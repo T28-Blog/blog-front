@@ -1,6 +1,7 @@
 import React from 'react'
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from '../styles/HeaderElements'
 import logo from '../assets/Team28-logo.png'
+import { FaSearch } from 'react-icons/fa'
 
 const Header = () => {
     return (
@@ -20,7 +21,10 @@ const Header = () => {
                     <NavLink to="/sign-up" activeStyle>
                         Sign Up
                     </NavLink>
-                    <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+                    <NavLink to="/search" activeStyle>
+                        <FaSearch />
+                    </NavLink>
+                    <NavBtnLink to='/sign-in'>Sign In</NavBtnLink>
                 </NavMenu>
                 {/* <NavBtn>
                     <NavBtnLink to='/signin'>Sign In</NavBtnLink>
