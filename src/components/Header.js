@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Nav, NavLink, NavLogo, NavItem, MobileIcon, NavMenu, NavBtnLink, NavbarContainer } from '../styles/HeaderElements'
+import { Nav, NavLink, NavLogo, NavItem, MobileIcon, NavMenu, NavBtnLink, NavbarContainer } from '../styles/headerElements'
 import logo from '../assets/Team28-logo.png'
 import { FaSearch, FaTimes, FaBars } from 'react-icons/fa'
 import { IconContext } from 'react-icons/lib'
