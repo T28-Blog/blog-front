@@ -1,7 +1,8 @@
 import { useField } from 'formik'
 import {
     StyledTextInput,
-    StyledLabel
+    StyledLabel,
+    ErrorMsg
 } from '../styles/signElements.js'
 
 export const TextInput = ({...props}) => {
@@ -9,13 +10,27 @@ export const TextInput = ({...props}) => {
 
     return (
         <div>
-            <StyledLabel htmlFor={props.name}>
-                {props.label}
-            </StyledLabel>
-            <StyledTextInput
-                {...field}
-                {...props}
-            />
+            <StyledLabel htmlFor={props.name}>{props.label}</StyledLabel>
+
+            {props.type !== "password" && (
+                <StyledTextInput invalid={meta.touched && meta.error}
+                    {...field}
+                    {...props} 
+                />
+            )}
+
+            {props.type === "password" && (
+                <StyledTextInput invalid={meta.touched && meta.error}
+                    {...field}
+                    {...props} 
+                />
+            )}
+
+            {meta.touched && meta.error ? (
+                <ErrorMsg>{meta.error}</ErrorMsg>
+            ):(
+                <ErrorMsg style={{visibility: "hidden"}}>.</ErrorMsg>
+            )}
         </div>
     )
 }

@@ -26,7 +26,7 @@ export const StyledTitle = styled.h2`
     text-align: center;
     color: ${(props) => props.color ? props.color : colors.primary};
     padding: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 `
 
 export const StyledSubTitle = styled.p`
@@ -76,15 +76,16 @@ export const ButtonGroup = styled.div`
 
 export const StyledTextInput = styled.input`
     width: 280px;
+    height: 50px;
     padding: 15px;
     padding-left: 30px;
     font-size: 17px;
     letter-spacing: 1px;
-    color: ${colors.light2};
+    color: ${colors.dark3};
     border: 1px solid ${colors.black};
     outline: 0;
     display: block;
-    margin: 5px auto 20px auto;
+    margin: 5px auto 10px auto;
     transition: ease-in-out 0.3s;
 
     ${(props) => props.invalid && `background-color: ${colors.red}; color: ${colors.primary};`}
@@ -133,4 +134,80 @@ export const StyledFormButton = styled.button`
         color: ${colors.primary};
         cursor: pointer;
     }
+`
+
+export const ErrorMsg = styled.div`
+    font-size: 11px;
+    color: ${colors.red};
+    margin-top: -5px;
+    margin-bottom: 10px;
+    text-align: left;
+`
+
+export const ExtraText = styled.p`
+    font-size: ${(props) => props.size}px;
+    text-align: center;
+    color: ${(props) => (props.color ? props.color : colors.dark2)};
+    padding: 2px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    font-size: 12px;
+`
+
+export const TextLink = styled(Link)`
+    text-decoration: none;
+    color: ${colors.theme};
+    transition: ease-in-out 0.3s;
+
+    &:hover {
+        text-decoration: underline;
+        /* letter-spacing: 2px; */
+        font-weight: bold;
+    }
+`
+
+export const DividerLine = styled.div`
+    width: 100%;
+    height: 1px;
+    background-color: ${colors.black};
+`
+
+export const OtherAccount = styled.p`
+    font-size: 14px;
+    text-align: center;
+    color: ${colors.black};
+    margin-top: 30px;
+`
+
+export const Facebook = styled.div`
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-image: url(${props => props.image});
+    background-size: cover;
+    background-position: center;
+    margin: 0 10px 0 auto;
+    display: inline;
+`
+
+export const Google = styled.div`
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-image: url(${props => props.image});
+    background-size: cover;
+    background-position: center;
+    margin: 0 10px 0 auto;
+    display: inline;
+`
+
+export const Kakao = styled.div`
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-image: url(${props => props.image});
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+    display: inline;
 `
