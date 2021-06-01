@@ -1,24 +1,24 @@
-import React from 'react'
+import React from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.css'
-import Header from 'components/header';
+import 'bootstrap/dist/css/bootstrap.css';
+import Header from 'components/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './pages/index'
-import ContactUs from './pages/contact'
-import SignUp from './pages/signup'
-import SignIn from './pages/signin'
-import Search from './pages/search'
+import Home from './pages/index';
+import ContactUs from './pages/contact';
+import SignUp from './pages/signup';
+import SignIn from './pages/signin';
+import Search from './pages/search';
 
 function App() {
   return (
     <Router>
-      <Header/>
+      <Header />
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/contact-us" exact component={ContactUs} />
-        <Route path="/sign-in" exact component={SignIn} />
-        <Route path="/search" exact component={Search} />
-        <Route path="/sign-up" exact component={SignUp} />
+        <Route path='/' exact component={Home} />
+        <Route path='/contact-us' exact component={ContactUs} />
+        <Route path='/sign-in' exact component={SignIn} />
+        <Route path='/search' exact component={Search} />
+        <Route path='/sign-up' exact component={SignUp} />
       </Switch>
     </Router>
   );
