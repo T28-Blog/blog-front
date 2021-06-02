@@ -8,6 +8,8 @@ import ContactUs from './pages/contact'
 import SignUp from './pages/signup'
 import SignIn from './pages/signin'
 import Search from './pages/search'
+import NaverLogin from './components/NaverLogin'
+import NaverLoginCallback from './components/NaverLoginCallback'
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/search" exact component={Search} />
         <Route path="/sign-up" exact component={SignUp} />
+        <Route path="/naver-login" exact component={NaverLogin} />
+        <Route path="/" exact component={NaverLoginCallback} />
       </Switch>
     </Router>
   );
