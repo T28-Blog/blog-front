@@ -1,34 +1,58 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 
-const NaverLogin = () => {
-    const initializeNaverLogin = () => {
-        const { naver } = window
-        const naverLogin = new naver.LoginWithNaverId({
-            clientId: process.env.REACT_APP_NAVER_CLIENT_ID,
-            callbackUrl: 'http://localhost:3000',
-            isPopup: false,
-            loginButton: {
-                color: 'white',
-                type: 1,
-                height: 55,
-            },
-            callbackHandle: true
+function NaverLogin(){
+  const { naver } = window;
+
+  const Login = () => {
+    Naver();
+    UserProfile();
+  }
+
+  useEffect(Login, []);
+
+  const Naver = () => {
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: 'E59C2Otkehlcqp1ItTxd',
+      callbackUrl: 'http://localhost:3000/',
+      isPopup: false,
+      loginButton: { color: 'green', type: 2, height: '50' }
+    });
+    naverLogin.init(); // Access_token/tokenType/expirein을 url로 전달
+  };
+
+  const UserProfile = () => {
+    window.location.href.includes('access_token') && GetUser();
+    function GetUser() {
+      const location = window.location.href.split('=')[1];
+      const token = location.split('&')[0];
+      console.log("token: ", token);
+      fetch(`${API}/account/sign-in` , {
+        method: "GET",
+        headers : {
+          "Content-type" : "application/json",
+          "Authorization": token
+        },
+      })
+      .then(res => res.json())
+      .then(res => {
+        localStorage.setItem("access_token", res.token);
+        localStorage.setUserData({
+          name : res.name,
+          email : res.email
         })
-        naverLogin.init() // 설정한 정보를 초기화하고 연동
+      })
+      .catch(err => console.log("err : ", err));
     }
+  }
 
-    useEffect(() => {
-        initializeNaverLogin()
-    }, [])
-
-    return (
-        <div>
-            <h1>네이버 아이디로 로그인</h1>
-            <div className="naverIdLoginButtonContainer">
-                <div id="naverIdLogin" />
-            </div>
-        </div>
-    )
+  return (
+    <SideLogin className="login">
+      <UserInfo>
+        <SideText>로그인</SideText>  
+      </UserInfo>
+      <LoginLink onClick={Login} id="naverIdLogin" /> 
+    </SideLogin>
+  )
 }
 
 export default NaverLogin
