@@ -44,15 +44,6 @@ function NaverLogin(){
       .catch(err => console.log("err : ", err));
     }
   }
-
-  return (
-    <SideLogin className="login">
-      <UserInfo>
-        <SideText>로그인</SideText>  
-      </UserInfo>
-      <LoginLink onClick={Login} id="naverIdLogin" /> 
-    </SideLogin>
-  )
 }
 
 export default NaverLogin
