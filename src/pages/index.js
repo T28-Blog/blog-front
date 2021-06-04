@@ -1,4 +1,5 @@
 import React from 'react';
+import Hashtag from 'components/hashtag';
 
 const Home = () => {
   return (
@@ -10,7 +11,7 @@ const Home = () => {
         height: '90vh',
       }}
     >
-      <h1>Home</h1>
+      <Hashtag />
     </div>
   );
 };

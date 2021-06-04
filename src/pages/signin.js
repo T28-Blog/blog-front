@@ -19,7 +19,7 @@ import logo from '../assets/Team28-logo.png';
 import facebook from '../assets/facebook.png';
 import kakao from '../assets/kakao.png';
 import google from '../assets/google.png';
-import getUserInfo from '../api/kakaoapi';
+import KakaoLogin from '../api/kakaoapi';
 
 // Formik
 import { Formik, Form } from 'formik';
@@ -29,7 +29,6 @@ import styled from 'styled-components';
 
 //handler함수 호출
 import handleSignin from '../container/usesignin';
-import store from 'store/store';
 
 //소셜 로그인 버튼
 const BtnContainer = styled.div`
@@ -43,7 +42,7 @@ const BtnContainer = styled.div`
 const SignIn = () => {
   const history = useHistory();
   useEffect(() => {
-    const requestToken = new URL(window.location.href).searchParams.get('code');
+    const requestToken = new URL(window.location.href).searchParams.get('code'); //카카오 인증 코드 받아오기
     if (requestToken) {
       //요청 토큰을 받아온 경우 access token => jwt까지 받아오도록 handler 함수 호출
       handleSignin(requestToken);
@@ -111,7 +110,7 @@ const SignIn = () => {
         <BtnContainer>
           <Facebook image={facebook}></Facebook>
           <Google image={google}></Google>
-          <Kakao image={kakao} onClick={getUserInfo.getRequestToken}></Kakao>
+          <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
         </BtnContainer>
       </StyledFormArea>
     </div>

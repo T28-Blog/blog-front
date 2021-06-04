@@ -2,10 +2,9 @@ import axios from 'axios';
 import config from '../config';
 
 const API_KEY = config.Kakao_KEY;
-
 const REDIRECT_URI = 'http://localhost:3000/sign-in';
 
-const getUserInfo = {
+const KakaoLogin = {
   getRequestToken: () => {
     const kakaoURL = new URL(
       `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${API_KEY}&redirect_uri=${REDIRECT_URI}`
@@ -33,13 +32,22 @@ const getUserInfo = {
     try {
       let jwt = '';
       //const access = promise;
-      //console.log(access); //이 액세스 토큰을 서버에 보냈다고 가정
+      //console.log(promise); //이 액세스 토큰을 서버에 보내고 정상 처리 되었다고 가정
       jwt = 'abcd';
-      return jwt;
+      const {
+        data: { access_token: at },
+      } = promise;
+      return { jwt, at };
     } catch (e) {
       alert('로그인 실패');
     }
   },
+  kakaoLogout: () => {
+    const kakaoLogout = new URL(
+      `https://kauth.kakao.com/oauth/logout?client_id=${API_KEY}&logout_redirect_uri=${REDIRECT_URI}`
+    ); //카카오 소셜 로그인 페이지 URL
+    window.location.assign(kakaoLogout);
+  },
 };
 
-export default getUserInfo;
+export default KakaoLogin;
