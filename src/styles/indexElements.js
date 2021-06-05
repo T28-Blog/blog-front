@@ -140,3 +140,13 @@ export const SubWriter = styled.p`
     font-size: 12px;
     color: blue;
 `
+
+export const PopularPost = styled.div`
+    display: inline-block;
+    width: 475px;
+    margin-right: 25px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+`
