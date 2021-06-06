@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
+  StyledTextInput,
   StyledFormArea,
   StyledFormButton,
+  StyledLabel,
   DividerLine,
   OtherAccount,
   Facebook,
@@ -54,7 +56,7 @@ const SignIn = () => {
     <div>
       <StyledFormArea>
         <Avatar>
-          <img src={logo} alt='logo' width='200px' />
+          <img src={logo} alt="logo" width="200px" />
         </Avatar>
         <StyledTitle color={colors.black} size={30}>
           Login
@@ -62,18 +64,18 @@ const SignIn = () => {
         <Formik
           initialValues={{
             // 객체형태 초기값
-            email: '',
-            password: '',
+            email: "",
+            password: "",
           }}
           // 유효성 검사를 위한 스키마 속성 추가
           validationSchema={Yup.object({
             email: Yup.string()
-              .email('Invalid email address')
-              .required('Required'),
+              .email("Invalid email address")
+              .required("Required"),
             password: Yup.string()
-              .min(8, 'Password is too short')
-              .max(30, 'Password is too long')
-              .required('Required'),
+              .min(8, "Password is too short")
+              .max(30, "Password is too long")
+              .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
             console.log(values);
@@ -82,26 +84,26 @@ const SignIn = () => {
           {() => (
             <Form>
               <TextInput
-                name='email'
-                type='text'
-                label='Email Address'
-                placeholder='abc123@gmail.com'
+                name="email"
+                type="text"
+                label="Email Address"
+                placeholder="abc123@gmail.com"
               />
 
               <TextInput
-                name='password'
-                type='password'
-                label='Password'
-                placeholder='********'
+                name="password"
+                type="password"
+                label="Password"
+                placeholder="********"
               />
               <ButtonGroup>
-                <StyledFormButton type='submit'>Login</StyledFormButton>
+                <StyledFormButton type="submit">Login</StyledFormButton>
               </ButtonGroup>
             </Form>
           )}
         </Formik>
         <ExtraText>
-          New here? <TextLink to='/signup'>SignUp</TextLink>
+          New here? <TextLink to="/signup">SignUp</TextLink>
         </ExtraText>
 
         {/* 소셜 로그인 구분선 */}

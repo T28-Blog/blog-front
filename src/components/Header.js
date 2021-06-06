@@ -14,6 +14,7 @@ import { FaSearch, FaTimes, FaBars } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
 import store from 'store/store';
 import KakaoLogin from 'api/kakaoapi';
+import { Nav, NavLink, NavLogo, NavItem, MobileIcon, NavMenu, NavBtnLink, NavbarContainer } from '../styles/HeaderElements'
 //import { LOG_OUT } from 'action/index';
 
 const Header = () => {
