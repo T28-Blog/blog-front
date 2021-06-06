@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
-import Header from 'components/header';
+import Header from 'components/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/index'
 import ContactUs from './pages/contact'

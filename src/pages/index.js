@@ -22,12 +22,13 @@ import {
 } from '../styles/indexElements'
 import testGoogle from '../assets/test_google.jpeg'
 import testMac from '../assets/test_mac.jpeg'
-    
+import Slider from 'components/Slider'
+
 const Home = () => {
     return (
         <div>
             <MainSlider>
-                Slider Area
+                <Slider></Slider>
             </MainSlider>
             <SectionTitle>
                     Latest articles
