@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   StyledTextInput,
   StyledFormArea,
@@ -15,23 +16,42 @@ import {
   TextLink,
   ExtraText,
   ButtonGroup,
-} from "../styles/signElements";
-import logo from "../assets/Team28-logo.png";
-import facebook from "../assets/facebook.png";
-import kakao from "../assets/kakao.png";
-import google from "../assets/google.png";
+} from '../styles/signElements';
+import logo from '../assets/Team28-logo.png';
+import facebook from '../assets/facebook.png';
+import kakao from '../assets/kakao.png';
+import google from '../assets/google.png';
+import KakaoLogin from '../api/kakaoapi';
 
 // Formik
-import { Formik, Form } from "formik";
-import { TextInput } from "../components/formLib";
-import * as Yup from "yup";
+import { Formik, Form } from 'formik';
+import { TextInput } from '../components/formLib';
+import * as Yup from 'yup';
+import styled from 'styled-components';
 
-import GoogleLogin from "react-google-login";
+//handler함수 호출
+import handleSignin from '../container/usesignin';
+
+//소셜 로그인 버튼
+const BtnContainer = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const SignIn = () => {
-  const responseGoogle = (response) => {
-    console.log(response.tokenId);
-  };
+  const history = useHistory();
+  useEffect(() => {
+    const requestToken = new URL(window.location.href).searchParams.get('code'); //카카오 인증 코드 받아오기
+    if (requestToken) {
+      //요청 토큰을 받아온 경우 access token => jwt까지 받아오도록 handler 함수 호출
+      handleSignin(requestToken);
+      history.push('/');
+    }
+  });
+
   return (
     <div>
       <StyledFormArea>
@@ -89,31 +109,11 @@ const SignIn = () => {
         {/* 소셜 로그인 구분선 */}
         <DividerLine />
         <OtherAccount>다른 계정으로 로그인</OtherAccount>
-        <Facebook>
-          <img src={facebook} alt="" width="50px" height="50px" />
-        </Facebook>
-        <GoogleLogin
-          clientId={process.env.REACT_APP_GOOGLE_API_ID}
-          render={(renderProps) => (
-            <button
-              onClick={renderProps.onClick}
-              disabled={renderProps.disabled}
-              style={{ border: "none", marginRight: "10px" }}
-            >
-              <img src={google} width="50px" height="50px" alt="google"></img>
-            </button>
-          )}
-          buttonText=""
-          onSuccess={responseGoogle}
-          onFailure={() => console.log("failure")}
-          isSignedIn={true}
-          cookiePolicy={"single_host_origin"}
-          uxMode="redirect"
-          redirectUri="http://localhost:3000"
-        />
-        <Kakao>
-          <img src={kakao} alt="" width="50px" height="50px" />
-        </Kakao>
+        <BtnContainer>
+          <Facebook image={facebook}></Facebook>
+          <Google image={google}></Google>
+          <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
+        </BtnContainer>
       </StyledFormArea>
     </div>
   );

@@ -44,9 +44,7 @@ const Home = () => {
                         <MainDesc>In 2020, Redux made complete sense after I watched the video tutorial by Dan Abramov...</MainDesc>
                         <Writer>ThankGod Ukachukwu</Writer>
                     </MainPost>
-                    <HashtagContainer>
-                        Hashtag List
-                    </HashtagContainer>
+                    <Hashtag />
                 </PostContainer>
                 <PostList>
                     <Post>
@@ -177,4 +175,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Home;
