@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Nav,
   NavLink,
@@ -8,13 +8,12 @@ import {
   NavMenu,
   NavBtnLink,
   NavbarContainer,
-} from '../styles/HeaderElements';
-import logo from '../assets/Team28-logo.png';
-import { FaSearch, FaTimes, FaBars } from 'react-icons/fa';
-import { IconContext } from 'react-icons/lib';
-import store from 'store/store';
-import KakaoLogin from 'api/kakaoapi';
-import { Nav, NavLink, NavLogo, NavItem, MobileIcon, NavMenu, NavBtnLink, NavbarContainer } from '../styles/HeaderElements'
+} from "../styles/HeaderElements";
+import logo from "../assets/Team28-logo.png";
+import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
+import { IconContext } from "react-icons/lib";
+import store from "store/store";
+import KakaoLogin from "api/kakaoapi";
 //import { LOG_OUT } from 'action/index';
 
 const Header = () => {
@@ -43,7 +42,7 @@ const Header = () => {
 
   useEffect(() => {
     changeNav();
-    window.addEventListener('scroll', changeNav);
+    window.addEventListener("scroll", changeNav);
   }, []);
 
   // 코드 수정 필요 => 단순히 kakaoLogout을 요청한 후 바로 상태 값이 변경되는 것이 아니라, sign-in page로 redirect 되고 난 뒤 dispatch 호출할 수 있도록
@@ -58,47 +57,47 @@ const Header = () => {
 
   return (
     <>
-      <IconContext.Provider value={{ color: '#131313' }}>
+      <IconContext.Provider value={{ color: "#131313" }}>
         <Nav active={scroll} click={click}>
           <NavbarContainer>
-            <NavLogo to='/' onClick={closeMobileMenu}>
-              <img src={logo} alt='logo' width='150px' />
+            <NavLogo to="/" onClick={closeMobileMenu}>
+              <img src={logo} alt="logo" width="150px" />
             </NavLogo>
             <MobileIcon onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
             </MobileIcon>
             <NavMenu onClick={handleClick} click={click}>
               <NavItem>
-                <NavLink to='/' activeStyle>
+                <NavLink to="/" activeStyle>
                   Home
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to='/contact-us' activeStyle>
+                <NavLink to="/contact-us" activeStyle>
                   Contact Us
                 </NavLink>
               </NavItem>
               {!user && (
                 <NavItem>
-                  <NavLink to='/sign-up' activeStyle>
+                  <NavLink to="/sign-up" activeStyle>
                     Sign up
                   </NavLink>
                 </NavItem>
               )}
               <NavItem>
-                <NavLink to='/search' activeStyle>
+                <NavLink to="/search" activeStyle>
                   <FaSearch />
                 </NavLink>
               </NavItem>
               {user ? (
                 <NavItem>
-                  <NavBtnLink to='/' onClick={doLogout}>
+                  <NavBtnLink to="/" onClick={doLogout}>
                     Log out
                   </NavBtnLink>
                 </NavItem>
               ) : (
                 <NavItem>
-                  <NavBtnLink to='/sign-in'>Sign in</NavBtnLink>
+                  <NavBtnLink to="/sign-in">Sign in</NavBtnLink>
                 </NavItem>
               )}
             </NavMenu>
