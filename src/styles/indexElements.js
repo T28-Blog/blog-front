@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const MainSlider = styled.div`
+export const MainSlider = styled.div `
     width: 100%;
     height: 400px;
     background-color: #000;
@@ -8,7 +8,7 @@ export const MainSlider = styled.div`
     font-size: 40px;
     text-align: center;
 `
-export const SectionTitle = styled.h2`
+export const SectionTitle = styled.h2 `
     display: block;
     max-width: 1000px;
     margin: 0 auto;
@@ -29,11 +29,11 @@ export const SectionTitle = styled.h2`
     }
 `
 
-export const Section = styled.div`
+export const Section = styled.div `
     max-width: 1000px;
     margin: 0 auto;
 `
-export const PostContainer = styled.div`
+export const PostContainer = styled.div `
     position: relative;
     height: 100%;
     display: flex;
@@ -41,7 +41,7 @@ export const PostContainer = styled.div`
     justify-content: space-between;
     margin-bottom: 30px; 
 `
-export const MainPost = styled.div`
+export const MainPost = styled.div `
     display: inline-block;
     width: 650px;
     margin: 0 50px 0 0;
@@ -59,14 +59,14 @@ export const MainPost = styled.div`
     }
 `
 
-export const MainThumbnail = styled.div`
+export const MainThumbnail = styled.div `
     width: 100%;
     height: 350px;
     margin-bottom: 20px;
     border-radius: 50px;
 `
 
-export const MainTitle = styled.h3`
+export const MainTitle = styled.h3 `
     font-size: 24px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -81,7 +81,7 @@ export const MainTitle = styled.h3`
     }
 `
 
-export const MainDesc = styled.p`
+export const MainDesc = styled.p `
     font-size: 14px;
     margin-bottom: 5px;
     color: #6c757d;
@@ -98,7 +98,7 @@ export const MainDesc = styled.p`
     }
 `
 
-export const Writer = styled.p`
+export const Writer = styled.p `
     font-size: 12px;
     color: blue;
     margin-bottom: 0;
@@ -108,20 +108,13 @@ export const Writer = styled.p`
     }
 `
 
-// export const Hashtag = styled.div`
-//     width: 300px;
-//     height: 350px;
-//     background-color: blue;
-//     color: white;
-//     font-size: 30px;
-//     text-align: center;
+// export const Hashtag = styled.div`     width: 300px;     height: 350px;
+// background-color: blue;     color: white;     font-size: 30px;
+// text-align: center;
 
-//     @media screen and (max-width: 768px){
-//         display: none;
-//     }
-//`
+//     @media screen and (max-width: 768px){         display: none;     } `
 
-export const PostList = styled.div`
+export const PostList = styled.div `
     position: relative;
     width: 1000px;
     height: 100%;
@@ -138,7 +131,7 @@ export const PostList = styled.div`
     }
 `
 
-export const Post = styled.div`
+export const Post = styled.div `
     display: inline-block;
     vertical-align: top;
     width: 300px;
@@ -180,10 +173,10 @@ export const Post = styled.div`
         }
     }
 `
-export const SubThumbnail = styled.div`
+export const SubThumbnail = styled.div `
     margin-bottom: 10px;
 `
-export const SubTitle = styled.h4`
+export const SubTitle = styled.h4 `
     font-size: 20px;
     margin-bottom: 2px;
     overflow: hidden;
@@ -194,7 +187,7 @@ export const SubTitle = styled.h4`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 `
-export const SubDesc = styled.p`
+export const SubDesc = styled.p `
     font-size: 14px;
     margin-bottom: 2px;
     color: #6c757d;
@@ -202,13 +195,13 @@ export const SubDesc = styled.p`
     overflow: hidden;
     text-overflow: ellipsis;
 `
-export const SubWriter = styled.p`
+export const SubWriter = styled.p `
     font-size: 12px;
     color: blue;
     white-space: nowrap;
 `
 
-export const PopularContainer = styled.div`
+export const PopularContainer = styled.div `
     display: inline-block;
     width: 1000px;
     height: 100%;
@@ -229,7 +222,7 @@ export const PopularContainer = styled.div`
     }
 `
 
-export const PopularPost = styled.div`
+export const PopularPost = styled.div `
     display: inline-block;
     width: 475px;
     height: 350px;
@@ -258,7 +251,7 @@ export const PopularPost = styled.div`
     }
 `
 
-export const PopularThumbnail = styled.div`
+export const PopularThumbnail = styled.div `
     width: 100%;
     margin-bottom: 20px;
 `

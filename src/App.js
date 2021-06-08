@@ -9,6 +9,7 @@ import ContactUs from './pages/contact';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
 import Search from './pages/search';
+import Footer from './components/footer'
 // import NaverLogin from './components/NaverLogin'
 // import NaverLoginCallback from './components/NaverLoginCallback'
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/sign-up" exact component={SignUp} />
         {/* <Route path="/naver-login" exact component={NaverLogin} /> */}
       </Switch>
+      <Footer />
     </Router>
   );
 }
