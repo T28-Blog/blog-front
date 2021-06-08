@@ -15,7 +15,6 @@ import {
     SubTitle,
     SubDesc,
     SubWriter,
-    HashtagContainer,
     PopularPost,
     PopularThumbnail,
     PopularContainer
@@ -23,6 +22,7 @@ import {
 import testGoogle from '../assets/test_google.jpeg'
 import testMac from '../assets/test_mac.jpeg'
 import Slider from 'components/Slider'
+import Hashtag from '../components/hashtag'
 
 const Home = () => {
     return (

@@ -37,8 +37,8 @@ function NaverLogin(){
       .then(res => {
         localStorage.setItem("access_token", res.token);
         localStorage.setUserData({
-          name : res.name,
-          email : res.email
+          email : res.email,
+          password : res.password
         })
       })
       .catch(err => console.log("err : ", err));

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Header from 'components/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/index';
+import MyBlog from './pages/myblog'
 import ContactUs from './pages/contact';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
@@ -17,6 +18,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/my-blog" exact component={MyBlog} />
         <Route path="/contact-us" exact component={ContactUs} />
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/search" exact component={Search} />

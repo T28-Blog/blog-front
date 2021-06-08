@@ -29,17 +29,17 @@ export default function Slideshow(){
       <Slide>
         <div className="each-slide">
           <SlideBackground style={{'backgroundImage': `url(${nature1})`}}>
-            <Title>Slide 1</Title>
+            <Title></Title>
           </SlideBackground>
         </div>
         <div className="each-slide">
           <SlideBackground style={{'backgroundImage': `url(${nature2})`}}>
-            <Title>Slide 2</Title>
+            <Title></Title>
           </SlideBackground>
         </div>
         <div className="each-slide">
           <SlideBackground style={{'backgroundImage': `url(${nature3})`}}>
-            <Title>Slide 3</Title>
+            <Title></Title>
           </SlideBackground>
         </div>
       </Slide>

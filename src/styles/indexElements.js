@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-// import {Link} from 'react-router-dom'
 
 export const MainSlider = styled.div`
     width: 100%;
@@ -109,18 +108,18 @@ export const Writer = styled.p`
     }
 `
 
-export const HashtagContainer = styled.div`
-    width: 300px;
-    height: 350px;
-    background-color: blue;
-    color: white;
-    font-size: 30px;
-    text-align: center;
+// export const Hashtag = styled.div`
+//     width: 300px;
+//     height: 350px;
+//     background-color: blue;
+//     color: white;
+//     font-size: 30px;
+//     text-align: center;
 
-    @media screen and (max-width: 768px){
-        display: none;
-    }
-`
+//     @media screen and (max-width: 768px){
+//         display: none;
+//     }
+//`
 
 export const PostList = styled.div`
     position: relative;
