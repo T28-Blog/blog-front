@@ -8,6 +8,7 @@ import ContactUs from './pages/contact';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
 import Search from './pages/search';
+import WritePost from 'pages/writePost';
 // import NaverLogin from './components/NaverLogin'
 // import NaverLoginCallback from './components/NaverLoginCallback'
 
@@ -17,6 +18,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/writepost" exact component={WritePost} />
         <Route path="/contact-us" exact component={ContactUs} />
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/search" exact component={Search} />

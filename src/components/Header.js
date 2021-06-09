@@ -69,6 +69,11 @@ const Header = () => {
             </MobileIcon>
             <NavMenu onClick={handleClick} click={click}>
               <NavItem>
+                <NavLink to='/' activeStyle>
+                  Home
+                </NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink to='/writepost' activeStyle>
                   My blog
                 </NavLink>
