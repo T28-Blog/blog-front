@@ -22,7 +22,7 @@ const ProfileCard = () => {
                     <ProfileThumbnail img src={pic} alt='Google'>
                         {/* < width='100%' height='100%' object-fit='cover'/> */}
                     </ProfileThumbnail>
-                    <Name>Michelle Gomes</Name>
+                    <Name>김은태</Name>
                     <Job>Front-End Developer</Job>
                     <Desc>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Desc>
                     <Email>Contact</Email>
@@ -44,7 +44,7 @@ const ProfileCard = () => {
                     <ProfileThumbnail img src={pic} alt='Google'>
                         {/* < width='100%' height='100%' object-fit='cover'/> */}
                     </ProfileThumbnail>
-                    <Name>Michelle Gomes</Name>
+                    <Name>김수빈</Name>
                     <Job>Front-End Developer</Job>
                     <Desc>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Desc>
                     <Email>Contact</Email>
@@ -66,7 +66,7 @@ const ProfileCard = () => {
                     <ProfileThumbnail img src={pic} alt='Google'>
                         {/* < width='100%' height='100%' object-fit='cover'/> */}
                     </ProfileThumbnail>
-                    <Name>Michelle Gomes</Name>
+                    <Name>이유정</Name>
                     <Job>Front-End Developer</Job>
                     <Desc>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Desc>
                     <Email>Contact</Email>
@@ -88,8 +88,8 @@ const ProfileCard = () => {
                     <ProfileThumbnail img src={pic} alt='Google'>
                         {/* < width='100%' height='100%' object-fit='cover'/> */}
                     </ProfileThumbnail>
-                    <Name>Michelle Gomes</Name>
-                    <Job>Front-End Developer</Job>
+                    <Name>이서윤</Name>
+                    <Job>Back-End Developer</Job>
                     <Desc>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Desc>
                     <Email>Contact</Email>
                 </CardHeader>
@@ -110,8 +110,8 @@ const ProfileCard = () => {
                     <ProfileThumbnail img src={pic} alt='Google'>
                         {/* < width='100%' height='100%' object-fit='cover'/> */}
                     </ProfileThumbnail>
-                    <Name>Michelle Gomes</Name>
-                    <Job>Front-End Developer</Job>
+                    <Name>손지민</Name>
+                    <Job>Back-End Developer</Job>
                     <Desc>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Desc>
                     <Email>Contact</Email>
                 </CardHeader>

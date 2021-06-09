@@ -7,6 +7,18 @@ export const ProfileContainer = styled.div`
     max-width: 1000px;
     margin: 0 auto;
     padding: 50px 0 100px 0;
+
+    @media screen and (max-width: 768px){
+        width: 768px;
+        overflow-x: scroll;
+        padding: 50px 20px;
+    }
+
+    @media screen and (max-width: 375px){
+        width: 375px;
+        display: block;
+        padding: 50px 20px 50px 20px;
+    }
 `
 export const Card = styled.div`
     display: flex;
@@ -16,6 +28,16 @@ export const Card = styled.div`
     width: 180px;
     background-color: #2c3a47;
     box-shadow: 5px 3px 8px 5px #e1e1e1;
+
+    @media screen and (max-width: 768px){
+        margin-right: 20px;
+    }
+
+    @media screen and (max-width: 375px){
+        width: 200px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
 `
 export const CardHeader = styled.div`
     width: 100%;
@@ -30,12 +52,21 @@ export const ProfileThumbnail = styled.img`
     margin: 0 auto;
     margin-bottom: 20px;
     border: 5px solid #4f6477;
+    
+    @media screen and (max-width: 375px){
+        display: none;
+    }
+
 `
 export const Name = styled.p`
     font-size: 16px;
     font-weight: 600;
     color: white;
     margin: 0 0 10px 0;
+
+    @media screen and (max-width: 375px){
+        display: block;
+    }
 `
 export const Job = styled.p`
     font-size: 12px;
@@ -47,6 +78,24 @@ export const Desc = styled.p`
     font-size: 10px;
     font-weight: 300;
     color: #adb5bd;
+/* 
+    @media screen and (max-width: 768){
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        word-wrap: break-word;
+    } */
+
+    @media screen and (max-width: 375px){
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        word-wrap: break-word;
+    }
 `
 export const Email = styled.button`
     width: 100px;
@@ -73,6 +122,10 @@ export const CardFooter = styled.div`
     height: 40px;
     padding: 10px;
     background-color: #adb5bd;
+
+    @media screen and (max-width: 375px){
+        width: 100%;
+    }
 `
 export const IconLink = styled.a`
     color: #fff;

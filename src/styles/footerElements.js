@@ -2,10 +2,17 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Footer = styled.div`
+    width: 100%;
     padding: 20px 0;
     background-color: #555;
 
+    @media screen and (max-width: 768px){
+        position: absolute;
+        bottom: 0;
+    }
+
     @media screen and (max-width: 375px){
+        position: static;
         padding: 20px 20px;
     }
 `
