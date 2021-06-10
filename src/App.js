@@ -1,13 +1,14 @@
-import React from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import Header from 'components/Header';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './pages/index';
-import ContactUs from './pages/contact';
-import SignUp from './pages/signup';
-import SignIn from './pages/signin';
-import Search from './pages/search';
+import React from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
+import Header from "components/Header";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./pages/index";
+import ContactUs from "./pages/contact";
+import SignUp from "./pages/signup";
+import SignIn from "./pages/signin";
+import Search from "./pages/search";
+import Comments from "components/Comments";
 // import NaverLogin from './components/NaverLogin'
 // import NaverLoginCallback from './components/NaverLoginCallback'
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/search" exact component={Search} />
         <Route path="/sign-up" exact component={SignUp} />
+        <Route path="/comment" exact component={Comments} />
         {/* <Route path="/naver-login" exact component={NaverLogin} /> */}
       </Switch>
     </Router>

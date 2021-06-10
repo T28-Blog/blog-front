@@ -1,4 +1,18 @@
 {
     "hashtag":["Paris", "Bali", "New York City", "Las Vagas", "Maui", "Hoi An", "Bangkok", "Singapore", 
-        "Seoul", "Hong Kong", "Rome", "London", "Barcelona", "Cairo", "Berlin"]
+        "Seoul", "Hong Kong", "Rome", "London", "Barcelona", "Cairo", "Berlin","Amsterdam", "Athens","Baghdad","Budapest","Buenos Aires","Cape Town","Lisbon","Washington, D.C.",
+    "São Paulo","Shanghai","Tokyo","Venice","Moscow"],
+    "comments":[{
+        "id":1,
+        "nickname": "젠킨스",
+        "text": "잘 읽고 갑니다~",
+        "thumbnail":"img/thumbnail1.jpg",
+        "date":"2021-06-01"
+    },{
+        "id" : 2,
+        "nickname":"Heize",
+        "text": "공감되네요 👍  항상 꾸준히 글 잘 읽고 있습니다. 저도 같은 일을 하면서 최준님과 같은 상황에 놓일 때가 많은데 많은 팁도 얻어갑니다. 앞으로도 이런 좋은 글 부탁드립니다~",
+        "thumbnail":"img/thumbnail2.jpg",
+        "date":"2021-06-02"
+    }]
 }

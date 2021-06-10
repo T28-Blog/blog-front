@@ -1,35 +1,39 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 280px;
-  height: 200px;
+  max-height: 370px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   row-gap: 4px;
   @media screen and (max-width: 768px) {
-    width: 100vw;
-    margin-left: 40px;
-    margin-right: 24px;
+    width: 650px;
+    margin-left: 4px;
+    margin-bottom: 8px;
+  }
+  @media screen and (max-width: 375px) {
+    display: block;
+    width: 375px;
+    margin: 0 auto;
   }
 `;
 
 export const HashContainer = styled.div`
   width: 100%;
-  height: ${(props) =>
-    props.more ? 'calc(100vh - 40px)' : 'calc(100% - 90px)'};
+  height: ${(props) => (props.more ? "inherit" : "110px")};
+  overflow: hidden;
   padding-top: 4px;
   justify-items: center;
   display: flex;
-  overflow: ${(props) => (props.more ? 'visible' : 'hidden')};
   flex-wrap: wrap;
   column-gap: 4px;
   row-gap: 8px;
   transition: heigth 2s ease-in;
   @media screen and (max-width: 768px) {
     column-gap: 2px;
-    height: ${(props) => (props.more ? 'fit-content' : '68px')};
-    overflow: ${(props) => (props.more ? 'visible' : 'hidden')};
+    height: ${(props) => (props.more ? "fit-content" : "68px")};
   }
 `;
 
