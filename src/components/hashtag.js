@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import hashtagAPI from "api/HashtagAPI";
+import hashtagAPI from "api/hashtagapi";
 import {
   Container,
   HashContainer,
@@ -7,7 +7,7 @@ import {
   Title,
   MoreBtn,
   Span,
-} from "styles/hashtagElements";
+} from "../styles/hashtagElements";
 import useDebounce from "hooks/useDebounce";
 
 const Hashtag = () => {

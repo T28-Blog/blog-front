@@ -1,17 +1,13 @@
+import ProfileCard from 'components/profileCard'
 import React from 'react'
+import {PageTitle} from '../styles/contactElements'
 
 const ContactUs = () => {
     return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '90vh'
-            }}
-        >
-            <h1>ContactUs</h1>
-        </div>
+        <>
+            <PageTitle>Contact Us</PageTitle>
+            <ProfileCard></ProfileCard>
+        </>
     )
 }
 

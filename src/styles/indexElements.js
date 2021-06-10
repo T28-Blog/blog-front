@@ -1,26 +1,26 @@
-import styled from "styled-components";
-// import {Link} from 'react-router-dom'
+import styled from 'styled-components'
 
-export const MainSlider = styled.div`
-  width: 100%;
-  height: 400px;
-  background-color: #000;
-  color: white;
-  font-size: 40px;
-  text-align: center;
-`;
-export const SectionTitle = styled.h2`
-  display: block;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding-top: 50px;
-  font-size: 24px;
-  font-weight: 400;
-  margin-bottom: 30px;
+export const MainSlider = styled.div `
+    width: 100%;
+    height: 400px;
+    background-color: #000;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+`
+export const SectionTitle = styled.h2 `
+    display: block;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 50px;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    
 
-  @media screen and (max-width: 768px) {
-    width: 650px;
-  }
+    @media screen and (max-width: 768px){
+        width: 650px;
+    }
 
   @media screen and (max-width: 375px) {
     width: 375px;
@@ -29,30 +29,22 @@ export const SectionTitle = styled.h2`
   }
 `;
 
-export const Section = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-`;
-export const PostContainer = styled.div`
-  position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  @media screen and (max-width: 768px) {
-    flex-direction: column-reverse;
-    align-items: center;
-  }
-
-  @media screen and (max-width: 375px) {
-    flex-direction: column-reverse;
-  }
-`;
-export const MainPost = styled.div`
-  display: inline-block;
-  width: 650px;
-  margin: 0 50px 0 0;
+export const Section = styled.div `
+    max-width: 1000px;
+    margin: 0 auto;
+`
+export const PostContainer = styled.div `
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px; 
+`
+export const MainPost = styled.div `
+    display: inline-block;
+    width: 650px;
+    margin: 0 50px 0 0;
 
   @media screen and (max-width: 768px) {
     display: block;
@@ -236,11 +228,11 @@ export const PopularContainer = styled.div`
   }
 `;
 
-export const PopularPost = styled.div`
-  display: inline-block;
-  width: 475px;
-  height: 350px;
-  margin-right: 50px;
+export const PopularPost = styled.div `
+    display: inline-block;
+    width: 475px;
+    height: 350px;
+    margin-right: 50px;
 
   &:last-child {
     margin-right: 0;
@@ -265,7 +257,7 @@ export const PopularPost = styled.div`
   }
 `;
 
-export const PopularThumbnail = styled.div`
-  width: 100%;
-  margin-bottom: 20px;
-`;
+export const PopularThumbnail = styled.div `
+    width: 100%;
+    margin-bottom: 20px;
+`

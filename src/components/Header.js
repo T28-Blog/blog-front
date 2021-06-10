@@ -13,7 +13,7 @@ import logo from "../assets/Team28-logo.png";
 import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import store from "store/store";
-import KakaoLogin from "api/KakaoAPI";
+import KakaoLogin from "api/kakaoapi";
 //import { LOG_OUT } from 'action/index';
 
 const Header = () => {
@@ -65,18 +65,29 @@ const Header = () => {
             </MobileIcon>
             <NavMenu onClick={handleClick} click={click}>
               <NavItem>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to='/'>
+                  Home
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/contact-us">Contact Us</NavLink>
+                <NavLink to='/my-blog'>
+                  My blog
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to='/contact-us'>
+                  Contact Us
+                </NavLink>
               </NavItem>
               {!user && (
                 <NavItem>
-                  <NavLink to="/sign-up">Sign up</NavLink>
+                  <NavLink to='/sign-up'>
+                    Sign up
+                  </NavLink>
                 </NavItem>
               )}
               <NavItem>
-                <NavLink to="/search">
+                <NavLink to='/search'>
                   <FaSearch />
                 </NavLink>
               </NavItem>
