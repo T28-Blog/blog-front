@@ -1,6 +1,6 @@
-import getUserInfo from '../api/kakaoapi';
-import { ADD_JWT } from 'action';
-import store from 'store/store';
+import getUserInfo from "../api/kakaoapi";
+import { ADD_JWT } from "action";
+import store from "store/store";
 
 async function useSignin(request) {
   try {
@@ -11,7 +11,7 @@ async function useSignin(request) {
       const { jwt, at } = await getUserInfo.getJWT(access); //at가 jwt 내에 들어간다면 store state 및 access_token을 다루는 코드 전체 수정 필요
       store.dispatch({ type: ADD_JWT, jwt, at });
     } else {
-      alert('로그인 실패..!');
+      alert("로그인 실패..!");
     }
   } catch (e) {
     console.log(e);
