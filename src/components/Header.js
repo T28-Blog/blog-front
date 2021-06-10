@@ -13,7 +13,7 @@ import logo from "../assets/Team28-logo.png";
 import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import store from "store/store";
-import KakaoLogin from "api/kakaoapi";
+import KakaoLogin from "api/KakaoAPI";
 //import { LOG_OUT } from 'action/index';
 
 const Header = () => {
@@ -45,10 +45,7 @@ const Header = () => {
     window.addEventListener("scroll", changeNav);
   }, []);
 
-  // 코드 수정 필요 => 단순히 kakaoLogout을 요청한 후 바로 상태 값이 변경되는 것이 아니라, sign-in page로 redirect 되고 난 뒤 dispatch 호출할 수 있도록
-  // 리덕스 미들웨어 라이브러리 적용 필요
-  // 확인 결과, 상태를 바꾸지 않아도 history back을 했을 때 최초 렌더링으로 돌아감 ..? 뒤로가기 버튼을 막아야 하는가??
-  // 해결 방법 찾아보기
+  //비동기 실행 매끄럽게 할 수 있도록 코드 리팩토링 추후 예정
   const doLogout = () => {
     KakaoLogin.kakaoLogout();
     console.log(user);
@@ -68,24 +65,18 @@ const Header = () => {
             </MobileIcon>
             <NavMenu onClick={handleClick} click={click}>
               <NavItem>
-                <NavLink to="/" activeStyle>
-                  Home
-                </NavLink>
+                <NavLink to="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/contact-us" activeStyle>
-                  Contact Us
-                </NavLink>
+                <NavLink to="/contact-us">Contact Us</NavLink>
               </NavItem>
               {!user && (
                 <NavItem>
-                  <NavLink to="/sign-up" activeStyle>
-                    Sign up
-                  </NavLink>
+                  <NavLink to="/sign-up">Sign up</NavLink>
                 </NavItem>
               )}
               <NavItem>
-                <NavLink to="/search" activeStyle>
+                <NavLink to="/search">
                   <FaSearch />
                 </NavLink>
               </NavItem>

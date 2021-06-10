@@ -12,7 +12,9 @@ const hashtagAPI = {
   filterPostByHashtag: (hash) => {
     //get method로 해당 hashtag 포함 포스팅 필터링(포스팅 fetch)
     //const fn = () => {};
-    console.log(hash);
+    if (hash) {
+      alert(hash);
+    }
   },
 };
 

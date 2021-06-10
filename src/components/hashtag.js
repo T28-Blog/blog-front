@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import hashtagAPI from "api/hashtagapi";
+import hashtagAPI from "api/HashtagAPI";
 import {
   Container,
   HashContainer,
@@ -17,7 +17,8 @@ const Hashtag = () => {
   const [nowClick, setClick] = useState(0);
   const [selectedHash, selectHash] = useState(null);
 
-  const timer = useDebounce(nowClick, selectedHash); //현재 클릭에 따라 useDebouce return 값 갱신
+  const filterFn = (hash) => hashtagAPI.filterPostByHashtag(hash);
+  const timer = useDebounce(nowClick, selectedHash, filterFn); //현재 클릭에 따라 useDebouce return 값 갱신
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
@@ -49,7 +50,7 @@ const Hashtag = () => {
             : "생성된 해시태그가 없습니다. 👀"
           : "loading..."}
       </HashContainer>
-      {hashtag.length > 0 && (
+      {!loading && hashtag.length > 0 && (
         <MoreBtn onClick={() => setOpen(!openBtn)}>
           {openBtn ? "close" : "more"}
         </MoreBtn>

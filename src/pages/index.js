@@ -22,8 +22,7 @@ import {
 import testGoogle from "../assets/test_google.jpeg";
 import testMac from "../assets/test_mac.jpeg";
 import Slider from "components/Slider";
-import Hashtag from "components/hashtag";
-import store from "store/store";
+import Hashtag from "components/Hashtag";
 
 const Home = () => {
   return (

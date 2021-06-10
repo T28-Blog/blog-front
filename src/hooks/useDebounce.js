@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import hashtagAPI from "api/hashtagapi";
 
-function useDebounce(lastCall, propsHash) {
+function useDebounce(lastCall, propsHash, fn) {
   let [timer, setTimer] = useState(lastCall);
   const delay = 1000; //1s
 
@@ -9,10 +8,7 @@ function useDebounce(lastCall, propsHash) {
     if (timer) {
       clearTimeout(timer);
     }
-    const temp = setTimeout(
-      () => hashtagAPI.filterPostByHashtag(propsHash),
-      delay
-    );
+    const temp = setTimeout(() => fn(propsHash), delay);
     setTimer(temp);
   }, [lastCall]);
 

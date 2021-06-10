@@ -9,9 +9,14 @@ export const Container = styled.div`
   align-items: flex-start;
   row-gap: 4px;
   @media screen and (max-width: 768px) {
-    width: 100vw;
-    margin-left: 40px;
-    margin-right: 24px;
+    width: 650px;
+    margin-left: 4px;
+    margin-bottom: 8px;
+  }
+  @media screen and (max-width: 375px) {
+    display: block;
+    width: 375px;
+    margin: 0 auto;
   }
 `;
 
