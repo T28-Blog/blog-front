@@ -7,7 +7,7 @@ const initialState = {
   id: null,
   password: null,
 };
-const loginReduer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case ADD_JWT:
@@ -31,4 +31,4 @@ const loginReduer = (state = initialState, action) => {
   return state;
 };
 
-export default loginReduer;
+export default loginReducer;

@@ -19,6 +19,7 @@ import logo from "../assets/Team28-logo.png";
 import facebook from "../assets/facebook.png";
 import kakao from "../assets/kakao.png";
 import google from "../assets/google.png";
+import GoogleLogin from "react-google-login";
 import KakaoLogin from "../api/kakaoapi";
 
 // Formik
@@ -41,6 +42,9 @@ const BtnContainer = styled.div`
 
 const SignIn = () => {
   const history = useHistory();
+  const responseGoogle = (response) => {
+    console.log(response.tokenId);
+  };
   useEffect(() => {
     const requestToken = new URL(window.location.href).searchParams.get("code"); //카카오 인증 코드 받아오기
     if (requestToken) {
@@ -109,7 +113,35 @@ const SignIn = () => {
         <OtherAccount>다른 계정으로 로그인</OtherAccount>
         <BtnContainer>
           <Facebook image={facebook}></Facebook>
-          <Google image={google}></Google>
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_API_ID}
+            render={(renderProps) => (
+              <button
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                style={{ border: "none", background: "transparent" }}
+              >
+                <img
+                  src={google}
+                  style={{
+                    borderRadius: "50px",
+                    margin: "0 0 0 20px",
+                    backgroundPosition: "center",
+                  }}
+                  width="50px"
+                  height="50px"
+                  alt="google"
+                ></img>
+              </button>
+            )}
+            buttonText=""
+            onSuccess={responseGoogle}
+            onFailure={() => console.log("failure")}
+            isSignedIn={true}
+            cookiePolicy={"single_host_origin"}
+            uxMode="redirect"
+            redirectUri="http://localhost:3000"
+          />
           <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
         </BtnContainer>
       </StyledFormArea>
