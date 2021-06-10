@@ -1,10 +1,10 @@
-import React from 'react'
-import { Slide } from 'react-slideshow-image'
-import 'react-slideshow-image/dist/styles.css'
-import styled from 'styled-components'
-import nature1 from 'assets/nature1.jpeg'
-import nature2 from 'assets/nature2.jpeg'
-import nature3 from 'assets/nature3.png'
+import React from "react";
+import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
+import styled from "styled-components";
+import nature1 from "assets/nature1.jpeg";
+import nature2 from "assets/nature2.jpeg";
+import nature3 from "assets/nature3.png";
 
 const SlideBackground = styled.div`
   height: 400px;
@@ -17,32 +17,31 @@ const SlideBackground = styled.div`
 const Title = styled.a`
   color: #fff;
   text-decoration: none;
-  &:hover{
+  &:hover {
     color: #000;
   }
 `;
 
-
-export default function Slideshow(){
+export default function Slideshow() {
   return (
     <div className="slide-container">
       <Slide>
         <div className="each-slide">
-          <SlideBackground style={{'backgroundImage': `url(${nature1})`}}>
+          <SlideBackground style={{ backgroundImage: `url(${nature1})` }}>
             <Title></Title>
           </SlideBackground>
         </div>
         <div className="each-slide">
-          <SlideBackground style={{'backgroundImage': `url(${nature2})`}}>
+          <SlideBackground style={{ backgroundImage: `url(${nature2})` }}>
             <Title></Title>
           </SlideBackground>
         </div>
         <div className="each-slide">
-          <SlideBackground style={{'backgroundImage': `url(${nature3})`}}>
+          <SlideBackground style={{ backgroundImage: `url(${nature3})` }}>
             <Title></Title>
           </SlideBackground>
         </div>
       </Slide>
     </div>
-  )
+  );
 }

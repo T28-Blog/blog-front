@@ -9,9 +9,10 @@ export const Container = styled.div`
   align-items: flex-start;
   row-gap: 4px;
   @media screen and (max-width: 768px) {
-    width: 650px;
+    width: 620px;
     margin-left: 4px;
     margin-bottom: 8px;
+    max-height: 300px;
   }
   @media screen and (max-width: 375px) {
     display: block;
@@ -79,4 +80,5 @@ export const MoreBtn = styled.button`
   font-weight: 350;
   color: #256ce1;
   border-bottom: 1px solid #d2dae2;
+  z-index: 1;
 `;
