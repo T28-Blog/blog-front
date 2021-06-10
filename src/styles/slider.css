@@ -1,0 +1,18 @@
+button.nav.default-nav{
+  background: transparent;
+}
+button.nav.default-nav:hover{
+  background: transparent;
+}
+
+.react-slideshow-container .default-nav:first-of-type{
+  background: transparent;
+}
+
+.react-slideshow-container .default-nav:last-of-type{
+  background: transparent;
+}
+
+svg{
+  fill: #fff;
+}

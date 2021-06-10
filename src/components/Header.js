@@ -65,29 +65,24 @@ const Header = () => {
             </MobileIcon>
             <NavMenu onClick={handleClick} click={click}>
               <NavItem>
-                <NavLink to='/'>
-                  Home
-                </NavLink>
+                <NavLink to="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to='/my-blog'>
-                  My blog
-                </NavLink>
+                <NavLink to="/writepost">writePost</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to='/contact-us'>
-                  Contact Us
-                </NavLink>
+                <NavLink to="/my-blog">My blog</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/contact-us">Contact Us</NavLink>
               </NavItem>
               {!user && (
                 <NavItem>
-                  <NavLink to='/sign-up'>
-                    Sign up
-                  </NavLink>
+                  <NavLink to="/sign-up">Sign up</NavLink>
                 </NavItem>
               )}
               <NavItem>
-                <NavLink to='/search'>
+                <NavLink to="/search">
                   <FaSearch />
                 </NavLink>
               </NavItem>
