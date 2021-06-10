@@ -10,6 +10,7 @@ import SignUp from './pages/signup';
 import SignIn from './pages/signin';
 import Search from './pages/search';
 import Footer from './components/footer'
+import Comments from "components/Comments";
 // import NaverLogin from './components/NaverLogin'
 // import NaverLoginCallback from './components/NaverLoginCallback'
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/search" exact component={Search} />
         <Route path="/sign-up" exact component={SignUp} />
+        <Route path="/comment" exact component={Comments} />
         {/* <Route path="/naver-login" exact component={NaverLogin} /> */}
       </Switch>
       <Footer />
