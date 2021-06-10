@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   StyledTextInput,
   StyledFormArea,
@@ -16,21 +16,22 @@ import {
   TextLink,
   ExtraText,
   ButtonGroup,
-} from '../styles/signElements';
-import logo from '../assets/Team28-logo.png';
-import facebook from '../assets/facebook.png';
-import kakao from '../assets/kakao.png';
-import google from '../assets/google.png';
-import KakaoLogin from '../api/kakaoapi';
+} from "../styles/signElements";
+import logo from "../assets/Team28-logo.png";
+import facebook from "../assets/facebook.png";
+import kakao from "../assets/kakao.png";
+import google from "../assets/google.png";
+import GoogleLogin from "react-google-login";
+import KakaoLogin from "../api/kakaoapi";
 
 // Formik
-import { Formik, Form } from 'formik';
-import { TextInput } from '../components/formLib';
-import * as Yup from 'yup';
-import styled from 'styled-components';
+import { Formik, Form } from "formik";
+import { TextInput } from "../components/formLib";
+import * as Yup from "yup";
+import styled from "styled-components";
 
 //handler함수 호출
-import handleSignin from '../container/usesignin';
+import handleSignin from "../container/usesignin";
 
 //소셜 로그인 버튼
 const BtnContainer = styled.div`
@@ -43,12 +44,15 @@ const BtnContainer = styled.div`
 
 const SignIn = () => {
   const history = useHistory();
+  const responseGoogle = (response) => {
+    console.log(response.tokenId);
+  };
   useEffect(() => {
-    const requestToken = new URL(window.location.href).searchParams.get('code'); //카카오 인증 코드 받아오기
+    const requestToken = new URL(window.location.href).searchParams.get("code"); //카카오 인증 코드 받아오기
     if (requestToken) {
       //요청 토큰을 받아온 경우 access token => jwt까지 받아오도록 handler 함수 호출
       handleSignin(requestToken);
-      history.push('/');
+      history.push("/");
     }
   });
 
@@ -111,7 +115,35 @@ const SignIn = () => {
         <OtherAccount>다른 계정으로 로그인</OtherAccount>
         <BtnContainer>
           <Facebook image={facebook}></Facebook>
-          <Google image={google}></Google>
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_API_ID}
+            render={(renderProps) => (
+              <button
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                style={{ border: "none", background: "transparent" }}
+              >
+                <img
+                  src={google}
+                  style={{
+                    borderRadius: "50px",
+                    margin: "0 0 0 20px",
+                    backgroundPosition: "center",
+                  }}
+                  width="50px"
+                  height="50px"
+                  alt="google"
+                ></img>
+              </button>
+            )}
+            buttonText=""
+            onSuccess={responseGoogle}
+            onFailure={() => console.log("failure")}
+            isSignedIn={true}
+            cookiePolicy={"single_host_origin"}
+            uxMode="redirect"
+            redirectUri="http://localhost:3000"
+          />
           <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
         </BtnContainer>
       </StyledFormArea>
