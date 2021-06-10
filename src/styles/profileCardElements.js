@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const ProfileContainer = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     max-width: 1000px;
     margin: 0 auto;
     padding: 50px 0 100px 0;
@@ -26,8 +26,13 @@ export const Card = styled.div`
     justify-content: center;
     align-items: center;
     width: 180px;
+    margin-right: 30px;
     background-color: #2c3a47;
     box-shadow: 5px 3px 8px 5px #e1e1e1;
+
+    /* &:last-child{
+        margin-right: 0;
+    } */
 
     @media screen and (max-width: 768px){
         margin-right: 20px;

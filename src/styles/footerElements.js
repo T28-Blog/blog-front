@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Footer = styled.div`
+    position: absolute;
+    bottom: 0;
     width: 100%;
     padding: 20px 0;
     background-color: #555;

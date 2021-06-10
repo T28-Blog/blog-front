@@ -9,7 +9,7 @@ import ContactUs from './pages/contact';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
 import Search from './pages/search';
-import Footer from './components/footer'
+import Footer from './components/Footer'
 import Comments from "components/Comments";
 // import NaverLogin from './components/NaverLogin'
 // import NaverLoginCallback from './components/NaverLoginCallback'
