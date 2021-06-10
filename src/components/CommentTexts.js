@@ -13,7 +13,7 @@ const CommentTexts = React.forwardRef((props, ref) => {
         setShowingBtn(true);
       }
     }
-  }, []);
+  }, [props, ref]);
 
   //여러 개의 ref를 감지하기 위해 useCallback 사용(더보기 버튼)
   const resizeCallback = (nodes) => {
