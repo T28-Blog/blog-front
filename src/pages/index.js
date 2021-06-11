@@ -15,7 +15,6 @@ import {
   SubTitle,
   SubDesc,
   SubWriter,
-  HashtagContainer,
   PopularPost,
   PopularThumbnail,
   PopularContainer,
@@ -28,7 +27,7 @@ import "styles/slider.css";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <MainSlider>
         <Slider></Slider>
       </MainSlider>
@@ -290,7 +289,7 @@ const Home = () => {
           </Post>
         </PostList>
       </Section>
-    </div>
+    </>
   );
 };
 

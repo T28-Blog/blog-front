@@ -1,9 +1,6 @@
 import React from 'react'
-import { StyledTextInput, StyledFormArea, StyledFormButton, StyledLabel, Avatar, colors, StyledTitle, TextLink, ExtraText, ButtonGroup } from '../styles/signElements'
+import { StyledFormArea, StyledFormButton, Avatar, colors, StyledTitle, TextLink, ExtraText, ButtonGroup, FormContainer } from '../styles/signElements'
 import logo from '../assets/Team28-logo.png'
-import facebook from '../assets/facebook.png'
-import kakao from '../assets/kakao.png'
-import google from '../assets/google.png'
 
 // Formik
 import { Formik, Form } from 'formik'
@@ -12,7 +9,7 @@ import * as Yup from 'yup'
 
 const SignUp = () => {
     return (
-        <div>
+        <FormContainer>
             <StyledFormArea>
                 <Avatar>
                     <img src={logo} alt="logo" width="200px"/>
@@ -79,7 +76,7 @@ const SignUp = () => {
                     Already hava an account? <TextLink to="/sign-in">SignIn</TextLink>
                 </ExtraText>
             </StyledFormArea>
-        </div>
+        </FormContainer>
     )
 }
 

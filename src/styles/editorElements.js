@@ -2,19 +2,35 @@ import styled from "styled-components";
 
 export const EditorWrapper = styled.div`
   display: flex;
+  max-width: 1000px;
+  height: 100vh;
+  margin: 0 auto;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  padding-bottom: 50px;
 `;
+
+export const PageTitle = styled.h2`
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  text-align: left;
+`
 
 export const TitleArea = styled.input.attrs({
   type: "text",
-  placeholder: "제목",
+  placeholder: "제목을 입력해주세요",
 })`
-  width: 80%;
-  font-size: 1.3rem;
-  padding: 0.2em 0.5em;
-  margin: 1em 0 0.5em 0;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  padding-left: 20px;
+  margin: 10px 0;
   border: 1px rgb(219, 218, 227) solid;
+  
   &:focus {
     outline: none;
     border: 1px black solid;
@@ -26,20 +42,20 @@ export const HashtagWrapper = styled.div`
 `;
 
 export const HashtagTempText = styled.span`
-  font-size: 1.1rem;
-  color: gray;
+  font-size: 14px;
+  color: #c6c6c6;
+  font-weight: 300;
 `;
 
 export const HashtagInput = styled.input.attrs({
   type: "text",
   placeholder: "태그입력",
 })`
-  font-size: 1.1rem;
+  font-size: 12px;
+  font-weight: 300;
   border: none;
-  color: gray;
-  &:focus {
-    outline: none;
-  }
+  color: #c6c6c6;
+
 `;
 
 export const ButtonWrapper = styled.div`
@@ -53,17 +69,26 @@ export const Button = styled.button`
   border-radius: 40px;
   background: transparent;
   border: 1px solid #256ce1;
-  padding: 5px 22px;
+  padding: 2px 15px;
+  font-size: 14px;
+  line-height: 20px;
   color: #256ce1;
   outline: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  margin-left: 0.2em;
+  margin-left: 10px;
+  
+  &:hover{
+    transition: all 0.2s ease-in-out;
+    background: #256ce1;
+    color: #fff;
+  }
 `;
 
 export const BottomWrapper = styled.div`
   display: flex;
-  width: 80%;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;

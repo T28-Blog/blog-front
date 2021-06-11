@@ -8,6 +8,14 @@ export const MainSlider = styled.div`
   font-size: 40px;
   text-align: center;
   margin: auto 0;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 375px) {
+    width: 100%;
+  }
 `;
 export const SectionTitle = styled.h2`
   display: block;
@@ -36,6 +44,7 @@ export const Section = styled.div`
 export const PostContainer = styled.div`
   position: relative;
   height: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -118,18 +127,18 @@ export const Writer = styled.p`
   }
 `;
 
-export const HashtagContainer = styled.div`
-  width: 300px;
-  height: 350px;
-  background-color: blue;
-  color: white;
-  font-size: 30px;
-  text-align: center;
+// export const HashtagContainer = styled.div`
+//   width: 300px;
+//   height: 350px;
+//   background-color: blue;
+//   color: white;
+//   font-size: 30px;
+//   text-align: center;
 
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-`;
+//   @media screen and (max-width: 768px) {
+//     display: none;
+//   }
+// `;
 
 export const PostList = styled.div`
   position: relative;

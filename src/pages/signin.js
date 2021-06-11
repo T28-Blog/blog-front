@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
+  FormContainer,
   StyledFormArea,
   StyledFormButton,
   DividerLine,
@@ -55,7 +56,7 @@ const SignIn = () => {
   });
 
   return (
-    <div>
+    <FormContainer>
       <StyledFormArea>
         <Avatar>
           <img src={logo} alt="logo" width="200px" />
@@ -145,7 +146,7 @@ const SignIn = () => {
           <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
         </BtnContainer>
       </StyledFormArea>
-    </div>
+    </FormContainer>
   );
 };
 
