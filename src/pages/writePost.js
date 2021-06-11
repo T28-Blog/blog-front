@@ -9,7 +9,8 @@ import {
   HashtagInput,
   ButtonWrapper,
   Button,
-  BottomWrapper
+  BottomWrapper,
+  PageTitle
 } from 'styles/editorElements';
 
 export default function WritePost() {
@@ -38,6 +39,7 @@ export default function WritePost() {
   return (
     <>
       <EditorWrapper>
+        <PageTitle>블로그 글쓰기<hr /></PageTitle>
         <TitleArea onChange={onTitleChange}></TitleArea>
         <TinyEditor contentEditor={contentEditor} setContentEditor={setContentEditor} ></TinyEditor>
         <BottomWrapper>

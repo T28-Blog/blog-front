@@ -22,7 +22,7 @@ export default function TinyEditor({contentEditor, setContentEditor}) {
           init={{
             skin: false,
             content_css: false,
-            width: "80%",
+            width: "100%",
             height: 600,
             menubar: false,
             language: "ko_KR",

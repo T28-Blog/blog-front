@@ -1,44 +1,43 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ProfileContainer = styled.div`
-    display: flex;
-    justify-content: center;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 50px 0 100px 0;
 
     @media screen and (max-width: 768px){
         width: 768px;
         overflow-x: scroll;
         padding: 50px 20px;
+        flex-direction: column;
     }
 
     @media screen and (max-width: 375px){
         width: 375px;
-        display: block;
         padding: 50px 20px 50px 20px;
     }
 `
 export const Card = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 180px;
-    margin-right: 30px;
+    width: 500px;
+    height: 100%;
+    margin: 30px auto;
     background-color: #2c3a47;
     box-shadow: 5px 3px 8px 5px #e1e1e1;
 
-    /* &:last-child{
-        margin-right: 0;
-    } */
-
     @media screen and (max-width: 768px){
-        margin-right: 20px;
+        display: flex;
+        width: 500px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 0 auto 20px auto;
+
     }
 
     @media screen and (max-width: 375px){
+        display: flex;
         width: 200px;
         margin: 0 auto;
         margin-bottom: 20px;
@@ -58,9 +57,6 @@ export const ProfileThumbnail = styled.img`
     margin-bottom: 20px;
     border: 5px solid #4f6477;
     
-    @media screen and (max-width: 375px){
-        display: none;
-    }
 
 `
 export const Name = styled.p`
@@ -83,15 +79,6 @@ export const Desc = styled.p`
     font-size: 10px;
     font-weight: 300;
     color: #adb5bd;
-/* 
-    @media screen and (max-width: 768){
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        word-wrap: break-word;
-    } */
 
     @media screen and (max-width: 375px){
         overflow: hidden;
@@ -123,13 +110,17 @@ export const Email = styled.button`
 `
 export const CardFooter = styled.div`
     display: flex;
-    width: 180px;
+    width: 500px;
     height: 40px;
     padding: 10px;
     background-color: #adb5bd;
 
+    @media screen and (max-width: 768px){
+        width: 500px;
+    }
+
     @media screen and (max-width: 375px){
-        width: 100%;
+        width: 200px;
     }
 `
 export const IconLink = styled.a`

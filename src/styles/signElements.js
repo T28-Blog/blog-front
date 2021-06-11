@@ -13,12 +13,24 @@ export const colors = {
   black: '#000',
 };
 
-export const StyledContainer = styled.div`
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const FormContainer = styled.div`
+`
+
+export const StyledFormArea = styled.div`
+  max-width: 375px;
+  background-color: ${(props) => props.bg || colors.primary};
+  text-align: center;
+  padding: 45px 50px;
+  margin: 50px auto 50px auto;
+  box-shadow: 8px 8px 20px 8px ${colors.light2};
+  
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 375px){
+      margin: 0 auto;
+    }
 `;
 
 export const StyledTitle = styled.h2`
@@ -105,20 +117,6 @@ export const StyledLabel = styled.p`
   margin-bottom: 5px;
 `;
 
-export const StyledFormArea = styled.div`
-  max-width: 375px;
-  background-color: ${(props) => props.bg || colors.primary};
-  text-align: center;
-  padding: 45px 50px;
-  margin: 50px auto 0 auto;
-  box-shadow: 8px 8px 20px 8px ${colors.light2};
-
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    height: 100vh;
-    margin-top: 0;
-  }
-`;
 
 export const StyledFormButton = styled.button`
   padding: 10px;

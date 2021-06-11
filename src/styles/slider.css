@@ -13,6 +13,6 @@ button.nav.default-nav:hover{
   background: transparent;
 }
 
-svg{
+button svg{
   fill: #fff;
 }

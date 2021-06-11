@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 280px;
+  width: 300px;
   max-height: 370px;
+  margin: 0 auto;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   row-gap: 4px;
   @media screen and (max-width: 768px) {
-    width: 620px;
-    margin-left: 4px;
-    margin-bottom: 8px;
+    width: 650px;
+    margin-bottom: 30px;
     max-height: 300px;
   }
   @media screen and (max-width: 375px) {
