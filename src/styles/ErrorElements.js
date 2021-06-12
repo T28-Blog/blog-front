@@ -7,11 +7,19 @@ export const ErrorContainer = styled.div`
     align-items: center;
     flex-direction: column;
     height: 100vh;
+
+    @media screen and (max-width: 768px){
+        padding: 0 50px;
+    }
 `
 
 export const ErrorImg = styled.img`
     width: 600px;
     margin-bottom: 80px;
+
+    @media screen and (max-width: 375px){
+        width: 300px;
+    }
 `
 
 export const ErrorTitle = styled.h2`
@@ -33,13 +41,13 @@ export const ErrorButton = styled(Link)`
     background: transparent;
     border: 1px solid #256ce1;
     padding: 5px 22px;
+    font-size: 24px;
     color: #256ce1;
     outline: none;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
 
-    margin-left: 24px;
     margin-top: 20px;
 
     &:hover{
