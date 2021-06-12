@@ -15,7 +15,7 @@ import {
   TextLink,
   ExtraText,
   ButtonGroup,
-} from "../styles/signElements";
+} from "../styles/SignElements";
 import logo from "../assets/Team28-logo.png";
 import facebook from "../assets/facebook.png";
 import kakao from "../assets/kakao.png";

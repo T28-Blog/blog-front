@@ -1,17 +1,19 @@
 import React from 'react'
+import { SearchContainer, SearchTitle, SearchInputContainer, SearchInput, SearchIcon } from '../styles/SearchInputElements'
+import { FaSearch } from "react-icons/fa";
 
 const Search = () => {
     return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '90vh'
-            }}
-        >
-            <h1>Search</h1>
-        </div>
+        <SearchContainer>
+            <SearchTitle>Search</SearchTitle>
+            <SearchInputContainer>
+                <SearchInput></SearchInput>
+                <SearchIcon>
+                    <FaSearch />
+                </SearchIcon>
+            </SearchInputContainer>
+        </SearchContainer>
+
     )
 }
 

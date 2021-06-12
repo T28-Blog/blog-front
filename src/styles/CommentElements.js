@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { StyledFormButton } from "styles/signElements";
-import { colors } from "styles/signElements";
+import { StyledFormButton } from "styles/SignElements";
+import { colors } from "styles/SignElements";
 
 export const Section = styled.section`
   width: 1000px;

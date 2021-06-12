@@ -10,7 +10,7 @@ import {
   ExtraText,
   ButtonGroup,
   FormContainer,
-} from "../styles/signElements";
+} from "../styles/SignElements";
 import logo from "../assets/Team28-logo.png";
 
 // Formik
