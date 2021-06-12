@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { StyledFormButton } from "styles/signElements";
+import { colors } from "styles/signElements";
 
 export const Section = styled.section`
   width: 1000px;
@@ -175,7 +176,41 @@ export const Text = styled.div`
 export const MoreBtn = styled.button`
   all: unset;
   border-bottom: 1px solid #8395a7;
-  font-size: 0.9rem;
   color: #8395a7;
   font-size: 0.8rem;
+`;
+
+export const btns = {
+  width: "60px",
+  display: "inline-flex",
+  justifyContent: "space-around",
+  marginLeft: "10px",
+};
+
+export const EditBtn = styled.button`
+  all: unset;
+  width: 50%;
+  height: 40px;
+  line-height: 20px;
+  font-size: 0.8rem;
+  color: #8395a7;
+  text-align: center;
+  &:hover {
+    color: ${colors.theme};
+    font-weight: 400;
+  }
+`;
+
+export const DeleteBtn = styled.button`
+  all: unset;
+  width: 50%;
+  height: 40px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #8395a7;
+  &:hover {
+    color: ${colors.red};
+    font-weight: 400;
+  }
 `;

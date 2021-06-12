@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # hide api key
-config.js 
+config.js
+.env

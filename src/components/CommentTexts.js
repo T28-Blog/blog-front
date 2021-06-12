@@ -15,20 +15,25 @@ const CommentTexts = React.forwardRef((props, ref) => {
     }
   }, [props, ref]);
 
-  //여러 개의 ref를 감지하기 위해 useCallback 사용(더보기 버튼)
+  //resizeObserver callback func
   const resizeCallback = (nodes) => {
+    const handleBtn = (node) => {
+      const { target } = node;
+      if (node.contentRect.height < target.scrollHeight) {
+        setShowingBtn(true);
+      } else {
+        setShowingBtn(false);
+      }
+    };
+
     for (let node of nodes) {
       if (node !== null) {
-        const { target } = node;
-        if (node.contentRect.height < target.scrollHeight) {
-          setShowingBtn(true);
-        } else {
-          setShowingBtn(false);
-        }
+        handleBtn(node);
       }
     }
   };
 
+  //textArea 부분 resizing 감지
   useResizeObserver(resizeCallback, ref);
 
   const onHandleBtn = (e) => {

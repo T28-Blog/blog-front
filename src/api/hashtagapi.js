@@ -1,8 +1,10 @@
 import mock_hashtag from "../assets/mock.json";
+import fetchData from "fbase/FbaseDB";
 
 const hashtagAPI = {
   getHashtag: () => {
     //get method로 hashtag 데이터 호출
+    fetchData();
     const { hashtag: hashtags } = mock_hashtag;
     return hashtags;
   },
