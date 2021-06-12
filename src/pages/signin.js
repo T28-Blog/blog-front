@@ -32,6 +32,11 @@ import styled from "styled-components";
 //handler함수 호출
 import handleSignin from "../hooks/useSignin";
 
+import { firebaseInstance } from "fbase/Fbase";
+
+import { ADD_JWT } from "action";
+import store from "store/store";
+
 //소셜 로그인 버튼
 const BtnContainer = styled.div`
   width: 100%;
@@ -44,7 +49,7 @@ const BtnContainer = styled.div`
 const SignIn = () => {
   const history = useHistory();
   const responseGoogle = (response) => {
-    console.log(response.tokenId);
+    // console.log(response.tokenId);
   };
   useEffect(() => {
     const requestToken = new URL(window.location.href).searchParams.get("code"); //카카오 인증 코드 받아오기
@@ -82,6 +87,24 @@ const SignIn = () => {
           })}
           onSubmit={(values, { setSubmitting }) => {
             console.log(values);
+            firebaseInstance
+              .auth()
+              .signInWithEmailAndPassword(values.email, values.password)
+              .then((userCredential) => {
+                // Signed in
+                var user = userCredential.user;
+                console.log("Logged in", user);
+                const jwt = null;
+                const at = null;
+                store.dispatch({ type: ADD_JWT, jwt, at });
+                history.push("/");
+                // ...
+              })
+              .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log("Error", errorCode, errorMessage);
+              });
           }}
         >
           {() => (
@@ -106,7 +129,7 @@ const SignIn = () => {
           )}
         </Formik>
         <ExtraText>
-          New here? <TextLink to="/signup">SignUp</TextLink>
+          New here? <TextLink to="/sign-up">SignUp</TextLink>
         </ExtraText>
 
         {/* 소셜 로그인 구분선 */}
