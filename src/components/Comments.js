@@ -11,11 +11,10 @@ import {
   CommentBox,
   commentTexts,
   Thumbnail,
-  Date,
-  ID,
   highlight,
 } from "styles/CommentElements";
 import CommentTexts from "./CommentTexts";
+import CommentUser from "./CommentUser";
 
 const Comments = () => {
   const [comments, setComments] = useState(null); //기존에 달린 댓글
@@ -58,13 +57,10 @@ const Comments = () => {
                 <Thumbnail img={comment.thumbnail}></Thumbnail>
                 <div style={commentTexts}>
                   <div>
-                    <ID>{comment.nickname}</ID>
-                    <Date>
-                      {comment.date
-                        .trim()
-                        .split("-")
-                        .map((d) => `${d}.`)}
-                    </Date>
+                    <CommentUser
+                      id={comment.nickname}
+                      date={comment.date}
+                    ></CommentUser>
                     <CommentTexts
                       ref={refs[idx]}
                       texts={comment.text}

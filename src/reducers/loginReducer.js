@@ -1,4 +1,4 @@
-import { ADD_JWT, LOG_OUT } from '../action/index';
+import { ADD_JWT, LOG_OUT } from "../action/index";
 
 const initialState = {
   isLogin: false,
@@ -6,6 +6,7 @@ const initialState = {
   accessToken: null,
   id: null,
   password: null,
+  name: "Heize", //임시 이름
 };
 const loginReducer = (state = initialState, action) => {
   // eslint-disable-next-line default-case
