@@ -9,21 +9,30 @@ import {
   CommentTitle,
   hr,
   CommentBox,
-  commentTexts,
-  Thumbnail,
   highlight,
 } from "styles/CommentElements";
-import CommentTexts from "./CommentTexts";
 import CommentUser from "./CommentUser";
 
 const Comments = () => {
   const [comments, setComments] = useState(null); //기존에 달린 댓글
+  const [error, setError] = useState(false);
   const [refs, setRefs] = useState([]);
   const textArea = useRef(null); //새 댓글 생성 창
 
-  useEffect(() => {
+  const getComments = () => {
     const res = CommentsAPI.getComments();
-    setComments(res);
+    res.then(
+      (datas) => {
+        setComments(datas);
+      },
+      (err) => {
+        setError(true);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getComments();
     if (comments && comments.length > 0) {
       for (let a of comments) {
         setRefs((prev) => [...prev, React.createRef()]);
@@ -31,9 +40,12 @@ const Comments = () => {
     }
   }, [comments]);
 
+  //포스트 생성 확인 버튼 핸들링 함수
   const onSubmitComment = async (e) => {
     const texts = textArea.current.value;
     await CommentsAPI.createComment(texts);
+    textArea.current.value = "";
+    getComments();
   };
 
   return (
@@ -46,31 +58,32 @@ const Comments = () => {
         <SubmitBtn onClick={onSubmitComment}>확인</SubmitBtn>
       </InputContainer>
       <CommentContainer>
-        <CommentTitle>
-          댓글 <span style={highlight}>{comments ? comments.length : 0}</span>개
-        </CommentTitle>
-        {comments &&
-          comments.map((comment, idx) => (
-            <div key={comment.id} style={{ width: "100%" }}>
-              <hr style={hr} />
-              <CommentBox>
-                <Thumbnail img={comment.thumbnail}></Thumbnail>
-                <div style={commentTexts}>
-                  <div>
+        {error ? (
+          <CommentTitle>댓글을 불러오는 데 실패했습니다.</CommentTitle>
+        ) : (
+          <>
+            <CommentTitle>
+              댓글{" "}
+              <span style={highlight}>{comments ? comments.length : 0}</span>개
+            </CommentTitle>
+            {comments &&
+              comments.map((comment, idx) => (
+                <div key={comment.comment_id} style={{ width: "100%" }}>
+                  <hr style={hr} />
+                  <CommentBox>
                     <CommentUser
-                      id={comment.nickname}
+                      thumbnail={comment.thumbnail}
+                      id={comment.user_id}
                       date={comment.date}
+                      refs={refs[idx]}
+                      texts={comment.content}
                     ></CommentUser>
-                    <CommentTexts
-                      ref={refs[idx]}
-                      texts={comment.text}
-                    ></CommentTexts>
-                  </div>
+                  </CommentBox>
+                  {idx === comments.length - 1 && <hr style={hr} />}
                 </div>
-              </CommentBox>
-              {idx === comments.length - 1 && <hr style={hr} />}
-            </div>
-          ))}
+              ))}
+          </>
+        )}
       </CommentContainer>
     </Section>
   );
