@@ -19,6 +19,7 @@ export const SearchTitle = styled.h2`
 `
 
 export const SearchInputContainer = styled.div`
+    margin-bottom: 50px;
 `
 
 export const SearchInput = styled.input.attrs({

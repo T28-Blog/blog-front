@@ -1,6 +1,7 @@
 import React from 'react'
 import { SearchContainer, SearchTitle, SearchInputContainer, SearchInput, SearchIcon } from '../styles/SearchInputElements'
 import { FaSearch } from "react-icons/fa";
+import SearchList from '../components/SearchList'
 
 const Search = () => {
     return (
@@ -12,7 +13,9 @@ const Search = () => {
                     <FaSearch />
                 </SearchIcon>
             </SearchInputContainer>
+            <SearchList />
         </SearchContainer>
+        
 
     )
 }
