@@ -6,12 +6,14 @@ export const SearchListContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    margin-bottom: 15px;
 `
 
 export const SearchThumbnail = styled.img`
     width: 150px;
     margin: 0;
     margin-right: 10px;
+    border-radius: 10px;
 `
 
 export const SearchTextBox = styled.div`
