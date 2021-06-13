@@ -20,8 +20,8 @@ import logo from "../assets/Team28-logo.png";
 import facebook from "../assets/facebook.png";
 import kakao from "../assets/kakao.png";
 import google from "../assets/google.png";
-import GoogleLogin from "react-google-login";
 import KakaoLogin from "../api/kakaoapi";
+// import GoogleLogin from "react-google-login";
 
 // Formik
 import { Formik, Form } from "formik";
@@ -32,6 +32,7 @@ import styled from "styled-components";
 //handler함수 호출
 import handleSignin from "../hooks/useSignin";
 
+import { auth, provider } from "fbase/Fbase";
 import { firebaseInstance } from "fbase/Fbase";
 
 import { ADD_JWT_OWN } from "action";
@@ -48,9 +49,6 @@ const BtnContainer = styled.div`
 
 const SignIn = () => {
   const history = useHistory();
-  const responseGoogle = (response) => {
-    // console.log(response.tokenId);
-  };
   useEffect(() => {
     const requestToken = new URL(window.location.href).searchParams.get("code"); //카카오 인증 코드 받아오기
     if (requestToken) {
@@ -59,6 +57,16 @@ const SignIn = () => {
       history.push("/");
     }
   }, []);
+
+  const signInWithGoogle = () => {
+    auth.signInWithPopup(provider).then((res) => {
+      console.log(res.user);
+      const jwt = null;
+      const at = null;
+      store.dispatch({ type: ADD_JWT, jwt, at });
+      history.push("/");
+    });
+  };
 
   return (
     <FormContainer>
@@ -137,35 +145,7 @@ const SignIn = () => {
         <OtherAccount>다른 계정으로 로그인</OtherAccount>
         <BtnContainer>
           <Facebook image={facebook}></Facebook>
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_API_ID}
-            render={(renderProps) => (
-              <button
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                style={{ border: "none", background: "transparent" }}
-              >
-                <img
-                  src={google}
-                  style={{
-                    borderRadius: "50px",
-                    margin: "0 0 0 20px",
-                    backgroundPosition: "center",
-                  }}
-                  width="50px"
-                  height="50px"
-                  alt="google"
-                ></img>
-              </button>
-            )}
-            buttonText=""
-            onSuccess={responseGoogle}
-            onFailure={() => console.log("failure")}
-            isSignedIn={true}
-            cookiePolicy={"single_host_origin"}
-            uxMode="redirect"
-            redirectUri="http://localhost:3000"
-          />
+          <Google image={google} onClick={signInWithGoogle} />
           <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
         </BtnContainer>
       </StyledFormArea>
@@ -174,3 +154,4 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
