@@ -34,7 +34,7 @@ import handleSignin from "../hooks/useSignin";
 
 import { firebaseInstance } from "fbase/Fbase";
 
-import { ADD_JWT } from "action";
+import { ADD_JWT_OWN } from "action";
 import store from "store/store";
 
 //소셜 로그인 버튼
@@ -58,7 +58,7 @@ const SignIn = () => {
       handleSignin(requestToken);
       history.push("/");
     }
-  });
+  }, []);
 
   return (
     <FormContainer>
@@ -96,7 +96,7 @@ const SignIn = () => {
                 console.log("Logged in", user);
                 const jwt = null;
                 const at = null;
-                store.dispatch({ type: ADD_JWT, jwt, at });
+                store.dispatch({ type: ADD_JWT_OWN, jwt, at });
                 history.push("/");
                 // ...
               })
