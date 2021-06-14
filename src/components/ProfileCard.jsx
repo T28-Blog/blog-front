@@ -11,7 +11,7 @@ import {
     Email,
     CardFooter,
     IconLink
-} from '../styles/profileCardElements'
+} from '../styles/ProfileCardElements'
 import pic from '../assets/woman.jpg'
 
 const ProfileCard = () => {

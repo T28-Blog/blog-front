@@ -18,7 +18,7 @@ import {
   PopularPost,
   PopularThumbnail,
   PopularContainer,
-} from "../styles/indexElements";
+} from "../styles/IndexElements";
 import testGoogle from "../assets/test_google.jpeg";
 import testMac from "../assets/test_mac.jpeg";
 import Slider from "components/Slider";

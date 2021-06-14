@@ -25,7 +25,7 @@ import KakaoLogin from "../api/kakaoapi";
 
 // Formik
 import { Formik, Form } from "formik";
-import { TextInput } from "../components/formLib";
+import { TextInput } from "../components/FormLib";
 import * as Yup from "yup";
 import styled from "styled-components";
 
@@ -63,7 +63,7 @@ const SignIn = () => {
       console.log(res.user);
       const jwt = null;
       const at = null;
-      store.dispatch({ type: ADD_JWT, jwt, at });
+      store.dispatch({ type: ADD_JWT_OWN, jwt, at });
       history.push("/");
     });
   };

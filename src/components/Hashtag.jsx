@@ -7,7 +7,7 @@ import {
   Title,
   MoreBtn,
   Span,
-} from "../styles/hashtagElements";
+} from "../styles/HashtagElements";
 import useDebounce from "hooks/useDebounce";
 
 const Hashtag = () => {
