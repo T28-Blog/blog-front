@@ -11,7 +11,7 @@ import {
   Button,
   BottomWrapper,
   PageTitle
-} from 'styles/editorElements';
+} from 'styles/EditorElements';
 
 export default function WritePost() {
   const [title, setTitle] = useState("");

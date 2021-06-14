@@ -3,7 +3,7 @@ import {
     StyledTextInput,
     StyledLabel,
     ErrorMsg
-} from '../styles/signElements.js'
+} from '../styles/SignElements.js'
 
 export const TextInput = ({...props}) => {
     const [field, meta] = useField(props)

@@ -9,14 +9,31 @@ export const EditorWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 50px;
+
+  @media screen and (max-width: 768px){
+    width: 100%;
+    padding: 0 50px;
+  }
+
+  @media screen and (max-width: 375px){
+    width: 100%;
+    padding: 0 20px 50px 20px;
+  }
+
 `;
 
 export const PageTitle = styled.h2`
   width: 100%;
   margin: 0;
   padding: 0;
-  font-size: 20px;
+  font-size: 40px;
   text-align: left;
+  margin-bottom: 30px;
+
+  @media screen and (max-width: 375px){
+    margin: 30px 0 10px 0;
+    font-size: 28px
+  }
 `
 
 export const TitleArea = styled.input.attrs({

@@ -101,6 +101,7 @@ export const Email = styled.button`
     text-align: center;
     line-height: 30px;
     text-transform: uppercase;
+    text-decoration: none;
 
     &:hover {
         border: 1px solid #f29494;

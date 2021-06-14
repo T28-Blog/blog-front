@@ -1,6 +1,6 @@
-import ProfileCard from 'components/profileCard'
+import ProfileCard from 'components/ProfileCard'
 import React from 'react'
-import {PageTitle, ContactContainer} from '../styles/contactElements'
+import {PageTitle, ContactContainer} from '../styles/ContactElements'
 
 const ContactUs = () => {
     return (

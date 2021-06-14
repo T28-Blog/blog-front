@@ -11,7 +11,7 @@ import {
     Email,
     CardFooter,
     IconLink
-} from '../styles/profileCardElements'
+} from '../styles/ProfileCardElements'
 import pic from '../assets/woman.jpg'
 
 const ProfileCard = () => {
@@ -25,7 +25,7 @@ const ProfileCard = () => {
                     <Name>김은태</Name>
                     <Job>Front-End Developer</Job>
                     <Desc>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Desc>
-                    <Email>Contact</Email>
+                    <Email><a href={`mailto:hurima90@gmail.com`} style={{textDecoration: 'none', color: '#fff', outline: 'none'}}>Contact</a></Email>
                 </CardHeader>
                 <CardFooter>
                     <IconLink>
@@ -47,7 +47,7 @@ const ProfileCard = () => {
                     <Name>김수빈</Name>
                     <Job>Front-End Developer</Job>
                     <Desc>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Desc>
-                    <Email>Contact</Email>
+                    <Email><a href={`mailto:qorgkr26@sookmyung.ac.kr`} style={{textDecoration: 'none', color: '#fff', outline: 'none'}}>Contact</a></Email>
                 </CardHeader>
                 <CardFooter>
                     <IconLink>
@@ -69,7 +69,7 @@ const ProfileCard = () => {
                     <Name>이유정</Name>
                     <Job>Front-End Developer</Job>
                     <Desc>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Desc>
-                    <Email>Contact</Email>
+                    <Email><a href={`mailto:yjclarelee@postech.ac.kr`} style={{textDecoration: 'none', color: '#fff', outline: 'none'}}>Contact</a></Email>
                 </CardHeader>
                 <CardFooter>
                     <IconLink>

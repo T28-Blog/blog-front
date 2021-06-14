@@ -10,12 +10,12 @@ import {
   ExtraText,
   ButtonGroup,
   FormContainer,
-} from "../styles/signElements";
+} from "../styles/SignElements";
 import logo from "../assets/Team28-logo.png";
 
 // Formik
 import { Formik, Form } from "formik";
-import { TextInput } from "../components/formLib";
+import { TextInput } from "../components/FormLib";
 import * as Yup from "yup";
 
 import { firebaseInstance } from "fbase/Fbase";
