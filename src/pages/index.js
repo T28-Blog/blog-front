@@ -24,8 +24,10 @@ import testMac from "../assets/test_mac.jpeg";
 import Slider from "components/Slider";
 import Hashtag from "components/Hashtag";
 import "styles/slider.css";
+import store from "store/store";
 
 const Home = () => {
+  console.log(store.getState());
   return (
     <>
       <MainSlider>

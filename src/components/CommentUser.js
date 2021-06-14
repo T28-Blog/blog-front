@@ -9,13 +9,23 @@ import {
   EditBtn,
   DeleteBtn,
   btns,
+  EditContainer,
 } from "styles/CommentElements";
 import timeChanger from "tools/TimeChange";
 import CommentTexts from "./CommentTexts";
 
-const CommentUser = ({ commentID, userID, date, refs, texts }) => {
+const CommentUser = ({
+  commentID,
+  userID,
+  date,
+  refs,
+  texts,
+  onHandleComments,
+}) => {
   const [userName, setUserName] = useState(null);
   const [userThumbnail, setUserThumbnail] = useState(null);
+  const [isEditing, setEdit] = useState(false);
+  const [contents, setContents] = useState(texts);
 
   const {
     userInfo: { name },
@@ -40,6 +50,18 @@ const CommentUser = ({ commentID, userID, date, refs, texts }) => {
 
   const onHandleDelete = () => {
     CommentsAPI.deleteComment(commentID);
+    onHandleComments();
+  };
+
+  const onHandleEdit = (e) => {
+    setEdit((state) => !state);
+    if (isEditing) {
+      CommentsAPI.editComment(contents, commentID);
+    }
+  };
+
+  const onHandleChange = (e) => {
+    setContents(e.target.value);
   };
 
   return (
@@ -51,12 +73,24 @@ const CommentUser = ({ commentID, userID, date, refs, texts }) => {
           <Date>{timeChanger.utcTOnow(date)}</Date>
           {userName === name && (
             <div style={btns}>
-              <EditBtn>수정</EditBtn>
+              <EditBtn onClick={onHandleEdit}>
+                {isEditing ? "완료" : "수정"}
+              </EditBtn>
               <DeleteBtn onClick={onHandleDelete}>삭제</DeleteBtn>
             </div>
           )}
         </div>
-        <CommentTexts ref={refs} texts={texts}></CommentTexts>
+        {isEditing ? (
+          <EditContainer
+            defaultValue={JSON.stringify(contents).slice(
+              1,
+              JSON.stringify(contents).length - 1
+            )}
+            onChange={onHandleChange}
+          />
+        ) : (
+          <CommentTexts ref={refs} texts={contents}></CommentTexts>
+        )}
       </div>
     </>
   );

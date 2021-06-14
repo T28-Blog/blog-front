@@ -20,8 +20,6 @@ import * as Yup from "yup";
 
 import { firebaseInstance } from "fbase/Fbase";
 
-
-
 const SignUp = () => {
   const history = useHistory();
   return (
@@ -56,21 +54,21 @@ const SignUp = () => {
               .oneOf([Yup.ref("password")], "Passwords must match"), // 비밀번호 일치 확인을 위해 oneOf속성에 배열을 전달
           })}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
+            //console.log(values);
             firebaseInstance
               .auth()
               .createUserWithEmailAndPassword(values.email, values.password)
               .then((userCredential) => {
                 // Signed in
-                  var user = userCredential.user;
+                var user = userCredential.user;
                 console.log(user);
-                history.push('/sign-in');
+                history.push("/sign-in");
                 // ...
               })
               .catch((error) => {
                 var errorCode = error.code;
-                  var errorMessage = error.message;
-                  console.log(errorCode, errorMessage);
+                var errorMessage = error.message;
+                console.log(errorCode, errorMessage);
                 // ..
               });
           }}
