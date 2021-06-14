@@ -25,6 +25,7 @@ const Header = () => {
 
   //user 설정(헤더 영역 login & logout 구현)
   const [user, setUser] = useState(store.getState().userInfo.isLogin);
+  const [isOauth, setOauth] = useState(store.getState().userInfo.oauth);
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -46,10 +47,16 @@ const Header = () => {
   }, []);
 
   //비동기 실행 매끄럽게 할 수 있도록 코드 리팩토링 추후 예정
+  //카카오 로그아웃 처리 분기 (state에 oauth 정보 추가)
   const doLogout = () => {
-    KakaoLogin.kakaoLogout();
-    console.log(user);
-    //store.dispatch({ type: LOG_OUT });
+    if (isOauth) {
+      const { service } = store.getState().userInfo;
+      if (service === "kakao") {
+        KakaoLogin.kakaoLogout();
+        console.log(user);
+        //store.dispatch({ type: LOG_OUT });
+      }
+    }
   };
 
   return (

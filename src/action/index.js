@@ -1,2 +1,3 @@
-export const ADD_JWT = 'ADD_JSON_WEB_TOKEN';
-export const LOG_OUT = 'LOG_OUT_USER';
+export const ADD_JWT_WITH_KAKAO = "ADD_JSON_WEB_TOKEN_USING_KAKAO_OAUTH";
+export const ADD_JWT_OWN = "ADD_JSON_WEB_TOKEN_OWN_LOGIN";
+export const LOG_OUT = "LOG_OUT_USER";

@@ -10,30 +10,49 @@ import {
   DeleteBtn,
   btns,
 } from "styles/CommentElements";
+import timeChanger from "tools/TimeChange";
 import CommentTexts from "./CommentTexts";
 
-const CommentUser = ({ id, date, thumbnail, refs, texts }) => {
+const CommentUser = ({ commentID, userID, date, refs, texts }) => {
   const [userName, setUserName] = useState(null);
+  const [userThumbnail, setUserThumbnail] = useState(null);
 
   const {
     userInfo: { name },
   } = store.getState();
 
   useEffect(() => {
-    const res = CommentsAPI.getCommentUserID(id);
+    const res = CommentsAPI.getCommentUserID(userID);
+    if (!res) {
+      setUserName("익명");
+    } else {
+      res
+        .then((response) => {
+          setUserName(response.name);
+          setUserThumbnail(response.thumbnail);
+        })
+        .catch((err) => {
+          console.log(err);
+          setUserName("익명");
+        });
+    }
   }, []);
+
+  const onHandleDelete = () => {
+    CommentsAPI.deleteComment(commentID);
+  };
 
   return (
     <>
-      <Thumbnail img={thumbnail}></Thumbnail>
+      <Thumbnail img={userThumbnail}></Thumbnail>
       <div style={commentTexts}>
         <div>
-          <ID>{id}</ID>
-          <Date>{date}</Date>
-          {id === name && (
+          <ID>{userName}</ID>
+          <Date>{timeChanger.utcTOnow(date)}</Date>
+          {userName === name && (
             <div style={btns}>
               <EditBtn>수정</EditBtn>
-              <DeleteBtn>삭제</DeleteBtn>
+              <DeleteBtn onClick={onHandleDelete}>삭제</DeleteBtn>
             </div>
           )}
         </div>

@@ -1,5 +1,5 @@
 import firebase from "firebase/app";
-import 'firebase/auth';
+import "firebase/auth";
 import "firebase/firestore";
 
 const firebaseConfig = {
@@ -16,7 +16,12 @@ firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
 
-export const firebaseInstance = firebase;
-export const authService = firebase.auth();
-export { firestore };
+const firebaseInstance = firebase;
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
+
+export { firestore, firebaseInstance, auth, provider };
+
+export default firebase; // firebaseInstance를 export 하고 있는데 firebase 왜 export 해야 하는지 확인 필요
 
