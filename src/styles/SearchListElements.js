@@ -6,6 +6,7 @@ export const SearchListContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    margin: 0 auto;
     margin-bottom: 15px;
 `
 

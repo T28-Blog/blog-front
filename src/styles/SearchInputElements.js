@@ -6,15 +6,16 @@ export const SearchContainer = styled.div`
     align-items: center;
     flex-direction: column;
     max-width: 1000px;
-    height: 100vh;
+    height: 100%;
     margin: 0 auto;
+    padding-top: 50px;
 `
 
-export const SearchTitle = styled.h2`
+export const SearchInputTitle = styled.h2`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     font-size: 40px;
 `
 
