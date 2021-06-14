@@ -15,20 +15,25 @@ import CommentUser from "./CommentUser";
 
 const Comments = () => {
   const [comments, setComments] = useState(null); //기존에 달린 댓글
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(false); //댓글 불러오기 실패 시 에러 처리
+  const [loading, setLoading] = useState(true); //댓글 로딩 상태
   const [refs, setRefs] = useState([]);
   const textArea = useRef(null); //새 댓글 생성 창
 
   const getComments = () => {
     const res = CommentsAPI.getComments();
-    res.then(
-      (datas) => {
+    res
+      .then((datas) => {
+        if (!datas) throw new Error();
         setComments(datas);
-      },
-      (err) => {
+      })
+      .catch((err) => {
         setError(true);
-      }
-    );
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -59,7 +64,15 @@ const Comments = () => {
       </InputContainer>
       <CommentContainer>
         {error ? (
-          <CommentTitle>댓글을 불러오는 데 실패했습니다.</CommentTitle>
+          <>
+            <CommentTitle></CommentTitle>
+            <div style={{ width: "100%" }}>
+              <hr style={hr} />
+              <CommentBox>댓글을 불러오는 데 실패했습니다.</CommentBox>
+            </div>
+          </>
+        ) : loading ? (
+          <CommentTitle>...loading...</CommentTitle>
         ) : (
           <>
             <CommentTitle>
@@ -72,8 +85,8 @@ const Comments = () => {
                   <hr style={hr} />
                   <CommentBox>
                     <CommentUser
-                      thumbnail={comment.thumbnail}
-                      id={comment.user_id}
+                      commentID={comment.comment_id}
+                      userID={comment.user_id}
                       date={comment.date}
                       refs={refs[idx]}
                       texts={comment.content}

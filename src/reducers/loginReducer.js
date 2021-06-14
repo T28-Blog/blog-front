@@ -1,4 +1,4 @@
-import { ADD_JWT, LOG_OUT } from "../action/index";
+import { ADD_JWT_OWN, ADD_JWT_WITH_KAKAO, LOG_OUT } from "../action/index";
 
 const initialState = {
   isLogin: false,
@@ -6,17 +6,24 @@ const initialState = {
   accessToken: null,
   id: null,
   password: null,
-  name: "Heize", //임시 이름
+  name: "익명", //임시 이름
+  oauth: false,
+  service: null, //oauth : true인 경우, 소셜 로그인 제공 회사
 };
 const loginReducer = (state = initialState, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
-    case ADD_JWT:
+    case ADD_JWT_OWN:
+      state = { jwt: action.jwt, isLogin: true, accessToken: action.at };
+      break;
+    case ADD_JWT_WITH_KAKAO:
       state = {
         ...state,
         jwt: action.jwt,
         isLogin: true,
         accessToken: action.at,
+        oauth: true,
+        service: "kakao",
       };
       break;
     // eslint-disable-next-line no-fallthrough
@@ -26,6 +33,8 @@ const loginReducer = (state = initialState, action) => {
         isLogin: false,
         accessToken: null,
         jwt: null, //한 번에 처리하는 게 아니므로 추후 코드 수정
+        oauth: false,
+        service: null,
       };
       break;
   }

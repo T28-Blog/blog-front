@@ -16,13 +16,12 @@ firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
 
-export const firebaseInstance = firebase;
-export const auth = firebase.auth();
-export const provider = new firebase.auth.GoogleAuthProvider();
+const firebaseInstance = firebase;
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
-export default firebase;
-export { firestore };
+export { firestore, firebaseInstance, auth, provider };
 
-
+export default firebase; // firebaseInstance를 export 하고 있는데 firebase 왜 export 해야 하는지 확인 필요
 
