@@ -1,35 +1,35 @@
-import { firestore } from "fbase/Fbase";
+import { firebaseInstance } from "fbase/Fbase";
 import store from "store/store";
 import timeChanger from "tools/TimeChange";
+import { v4 } from "uuid";
 
 const CommentsAPI = {
   getComments: async () => {
     try {
       const arr = [];
-      const commentsRef = await firestore
-        .collection("comments")
-        .orderBy("date")
+      const commentRef = await firebaseInstance
+        .database()
+        .ref("comments")
         .get();
-      const comments = await commentsRef.forEach((c) => arr.push(c.data()));
-      return arr;
+      await commentRef.forEach((s) => {
+        arr.push(s.val());
+      });
+      return arr.sort((a, b) => +a.date - +b.date);
     } catch (err) {
+      console.log(err);
       return null;
     }
   },
   getCommentUserID: async (id) => {
     try {
-      //user collection
-      let findUser = null; //해당 id값을 갖고 있는 user 정보 db에서 찾아오기
-      const usersRef = await firestore
-        .collection("users")
-        .where("user_id", "==", id)
+      const usersRef = await firebaseInstance
+        .database()
+        .ref(`users/user_${id}`)
         .get();
-      const user = await usersRef.forEach((data) => {
-        findUser = data.data();
-      });
-      return findUser;
-    } catch (err) {
-      console.log(err);
+      const user = usersRef.val();
+      return user;
+    } catch (e) {
+      console.log(e);
       return null;
     }
   },
@@ -37,33 +37,40 @@ const CommentsAPI = {
     //이 댓글을 작성한 user 정보(store.getState())
     //str : 작성 댓글 text
     const date = timeChanger.nowTOutc();
-
-    const user_id = store.getState().userInfo.id ?? "3"; //user_id값을 store 내 state로 관리해야 함
-    const rndNum = Math.floor(Math.random() * 1000) + 3;
-    const newComment = firestore
-      .collection("comments")
-      .doc(`comment_${rndNum}`)
-      .set({
-        date,
-        comment_id: rndNum,
-        content: str,
-        post_id: "1", //해당 포스팅 id
-        user_id, //
-      })
-      .then(() => console.log("success!!!"))
-      .catch((err) => console.log(`we fail to create new comment ${err}`));
+    const uuid = v4();
+    firebaseInstance
+      .database()
+      .ref(`comments/comment_${uuid}`)
+      .set(
+        {
+          content: str,
+          comment_id: `comment_${uuid}`,
+          date: date,
+          post_id: "1",
+          user_id: "10",
+        },
+        (error) => {
+          if (error) {
+            alert("댓글 작성에 실패하였습니다.. 잠시 후 다시 시도해주세요.🙇‍♂️");
+          }
+        }
+      );
   },
   deleteComment: (commentID) => {
-    firestore
-      .collection("comments")
-      .doc(`comment_${commentID}`)
-      .delete()
-      .then(
-        () => {
-          console.log("delete!!");
-        },
-        (err) => console.log("fail to delete document")
-      );
+    console.log(commentID);
+    const commentRef = firebaseInstance
+      .database()
+      .ref(`comments/${commentID}`)
+      .remove();
+  },
+  editComment: async (content, commentID) => {
+    const current = await firebaseInstance
+      .database()
+      .ref(`comments/${commentID}`)
+      .get();
+    let field = await current.val();
+    field = { ...field, content };
+    firebaseInstance.database().ref(`comments/${commentID}`).update(field);
   },
 };
 

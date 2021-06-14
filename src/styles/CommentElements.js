@@ -214,3 +214,12 @@ export const DeleteBtn = styled.button`
     font-weight: 400;
   }
 `;
+
+export const EditContainer = styled.input`
+  width: 90%;
+  outline: none;
+  border: 1px solid #8395a7;
+  font-size: 0.9rem;
+  height: 28px;
+  line-height: 28px;
+`;

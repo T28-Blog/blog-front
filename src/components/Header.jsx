@@ -37,8 +37,7 @@ const Header = () => {
 
   //store 내 state가 변경될 때 불리는 callback 함수
   store.subscribe(() => {
-    console.log(user);
-    setUser(!user);
+    setUser((state) => !state);
   });
 
   useEffect(() => {

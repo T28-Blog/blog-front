@@ -22,18 +22,19 @@ const Comments = () => {
 
   const getComments = () => {
     const res = CommentsAPI.getComments();
-    res
-      .then((datas) => {
-        if (!datas) throw new Error();
-        setComments(datas);
-      })
-      .catch((err) => {
-        setError(true);
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    if (res) {
+      res
+        .then((data) => {
+          setComments(data);
+        })
+        .catch((e) => {
+          console.log(e);
+          setError(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const Comments = () => {
         setRefs((prev) => [...prev, React.createRef()]);
       }
     }
-  }, [comments]);
+  }, []);
 
   //포스트 생성 확인 버튼 핸들링 함수
   const onSubmitComment = async (e) => {
@@ -90,6 +91,7 @@ const Comments = () => {
                       date={comment.date}
                       refs={refs[idx]}
                       texts={comment.content}
+                      onHandleComments={getComments}
                     ></CommentUser>
                   </CommentBox>
                   {idx === comments.length - 1 && <hr style={hr} />}
