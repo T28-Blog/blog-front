@@ -16,6 +16,7 @@ import {
 } from '../styles/SearchListElements'
 import { FaSearch } from "react-icons/fa";
 // import SearchList from '../components/SearchList'
+import ScrollToTop from 'components/ScrollToTop';
 import JSONDATA from "../assets/MOCK_DATA.json"
 
 const Search = () => {
@@ -54,6 +55,7 @@ const Search = () => {
                     </SearchListContainer>
                 ))
             }
+            <ScrollToTop />
         </>
     )
 }

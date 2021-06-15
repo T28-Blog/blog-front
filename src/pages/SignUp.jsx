@@ -12,6 +12,7 @@ import {
   FormContainer,
 } from "../styles/SignElements";
 import logo from "../assets/Team28-logo.png";
+import ScrollToTop from "components/ScrollToTop";
 
 // Formik
 import { Formik, Form } from "formik";
@@ -114,6 +115,7 @@ const SignUp = () => {
           Already hava an account? <TextLink to="/sign-in">SignIn</TextLink>
         </ExtraText>
       </StyledFormArea>
+      <ScrollToTop />
     </FormContainer>
   );
 };

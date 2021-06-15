@@ -7,6 +7,7 @@ import {
     ErrorButton
 } from '../styles/ErrorElements.js'
 import error from '../assets/error404.png'
+import ScrollToTop from 'components/ScrollToTop.jsx'
 
 const Error = () => {
     return (
@@ -20,6 +21,7 @@ const Error = () => {
                 올바른 URL을 입력하였는지 확인하세요. 자세한 내용은 사이트 소유자에게 문의하시기 바랍니다.
             </ErrorDesc>
             <ErrorButton to="/">메인으로 돌아가기</ErrorButton>
+            <ScrollToTop />
         </ErrorContainer>
     )
 }
