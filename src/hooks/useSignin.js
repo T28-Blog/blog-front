@@ -1,4 +1,4 @@
-import getUserInfo from "../api/KakaoAPI";
+import getUserInfo from "../api/Kakaoapi";
 import { ADD_JWT_WITH_KAKAO } from "action";
 import store from "store/store";
 
