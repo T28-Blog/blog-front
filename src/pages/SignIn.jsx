@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   FormContainer,
@@ -23,6 +23,7 @@ import google from "../assets/google.png";
 import KakaoLogin from "../api/KakaoAPI";
 // import GoogleLogin from "react-google-login";
 import ScrollToTop from "components/ScrollToTop";
+import Modal from "components/Modal";
 
 // Formik
 import { Formik, Form } from "formik";
@@ -68,6 +69,16 @@ const SignIn = () => {
       history.push("/");
     });
   };
+
+  const [ modalState, setModalState ] = useState(false);
+
+  const openModal = () => {
+    setModalState(true);
+  }
+
+  const closeModal = () => {
+    setModalState(false);
+  }
 
   return (
     <FormContainer>
@@ -131,7 +142,7 @@ const SignIn = () => {
                 placeholder="********"
               />
               <ButtonGroup>
-                <StyledFormButton type="submit">Login</StyledFormButton>
+                <StyledFormButton type="submit"  onClick={openModal}>Login</StyledFormButton>
               </ButtonGroup>
             </Form>
           )}
@@ -144,12 +155,13 @@ const SignIn = () => {
         <DividerLine />
         <OtherAccount>다른 계정으로 로그인</OtherAccount>
         <BtnContainer>
-          <Facebook image={facebook}></Facebook>
           <Google image={google} onClick={signInWithGoogle} />
           <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
+          <Facebook image={facebook}></Facebook>
         </BtnContainer>
       </StyledFormArea>
       <ScrollToTop />
+      <Modal state={modalState} closeModal={closeModal} title="로그인 실패" desc="이메일 또는 비밀번호를 확인해주세요<br>신규가입자는 가입 후 발송된 인증메일을 확인해주세요"/>
     </FormContainer>
   );
 };
