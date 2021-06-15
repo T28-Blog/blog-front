@@ -1,43 +1,40 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const ErrorContainer = styled.div`
+export const SuccessContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    max-width: 1000px;
     height: 100vh;
-
-    @media screen and (max-width: 768px){
-        padding: 0 50px;
-    }
+    flex-direction: column;
+    margin: 0 auto;
 `
 
-export const ErrorImg = styled.img`
+export const SuccessLogo = styled.img`
     width: 400px;
-    margin-bottom: 80px;
-
-    @media screen and (max-width: 375px){
-        width: 300px;
-    }
+    margin-bottom: 50px;
 `
 
-export const ErrorTitle = styled.h2`
-    font-size: 28px;
-    color: blue;
+export const SuccessTitle = styled.h3`
+    font-size: 50px;
+    font-weight: 400;
     margin-bottom: 30px;
 `
 
-export const ErrorDesc = styled.p`
-    font-size: 16px;
+export const SuccessDesc = styled.p`
     text-align: center;
+    font-size: 16px;
     line-height: 30px;
+    margin-bottom: 50px;
 `
 
-export const ErrorButton = styled(Link)`
+export const SuccessButton = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 300px;
+    height: 50px;
     border-radius: 40px;
     background: transparent;
     border: 1px solid #256ce1;
@@ -48,7 +45,7 @@ export const ErrorButton = styled(Link)`
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
-    margin-top: 20px;
+    margin-bottom: 50px;
 
     &:hover{
         transition: all 0.2s ease-in-out;

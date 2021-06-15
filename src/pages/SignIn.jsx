@@ -22,6 +22,7 @@ import kakao from "../assets/kakao.png";
 import google from "../assets/google.png";
 import KakaoLogin from "../api/kakaoapi";
 // import GoogleLogin from "react-google-login";
+import ScrollToTop from "components/ScrollToTop";
 
 // Formik
 import { Formik, Form } from "formik";
@@ -149,6 +150,7 @@ const SignIn = () => {
           <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
         </BtnContainer>
       </StyledFormArea>
+      <ScrollToTop />
     </FormContainer>
   );
 };

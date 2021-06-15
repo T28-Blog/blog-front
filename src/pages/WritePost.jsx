@@ -12,6 +12,7 @@ import {
   BottomWrapper,
   PageTitle
 } from 'styles/EditorElements';
+import ScrollToTop from "components/ScrollToTop";
 
 export default function WritePost() {
   const [title, setTitle] = useState("");
@@ -66,6 +67,7 @@ export default function WritePost() {
           </ButtonWrapper>
         </BottomWrapper>
       </EditorWrapper>
+      <ScrollToTop />
     </>
   );
 }
