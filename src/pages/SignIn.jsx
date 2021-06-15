@@ -20,7 +20,7 @@ import logo from "../assets/Team28-logo.png";
 import facebook from "../assets/facebook.png";
 import kakao from "../assets/kakao.png";
 import google from "../assets/google.png";
-import KakaoLogin from "../api/kakaoapi";
+import KakaoLogin from "../api/KakaoAPI";
 // import GoogleLogin from "react-google-login";
 
 // Formik

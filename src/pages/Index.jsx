@@ -27,7 +27,6 @@ import "styles/slider.css";
 import store from "store/store";
 
 const Home = () => {
-  console.log(store.getState());
   return (
     <>
       <MainSlider>
