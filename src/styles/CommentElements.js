@@ -176,6 +176,7 @@ export const Text = styled.div`
 export const MoreBtn = styled.button`
   all: unset;
   border-bottom: 1px solid #8395a7;
+  width: fit-content;
   color: #8395a7;
   font-size: 0.8rem;
 `;

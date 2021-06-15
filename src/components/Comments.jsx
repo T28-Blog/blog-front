@@ -18,6 +18,7 @@ const Comments = () => {
   const [error, setError] = useState(false); //댓글 불러오기 실패 시 에러 처리
   const [loading, setLoading] = useState(true); //댓글 로딩 상태
   const [refs, setRefs] = useState([]);
+  const [first, setNext] = useState(0);
   const textArea = useRef(null); //새 댓글 생성 창
 
   const getComments = () => {
@@ -38,13 +39,17 @@ const Comments = () => {
   };
 
   useEffect(() => {
-    getComments();
+    if (!first) {
+      //무한 데이터 call 막기
+      getComments();
+      setNext(10);
+    }
     if (comments && comments.length > 0) {
       for (let a of comments) {
         setRefs((prev) => [...prev, React.createRef()]);
       }
     }
-  }, []);
+  }, [comments]);
 
   //포스트 생성 확인 버튼 핸들링 함수
   const onSubmitComment = async (e) => {
