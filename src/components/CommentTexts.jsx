@@ -13,7 +13,7 @@ const CommentTexts = React.forwardRef((props, ref) => {
         setShowingBtn(true);
       }
     }
-  }, [props, ref]);
+  }, [ref]);
 
   //resizeObserver callback func
   const resizeCallback = (nodes) => {

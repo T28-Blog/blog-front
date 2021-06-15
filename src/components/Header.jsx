@@ -13,7 +13,7 @@ import logo from "../assets/Team28-logo.png";
 import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import store from "store/store";
-import KakaoLogin from "api/kakaoapi";
+import KakaoLogin from "api/KakaoAPI";
 //import { LOG_OUT } from 'action/index';
 
 const Header = () => {
@@ -37,8 +37,8 @@ const Header = () => {
 
   //store 내 state가 변경될 때 불리는 callback 함수
   store.subscribe(() => {
-    console.log(user);
-    setUser(!user);
+    setUser((state) => !state);
+    setOauth((state) => !state);
   });
 
   useEffect(() => {
@@ -49,9 +49,12 @@ const Header = () => {
   //비동기 실행 매끄럽게 할 수 있도록 코드 리팩토링 추후 예정
   //카카오 로그아웃 처리 분기 (state에 oauth 정보 추가)
   const doLogout = () => {
+    console.log(isOauth);
     if (isOauth) {
       const { service } = store.getState().userInfo;
+      console.log(service);
       if (service === "kakao") {
+        console.log(1);
         KakaoLogin.kakaoLogout();
         console.log(user);
         //store.dispatch({ type: LOG_OUT });

@@ -18,26 +18,32 @@ const Comments = () => {
   const [error, setError] = useState(false); //댓글 불러오기 실패 시 에러 처리
   const [loading, setLoading] = useState(true); //댓글 로딩 상태
   const [refs, setRefs] = useState([]);
+  const [first, setNext] = useState(0);
   const textArea = useRef(null); //새 댓글 생성 창
 
   const getComments = () => {
     const res = CommentsAPI.getComments();
-    res
-      .then((datas) => {
-        if (!datas) throw new Error();
-        setComments(datas);
-      })
-      .catch((err) => {
-        setError(true);
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    if (res) {
+      res
+        .then((data) => {
+          setComments(data);
+        })
+        .catch((e) => {
+          console.log(e);
+          setError(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
 
   useEffect(() => {
-    getComments();
+    if (!first) {
+      //무한 데이터 call 막기
+      getComments();
+      setNext(10);
+    }
     if (comments && comments.length > 0) {
       for (let a of comments) {
         setRefs((prev) => [...prev, React.createRef()]);
@@ -90,6 +96,7 @@ const Comments = () => {
                       date={comment.date}
                       refs={refs[idx]}
                       texts={comment.content}
+                      onHandleComments={getComments}
                     ></CommentUser>
                   </CommentBox>
                   {idx === comments.length - 1 && <hr style={hr} />}

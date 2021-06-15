@@ -20,7 +20,7 @@ import logo from "../assets/Team28-logo.png";
 import facebook from "../assets/facebook.png";
 import kakao from "../assets/kakao.png";
 import google from "../assets/google.png";
-import KakaoLogin from "../api/kakaoapi";
+import KakaoLogin from "../api/KakaoAPI";
 // import GoogleLogin from "react-google-login";
 import ScrollToTop from "components/ScrollToTop";
 
@@ -36,7 +36,7 @@ import handleSignin from "../hooks/useSignin";
 import { auth, provider } from "fbase/Fbase";
 import { firebaseInstance } from "fbase/Fbase";
 
-import { ADD_JWT_OWN } from "action";
+import { ADD_JWT_OWN, ADD_JWT_WITH_GOOGLE } from "action";
 import store from "store/store";
 
 //소셜 로그인 버튼
@@ -64,7 +64,7 @@ const SignIn = () => {
       console.log(res.user);
       const jwt = null;
       const at = null;
-      store.dispatch({ type: ADD_JWT_OWN, jwt, at });
+      store.dispatch({ type: ADD_JWT_WITH_GOOGLE, jwt, at });
       history.push("/");
     });
   };
@@ -95,7 +95,7 @@ const SignIn = () => {
               .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
+            //console.log(values);
             firebaseInstance
               .auth()
               .signInWithEmailAndPassword(values.email, values.password)
@@ -103,9 +103,8 @@ const SignIn = () => {
                 // Signed in
                 var user = userCredential.user;
                 console.log("Logged in", user);
-                const jwt = null;
-                const at = null;
-                store.dispatch({ type: ADD_JWT_OWN, jwt, at });
+                const uid = user.uid;
+                store.dispatch({ type: ADD_JWT_OWN, uid });
                 history.push("/");
                 // ...
               })
@@ -156,4 +155,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
