@@ -13,8 +13,11 @@ import logo from "../assets/Team28-logo.png";
 import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import store from "store/store";
-import KakaoLogin from "api/KakaoAPI";
-//import { LOG_OUT } from 'action/index';
+import KakaoLogin from "api/Kakaoapi";
+import { LOG_OUT } from "action/index";
+import { useHistory } from "react-router-dom";
+
+import { firebaseInstance } from "fbase/Fbase";
 
 const Header = () => {
   const [click, setClick] = useState(false);
@@ -26,6 +29,8 @@ const Header = () => {
   //user 설정(헤더 영역 login & logout 구현)
   const [user, setUser] = useState(store.getState().userInfo.isLogin);
   const [isOauth, setOauth] = useState(store.getState().userInfo.oauth);
+
+  const history = useHistory();
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -49,17 +54,27 @@ const Header = () => {
   //비동기 실행 매끄럽게 할 수 있도록 코드 리팩토링 추후 예정
   //카카오 로그아웃 처리 분기 (state에 oauth 정보 추가)
   const doLogout = () => {
-    console.log(isOauth);
-    if (isOauth) {
-      const { service } = store.getState().userInfo;
-      console.log(service);
-      if (service === "kakao") {
-        console.log(1);
-        KakaoLogin.kakaoLogout();
-        console.log(user);
-        //store.dispatch({ type: LOG_OUT });
-      }
-    }
+    // console.log(isOauth);
+    // if (isOauth) {
+    //   const { service } = store.getState().userInfo;
+    //   console.log(service);
+    //   if (service === "kakao") {
+    //     console.log(1);
+    //     KakaoLogin.kakaoLogout();
+    //     console.log(user);
+    //     //store.dispatch({ type: LOG_OUT });
+    //   }
+    // } else {
+      firebaseInstance
+        .auth()
+        .signOut()
+        .then(() => {
+          store.dispatch({ type: LOG_OUT });
+          history.push("/");
+          console.log('logout!')
+        })
+        .catch((error) => console.log(error));
+    // }
   };
 
   return (

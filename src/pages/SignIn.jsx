@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   FormContainer,
@@ -20,7 +20,7 @@ import logo from "../assets/Team28-logo.png";
 import facebook from "../assets/facebook.png";
 import kakao from "../assets/kakao.png";
 import google from "../assets/google.png";
-import KakaoLogin from "../api/KakaoAPI";
+import KakaoLogin from "../api/Kakaoapi";
 // import GoogleLogin from "react-google-login";
 import ScrollToTop from "components/ScrollToTop";
 import Modal from "components/Modal";
@@ -34,8 +34,7 @@ import styled from "styled-components";
 //handler함수 호출
 import handleSignin from "../hooks/useSignin";
 
-import { auth, provider } from "fbase/Fbase";
-import { firebaseInstance } from "fbase/Fbase";
+import { auth, provider, firebaseInstance } from "fbase/Fbase";
 
 import { ADD_JWT_OWN, ADD_JWT_WITH_GOOGLE } from "action";
 import store from "store/store";
@@ -50,6 +49,9 @@ const BtnContainer = styled.div`
 `;
 
 const SignIn = () => {
+  const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+  const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+
   const history = useHistory();
   useEffect(() => {
     const requestToken = new URL(window.location.href).searchParams.get("code"); //카카오 인증 코드 받아오기
@@ -106,24 +108,29 @@ const SignIn = () => {
               .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            //console.log(values);
             firebaseInstance
-              .auth()
-              .signInWithEmailAndPassword(values.email, values.password)
-              .then((userCredential) => {
-                // Signed in
+            .auth()
+            .signInWithEmailAndPassword(values.email, values.password)
+            .then((userCredential) => {
+              // Signed in
                 var user = userCredential.user;
                 console.log("Logged in", user);
-                const uid = user.uid;
-                store.dispatch({ type: ADD_JWT_OWN, uid });
+                const jwt = null;
+                const at = null;
+                store.dispatch({ type: ADD_JWT_OWN, jwt, at });
                 history.push("/");
-                // ...
-              })
-              .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log("Error", errorCode, errorMessage);
-              });
+            })
+            .catch((error) => {
+              setIsInvalidEmail(false);
+              setIsInvalidPassword(false);
+              const errorCode = error.code;
+              if (errorCode === "auth/user-not-found")
+                setIsInvalidEmail(true);
+              if (errorCode === "auth/wrong-password")
+                setIsInvalidPassword(true);
+              const errorMessage = error.message;
+              console.log("Error", errorCode, errorMessage);
+            });
           }}
         >
           {() => (
@@ -133,6 +140,7 @@ const SignIn = () => {
                 type="text"
                 label="Email Address"
                 placeholder="abc123@gmail.com"
+                isInvalidEmail={isInvalidEmail}
               />
 
               <TextInput
@@ -140,6 +148,7 @@ const SignIn = () => {
                 type="password"
                 label="Password"
                 placeholder="********"
+                isInvalidPassword={isInvalidPassword}
               />
               <ButtonGroup>
                 <StyledFormButton type="submit"  onClick={openModal}>Login</StyledFormButton>
