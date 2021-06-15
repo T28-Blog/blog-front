@@ -25,6 +25,7 @@ import Slider from "components/Slider";
 import Hashtag from "components/Hashtag";
 import "styles/slider.css";
 import store from "store/store";
+import ScrollToTop from "components/ScrollToTop";
 
 const Home = () => {
   return (
@@ -289,6 +290,7 @@ const Home = () => {
             <SubWriter>Harsha Vardhan</SubWriter>
           </Post>
         </PostList>
+        <ScrollToTop />
       </Section>
     </>
   );

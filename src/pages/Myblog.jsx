@@ -1,3 +1,4 @@
+import ScrollToTop from 'components/ScrollToTop'
 import React from 'react'
 
 const MyBlog = () => {
@@ -11,6 +12,7 @@ const MyBlog = () => {
             }}
         >
             <h1>MyBlog</h1>
+            <ScrollToTop />
         </div>
     )
 }

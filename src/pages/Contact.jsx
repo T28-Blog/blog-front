@@ -1,6 +1,7 @@
 import ProfileCard from 'components/ProfileCard'
 import React from 'react'
 import {PageTitle, ContactContainer} from '../styles/ContactElements'
+import ScrollToTop from 'components/ScrollToTop'
 
 const ContactUs = () => {
     return (
@@ -9,6 +10,7 @@ const ContactUs = () => {
             <ContactContainer>
                 <ProfileCard/>
             </ContactContainer>
+            <ScrollToTop />
         </>
     )
 }
