@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     SuccessContainer,
     SuccessLogo,
@@ -10,7 +10,7 @@ import logo from "../assets/Team28-logo.png";
 import userInfo from "assets/user.json"
 import ScrollToTop from 'components/ScrollToTop';
 
-const SuccessSingUp = () => {
+const SuccessSignUp = () => {
     
     return (
         <>
@@ -32,4 +32,4 @@ const SuccessSingUp = () => {
     )
 }
 
-export default SuccessSingUp
+export default SuccessSignUp
