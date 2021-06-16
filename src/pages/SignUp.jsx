@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   StyledFormArea,
@@ -23,6 +23,7 @@ import { firebaseInstance } from "fbase/Fbase";
 
 const SignUp = () => {
   const history = useHistory();
+  const [isExistingEmail, setIsExistingEmail] = useState(false);
   return (
     <FormContainer>
       <StyledFormArea>
@@ -55,22 +56,22 @@ const SignUp = () => {
               .oneOf([Yup.ref("password")], "Passwords must match"), // 비밀번호 일치 확인을 위해 oneOf속성에 배열을 전달
           })}
           onSubmit={(values, { setSubmitting }) => {
-            //console.log(values);
             firebaseInstance
               .auth()
-              .createUserWithEmailAndPassword(values.email, values.password)
+              .createUserWithEmailAndPassword(
+                values.email,
+                values.password.toString()
+              )
               .then((userCredential) => {
-                // Signed in
-                var user = userCredential.user;
-                console.log(user);
+                // const user = userCredential.user;
+                setIsExistingEmail(false);
                 history.push("/sign-in");
-                // ...
               })
               .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
+                const errorCode = error.code;
+                if (errorCode === "auth/email-already-in-use") setIsExistingEmail(true);
+                const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
-                // ..
               });
           }}
         >
@@ -88,6 +89,7 @@ const SignUp = () => {
                 type="text"
                 label="Email Address"
                 placeholder="abc123@gmail.com"
+                isExistingEmail={isExistingEmail}
               />
 
               <TextInput
