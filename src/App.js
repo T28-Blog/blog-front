@@ -13,7 +13,8 @@ import WritePost from "pages/WritePost";
 import Footer from "./components/Footer";
 import Comments from "components/Comments";
 import Error from "pages/Error";
-import SuccessSignUp from "pages/SuccessSignUp";
+import SuccessSingUp from "pages/SuccessSingUp";
+import UserInfo from "pages/UersInfo";
 // import NaverLogin from './components/NaverLogin'
 // import NaverLoginCallback from './components/NaverLoginCallback'
 
@@ -30,9 +31,10 @@ function App() {
         <Route path="/search" exact component={Search} />
         <Route path="/sign-up" exact component={SignUp} />
         <Route path="/comment" exact component={Comments} />
-        <Route path="/success" exact component={SuccessSignUp} />
+        <Route path="/success" exact component={SuccessSingUp} />
+        <Route path="/userinfo" exact component={UserInfo} />
         {/* 404 Error Page */}
-        <Route path={"*"} exact component={Error} /> 
+        <Route path={"*"} exact component={Error} />
       </Switch>
       <Footer />
     </Router>

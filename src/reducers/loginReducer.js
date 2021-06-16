@@ -1,4 +1,5 @@
 import {
+  ADD_UID,
   ADD_JWT_OWN,
   ADD_JWT_WITH_KAKAO,
   LOG_OUT,
@@ -23,6 +24,9 @@ const loginReducer = (state = initialState, action) => {
         uid: action.uid,
         isLogin: true,
       };
+      break;
+    case ADD_UID:
+      state = { ...state, uid: action.uid };
       break;
     case ADD_JWT_WITH_KAKAO:
       state = {

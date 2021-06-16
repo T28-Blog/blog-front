@@ -32,11 +32,11 @@ import * as Yup from "yup";
 import styled from "styled-components";
 
 //handler함수 호출
-import handleSignin from "../hooks/useSignin";
+import confirmUser from "../tools/ConfirmUser";
 
 import { auth, provider, firebaseInstance } from "fbase/Fbase";
 
-import { ADD_JWT_OWN, ADD_JWT_WITH_GOOGLE } from "action";
+import { ADD_JWT_OWN, ADD_JWT_WITH_GOOGLE, ADD_UID } from "action";
 import store from "store/store";
 
 //소셜 로그인 버튼
@@ -56,9 +56,18 @@ const SignIn = () => {
   useEffect(() => {
     const requestToken = new URL(window.location.href).searchParams.get("code"); //카카오 인증 코드 받아오기
     if (requestToken) {
-      //요청 토큰을 받아온 경우 access token => jwt까지 받아오도록 handler 함수 호출
-      handleSignin(requestToken);
-      history.push("/");
+      const res = confirmUser(requestToken);
+      res
+        .then((data) => {
+          console.log(data);
+          if (data.needUserData) {
+            store.dispatch({ type: ADD_UID, uid: data.userID });
+            history.push("/userinfo");
+          } else {
+            history.push("/");
+          }
+        })
+        .catch((err) => console.log(err));
     }
   }, []);
 
