@@ -12,12 +12,12 @@ export const SuccessContainer = styled.div`
 `
 
 export const SuccessLogo = styled.img`
-    width: 400px;
-    margin-bottom: 50px;
+    width: 300px;
+    margin-bottom: 30px;
 `
 
 export const SuccessTitle = styled.h3`
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 400;
     margin-bottom: 30px;
 `
