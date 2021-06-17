@@ -34,10 +34,12 @@ import styled from "styled-components";
 //handler함수 호출
 import confirmUser from "../tools/ConfirmUser";
 
-import { auth, provider, firebaseInstance } from "fbase/Fbase";
+import { auth, provider} from "fbase/Fbase";
 
-import { ADD_JWT_OWN, ADD_JWT_WITH_GOOGLE, ADD_UID } from "action";
+import { ADD_JWT_WITH_GOOGLE, ADD_UID } from "action";
 import store from "store/store";
+
+import SigninAPI from 'api/SigninAPI';
 
 //소셜 로그인 버튼
 const BtnContainer = styled.div`
@@ -51,6 +53,8 @@ const BtnContainer = styled.div`
 const SignIn = () => {
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+  // 'hidden(not verified)', 'shown(not verified but shown', 'verified'
+  const [emailVerified, setEmailVerified] = useState('hidden');
 
   const history = useHistory();
   useEffect(() => {
@@ -117,29 +121,7 @@ const SignIn = () => {
               .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            firebaseInstance
-            .auth()
-            .signInWithEmailAndPassword(values.email, values.password)
-            .then((userCredential) => {
-              // Signed in
-                var user = userCredential.user;
-                console.log("Logged in", user);
-                const jwt = null;
-                const at = null;
-                store.dispatch({ type: ADD_JWT_OWN, jwt, at });
-                history.push("/");
-            })
-            .catch((error) => {
-              setIsInvalidEmail(false);
-              setIsInvalidPassword(false);
-              const errorCode = error.code;
-              if (errorCode === "auth/user-not-found")
-                setIsInvalidEmail(true);
-              if (errorCode === "auth/wrong-password")
-                setIsInvalidPassword(true);
-              const errorMessage = error.message;
-              console.log("Error", errorCode, errorMessage);
-            });
+            SigninAPI.signin(values.email, values.password, history, emailVerified, setEmailVerified, setIsInvalidEmail, setIsInvalidPassword)
           }}
         >
           {() => (
@@ -149,7 +131,12 @@ const SignIn = () => {
                 type="text"
                 label="Email Address"
                 placeholder="abc123@gmail.com"
+                onInput={() => {
+                  setIsInvalidEmail(false);
+                  setEmailVerified('hidden');
+                }}
                 isInvalidEmail={isInvalidEmail}
+                emailVerified={emailVerified}
               />
 
               <TextInput
@@ -157,6 +144,7 @@ const SignIn = () => {
                 type="password"
                 label="Password"
                 placeholder="********"
+                onInput={() => setIsInvalidPassword(false)}
                 isInvalidPassword={isInvalidPassword}
               />
               <ButtonGroup>

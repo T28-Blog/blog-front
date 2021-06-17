@@ -11,6 +11,7 @@ export const TextInput = ({ ...props }) => {
     isExistingEmail,
     isInvalidEmail,
     isInvalidPassword,
+    emailVerified
   } = props;
   return (
     <div>
@@ -24,6 +25,7 @@ export const TextInput = ({ ...props }) => {
         />
       )}
       {isExistingEmail && <ErrorMsg>Email exists</ErrorMsg>}
+      {(emailVerified ==='shown') && <ErrorMsg>Email is not verified</ErrorMsg>}
       {isInvalidEmail && <ErrorMsg>Email does not exist</ErrorMsg>}
 
       {props.type === "password" && (
