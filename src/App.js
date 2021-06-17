@@ -13,7 +13,7 @@ import WritePost from "pages/WritePost";
 import Footer from "./components/Footer";
 import Comments from "components/Comments";
 import Error from "pages/Error";
-import SuccessSingUp from "pages/SuccessSingUp";
+import SuccessSingUp from "./pages/SuccessSignUp";
 import UserInfo from "pages/UersInfo";
 // import NaverLogin from './components/NaverLogin'
 // import NaverLoginCallback from './components/NaverLoginCallback'

@@ -13,12 +13,7 @@ import logo from "../assets/Team28-logo.png";
 import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import store from "store/store";
-<<<<<<< HEAD
 import KakaoLogin from "api/KakaoAPI";
-=======
-
-import KakaoLogin from "api/Kakaoapi";
->>>>>>> 8594b78cca247b4bd54ce34d0547750b01068a80
 import { LOG_OUT } from "action/index";
 import { useHistory } from "react-router-dom";
 
