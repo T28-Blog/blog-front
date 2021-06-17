@@ -42,13 +42,19 @@ const SigninAPI = {
       .catch((error) => {
         setIsInvalidEmail(false);
         setIsInvalidPassword(false);
-        if (emailVerified === 'hidden') {
-          setEmailVerified('shown');
-          return;
-        }
         const errorCode = error.code;
-        if (errorCode === "auth/user-not-found") setIsInvalidEmail(true);
-        if (errorCode === "auth/wrong-password") setIsInvalidPassword(true);
+        if (firebaseInstance.auth().isSignInWithEmailLink(window.location.href)) {
+          setEmailVerified('verified');
+          if (errorCode === "auth/user-not-found") setIsInvalidEmail(true);
+          else if (errorCode === "auth/wrong-password") setIsInvalidPassword(true);
+        }
+        else {
+          if (errorCode === "auth/user-not-found") {
+            setIsInvalidEmail(true);
+            return;
+          }
+          if (emailVerified === 'hidden') setEmailVerified('shown');
+        }
         const errorMessage = error.message;
         console.log('here', error, errorCode, errorMessage);
       });
