@@ -112,6 +112,13 @@ const UserInfo = () => {
     if (userEmail) {
       checkEmail();
     }
+    //토큰 발급 테스트 코드
+    const res = fetch("http://localhost:4000/token/create", {
+      method: "post",
+      mode: "cors",
+    })
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   }, [userEmail]);
 
   return (

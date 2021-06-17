@@ -30,15 +30,6 @@ const KakaoLogin = {
     }).catch((reject) => alert("로그인 실패"));
     return res;
   },
-  getJWT: (promise) => {
-    //user 정보가 없다면 user를 db에 저장하는 api 콜 하나,
-    //user가 이미 가입한 적이 있는 경우라면 바로 jwt 받아오기
-    let jwt = "abcd";
-    const {
-      data: { access_token: at },
-    } = promise;
-    return { jwt, at };
-  },
   getUIDfromDB: async (promise) => {
     //access 토큰 받은 후 서버로 accesstoken 보내고 jwt 받아오기
     const { data } = promise;
@@ -49,6 +40,15 @@ const KakaoLogin = {
       data: { kakaoLoginData: data },
     });
     return res.data;
+  },
+  getJWT: (promise) => {
+    //user 정보가 없다면 user를 db에 저장하는 api 콜 하나,
+    //user가 이미 가입한 적이 있는 경우라면 바로 jwt 받아오기
+    let jwt = "abcd";
+    const {
+      data: { access_token: at },
+    } = promise;
+    return { jwt, at };
   },
   createUserDB: async (email) => {
     //서버에 유저 생성 요청 call
