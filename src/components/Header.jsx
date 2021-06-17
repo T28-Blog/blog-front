@@ -14,7 +14,7 @@ import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import store from "store/store";
 
-import KakaoLogin from "api/Kakaoapi";
+import KakaoLogin from "api/KakaoAPI";
 import { LOG_OUT } from "action/index";
 import { useHistory } from "react-router-dom";
 

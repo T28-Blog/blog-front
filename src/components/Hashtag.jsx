@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import hashtagAPI from "api/Hashtagapi";
+import hashtagAPI from "api/HashtagAPI";
 import {
   Container,
   HashContainer,
