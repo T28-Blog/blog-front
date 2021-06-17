@@ -13,13 +13,12 @@ import {
 } from "../styles/SignElements";
 import logo from "../assets/Team28-logo.png";
 import ScrollToTop from "components/ScrollToTop";
+import SignupAPI from 'api/SignupAPI';
 
 // Formik
 import { Formik, Form } from "formik";
 import { TextInput } from "../components/FormLib";
 import * as Yup from "yup";
-
-import { firebaseInstance } from "fbase/Fbase";
 
 const SignUp = () => {
   const history = useHistory();
@@ -56,36 +55,7 @@ const SignUp = () => {
               .oneOf([Yup.ref("password")], "Passwords must match"), // 비밀번호 일치 확인을 위해 oneOf속성에 배열을 전달
           })}
           onSubmit={(values, { setSubmitting }) => {
-            firebaseInstance
-              .auth()
-              .createUserWithEmailAndPassword(
-                values.email,
-                values.password
-              )
-              .then((userCredential) => {
-                setIsExistingEmail(false);
-                const actionCodeSettings = {
-                  url: 'http://localhost:3000/sign-in',
-                  handleCodeInApp: true,
-                };
-                firebaseInstance.auth().sendSignInLinkToEmail(values.email, actionCodeSettings)
-                .then(() => {
-                  window.localStorage.setItem('emailForSignIn', values.email);
-                })
-                .catch((error) => {
-                  const errorCode = error.code;
-                  const errorMessage = error.message;
-                  console.log('error', errorCode, errorMessage)
-                  // ...
-                });
-                history.push("/sign-in");
-              })
-              .catch((error) => {
-                const errorCode = error.code;
-                if (errorCode === "auth/email-already-in-use") setIsExistingEmail(true);
-                const errorMessage = error.message;
-                console.log(error, errorCode, errorMessage);
-              });
+            SignupAPI.signup(values.email, values.password, history, setIsExistingEmail)
           }}
         >
           {() => (
@@ -102,6 +72,7 @@ const SignUp = () => {
                 type="text"
                 label="Email Address"
                 placeholder="abc123@gmail.com"
+                onInput={() => setIsExistingEmail(false)}
                 isExistingEmail={isExistingEmail}
               />
 
