@@ -33,12 +33,12 @@ import styled from "styled-components";
 //handler함수 호출
 import confirmUser from "../tools/ConfirmUser";
 
-import { auth, provider} from "fbase/Fbase";
+import { auth, provider } from "fbase/Fbase";
 
 import { ADD_JWT_WITH_GOOGLE, ADD_UID } from "action";
 import store from "store/store";
 
-import SigninAPI from 'api/SigninAPI';
+import SigninAPI from "api/SigninAPI";
 
 //소셜 로그인 버튼
 const BtnContainer = styled.div`
@@ -53,7 +53,7 @@ const SignIn = () => {
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
   // 'hidden(not verified)', 'shown(not verified but shown', 'verified'
-  const [emailVerified, setEmailVerified] = useState('hidden');
+  const [emailVerified, setEmailVerified] = useState("hidden");
 
   const history = useHistory();
   useEffect(() => {
@@ -110,7 +110,15 @@ const SignIn = () => {
               .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            SigninAPI.signin(values.email, values.password, history, emailVerified, setEmailVerified, setIsInvalidEmail, setIsInvalidPassword)
+            SigninAPI.signin(
+              values.email,
+              values.password,
+              history,
+              emailVerified,
+              setEmailVerified,
+              setIsInvalidEmail,
+              setIsInvalidPassword
+            );
           }}
         >
           {() => (
@@ -122,7 +130,7 @@ const SignIn = () => {
                 placeholder="abc123@gmail.com"
                 onInput={() => {
                   setIsInvalidEmail(false);
-                  setEmailVerified('hidden');
+                  setEmailVerified("hidden");
                 }}
                 isInvalidEmail={isInvalidEmail}
                 emailVerified={emailVerified}
