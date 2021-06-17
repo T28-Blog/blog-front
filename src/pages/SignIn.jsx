@@ -148,7 +148,7 @@ const SignIn = () => {
                 isInvalidPassword={isInvalidPassword}
               />
               <ButtonGroup>
-                <StyledFormButton type="submit"  onClick={openModal}>Login</StyledFormButton>
+                <StyledFormButton type="submit">Login</StyledFormButton>
               </ButtonGroup>
             </Form>
           )}
