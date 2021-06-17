@@ -64,6 +64,16 @@ const Header = () => {
       if (service === "kakao") {
         KakaoLogin.kakaoLogout();
       }
+      else if (service === "google") {
+        firebaseInstance
+        .auth()
+        .signOut()
+        .then(() => {
+          store.dispatch({ type: LOG_OUT });
+          history.push("/");
+        })
+        .catch((error) => console.log(error));
+      }
     } else {
       //자체 로그인
       firebaseInstance
@@ -72,7 +82,6 @@ const Header = () => {
         .then(() => {
           store.dispatch({ type: LOG_OUT });
           history.push("/");
-          console.log("logout!");
         })
         .catch((error) => console.log(error));
     }

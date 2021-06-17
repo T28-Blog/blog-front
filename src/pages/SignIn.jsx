@@ -107,28 +107,59 @@ const SignIn = () => {
           })}
           onSubmit={(values, { setSubmitting }) => {
             firebaseInstance
-            .auth()
-            .signInWithEmailAndPassword(values.email, values.password)
-            .then((userCredential) => {
-              // Signed in
-                var user = userCredential.user;
-                console.log("Logged in", user);
-                const jwt = null;
-                const at = null;
-                store.dispatch({ type: ADD_JWT_OWN, jwt, at });
-                history.push("/");
-            })
-            .catch((error) => {
-              setIsInvalidEmail(false);
-              setIsInvalidPassword(false);
-              const errorCode = error.code;
-              if (errorCode === "auth/user-not-found")
-                setIsInvalidEmail(true);
-              if (errorCode === "auth/wrong-password")
-                setIsInvalidPassword(true);
-              const errorMessage = error.message;
-              console.log("Error", errorCode, errorMessage);
-            });
+              .auth()
+              .signInWithEmailAndPassword(
+                values.email,
+                values.password.toString()
+              )
+              .then((userCredential) => {
+                console.log(userCredential);
+                if (firebaseInstance.auth().isSignInWithEmailLink(window.location.href)) {
+                  var email = window.localStorage.getItem("emailForSignIn");
+                  if (!email) {
+                    email = window.prompt(
+                      "Please provide your email for confirmation"
+                    );
+                  }
+                  firebaseInstance
+                    .auth()
+                    .signInWithEmailLink(email, window.location.href)
+                    .then((result) => {
+                      const user = firebaseInstance.auth().currentUser;
+                      const setPassword = values.password;
+                      user
+                        .updatePassword(setPassword)
+                        .then(() => console.log("pw is set"))
+                        .catch((error) => console.log(error));
+                      window.localStorage.removeItem("emailForSignIn");
+                      const jwt = null;
+                      const at = null;
+                      store.dispatch({ type: ADD_JWT_OWN, jwt, at });
+                      history.push("/");
+                    })
+                    .catch(error => console.log(error));
+                } else if (userCredential.user.emailVerified) {
+                  // var user = userCredential.user;
+                  const jwt = null;
+                  const at = null;
+                  store.dispatch({ type: ADD_JWT_OWN, jwt, at });
+                  history.push("/");
+                } else {
+                  console.log("email not verified");
+                }
+              })
+              .catch((error) => {
+                console.log(values, values.email, values.password);
+                setIsInvalidEmail(false);
+                setIsInvalidPassword(false);
+                const errorCode = error.code;
+                if (errorCode === "auth/user-not-found")
+                  setIsInvalidEmail(true);
+                if (errorCode === "auth/wrong-password")
+                  setIsInvalidPassword(true);
+                const errorMessage = error.message;
+                console.log(error, errorCode, errorMessage);
+              });
           }}
         >
           {() => (
