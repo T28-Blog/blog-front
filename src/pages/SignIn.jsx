@@ -50,6 +50,7 @@ const BtnContainer = styled.div`
 const SignIn = () => {
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+  const [isNotVerifiedEmail, setIsNotVerifiedEmail] = useState(false);
 
   const history = useHistory();
   useEffect(() => {
@@ -113,8 +114,8 @@ const SignIn = () => {
                 values.password.toString()
               )
               .then((userCredential) => {
-                console.log(userCredential);
                 if (firebaseInstance.auth().isSignInWithEmailLink(window.location.href)) {
+                  setIsNotVerifiedEmail(false);
                   var email = window.localStorage.getItem("emailForSignIn");
                   if (!email) {
                     email = window.prompt(
@@ -140,11 +141,13 @@ const SignIn = () => {
                     .catch(error => console.log(error));
                 } else if (userCredential.user.emailVerified) {
                   // var user = userCredential.user;
+                  setIsNotVerifiedEmail(false);
                   const jwt = null;
                   const at = null;
                   store.dispatch({ type: ADD_JWT_OWN, jwt, at });
                   history.push("/");
                 } else {
+                  setIsNotVerifiedEmail(true);
                   console.log("email not verified");
                 }
               })
@@ -170,6 +173,7 @@ const SignIn = () => {
                 label="Email Address"
                 placeholder="abc123@gmail.com"
                 isInvalidEmail={isInvalidEmail}
+                isNotVerifiedEmail={isNotVerifiedEmail}
               />
 
               <TextInput
