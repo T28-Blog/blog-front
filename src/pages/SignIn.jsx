@@ -20,7 +20,7 @@ import logo from "../assets/Team28-logo.png";
 import facebook from "../assets/facebook.png";
 import kakao from "../assets/kakao.png";
 import google from "../assets/google.png";
-import KakaoLogin from "../api/Kakaoapi";
+import KakaoLogin from "../api/KakaoAPI";
 // import GoogleLogin from "react-google-login";
 import ScrollToTop from "components/ScrollToTop";
 
@@ -50,6 +50,7 @@ const BtnContainer = styled.div`
 const SignIn = () => {
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+  const [isNotVerifiedEmail, setIsNotVerifiedEmail] = useState(false);
 
   const history = useHistory();
   useEffect(() => {
@@ -107,28 +108,61 @@ const SignIn = () => {
           })}
           onSubmit={(values, { setSubmitting }) => {
             firebaseInstance
-            .auth()
-            .signInWithEmailAndPassword(values.email, values.password)
-            .then((userCredential) => {
-              // Signed in
-                var user = userCredential.user;
-                console.log("Logged in", user);
-                const jwt = null;
-                const at = null;
-                store.dispatch({ type: ADD_JWT_OWN, jwt, at });
-                history.push("/");
-            })
-            .catch((error) => {
-              setIsInvalidEmail(false);
-              setIsInvalidPassword(false);
-              const errorCode = error.code;
-              if (errorCode === "auth/user-not-found")
-                setIsInvalidEmail(true);
-              if (errorCode === "auth/wrong-password")
-                setIsInvalidPassword(true);
-              const errorMessage = error.message;
-              console.log("Error", errorCode, errorMessage);
-            });
+              .auth()
+              .signInWithEmailAndPassword(
+                values.email,
+                values.password.toString()
+              )
+              .then((userCredential) => {
+                if (firebaseInstance.auth().isSignInWithEmailLink(window.location.href)) {
+                  setIsNotVerifiedEmail(false);
+                  var email = window.localStorage.getItem("emailForSignIn");
+                  if (!email) {
+                    email = window.prompt(
+                      "Please provide your email for confirmation"
+                    );
+                  }
+                  firebaseInstance
+                    .auth()
+                    .signInWithEmailLink(email, window.location.href)
+                    .then((result) => {
+                      const user = firebaseInstance.auth().currentUser;
+                      const setPassword = values.password;
+                      user
+                        .updatePassword(setPassword)
+                        .then(() => console.log("pw is set"))
+                        .catch((error) => console.log(error));
+                      window.localStorage.removeItem("emailForSignIn");
+                      const jwt = null;
+                      const at = null;
+                      store.dispatch({ type: ADD_JWT_OWN, jwt, at });
+                      history.push("/");
+                    })
+                    .catch(error => console.log(error));
+                } else if (userCredential.user.emailVerified) {
+                  // var user = userCredential.user;
+                  setIsNotVerifiedEmail(false);
+                  const jwt = null;
+                  const at = null;
+                  store.dispatch({ type: ADD_JWT_OWN, jwt, at });
+                  history.push("/");
+                } else {
+                  setIsNotVerifiedEmail(true);
+                  console.log("email not verified");
+                }
+              })
+              .catch((error) => {
+                console.log(values, values.email, values.password);
+                setIsInvalidEmail(false);
+                setIsInvalidPassword(false);
+                const errorCode = error.code;
+                if (errorCode === "auth/user-not-found")
+                  setIsInvalidEmail(true);
+                if (errorCode === "auth/wrong-password")
+                  setIsInvalidPassword(true);
+                const errorMessage = error.message;
+                console.log(error, errorCode, errorMessage);
+              });
           }}
         >
           {() => (
@@ -139,6 +173,7 @@ const SignIn = () => {
                 label="Email Address"
                 placeholder="abc123@gmail.com"
                 isInvalidEmail={isInvalidEmail}
+                isNotVerifiedEmail={isNotVerifiedEmail}
               />
 
               <TextInput

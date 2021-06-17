@@ -60,18 +60,31 @@ const SignUp = () => {
               .auth()
               .createUserWithEmailAndPassword(
                 values.email,
-                values.password.toString()
+                values.password
               )
               .then((userCredential) => {
-                // const user = userCredential.user;
                 setIsExistingEmail(false);
+                const actionCodeSettings = {
+                  url: 'http://localhost:3000/sign-in',
+                  handleCodeInApp: true,
+                };
+                firebaseInstance.auth().sendSignInLinkToEmail(values.email, actionCodeSettings)
+                .then(() => {
+                  window.localStorage.setItem('emailForSignIn', values.email);
+                })
+                .catch((error) => {
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                  console.log('error', errorCode, errorMessage)
+                  // ...
+                });
                 history.push("/sign-in");
               })
               .catch((error) => {
                 const errorCode = error.code;
                 if (errorCode === "auth/email-already-in-use") setIsExistingEmail(true);
                 const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
+                console.log(error, errorCode, errorMessage);
               });
           }}
         >

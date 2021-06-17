@@ -14,7 +14,7 @@ import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import store from "store/store";
 
-import KakaoLogin from "api/Kakaoapi";
+import KakaoLogin from "api/KakaoAPI";
 import { LOG_OUT } from "action/index";
 import { useHistory } from "react-router-dom";
 
@@ -64,6 +64,16 @@ const Header = () => {
       if (service === "kakao") {
         KakaoLogin.kakaoLogout();
       }
+      else if (service === "google") {
+        firebaseInstance
+        .auth()
+        .signOut()
+        .then(() => {
+          store.dispatch({ type: LOG_OUT });
+          history.push("/");
+        })
+        .catch((error) => console.log(error));
+      }
     } else {
       //자체 로그인
       firebaseInstance
@@ -72,7 +82,6 @@ const Header = () => {
         .then(() => {
           store.dispatch({ type: LOG_OUT });
           history.push("/");
-          console.log("logout!");
         })
         .catch((error) => console.log(error));
     }
