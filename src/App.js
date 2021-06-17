@@ -15,7 +15,7 @@ import Comments from "components/Comments";
 import Error from "pages/Error";
 import SuccessSingUp from "./pages/SuccessSignUp";
 import SuccessLogout from "./pages/SuccessLogout";
-import UserInfo from "pages/UersInfo";
+import UserInfo from "pages/UsersInfo";
 import PreLoader from "pages/PreLoader";
 
 function App() {
