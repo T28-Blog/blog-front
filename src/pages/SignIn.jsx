@@ -102,7 +102,7 @@ const SignIn = () => {
           <img src={logo} alt="logo" width="200px" />
         </Avatar>
         <StyledTitle color={colors.black} size={30}>
-          Login
+          로그인
         </StyledTitle>
         <Formik
           initialValues={{
@@ -148,13 +148,13 @@ const SignIn = () => {
                 isInvalidPassword={isInvalidPassword}
               />
               <ButtonGroup>
-                <StyledFormButton type="submit">Login</StyledFormButton>
+                <StyledFormButton type="submit">로그인</StyledFormButton>
               </ButtonGroup>
             </Form>
           )}
         </Formik>
         <ExtraText>
-          New here? <TextLink to="/sign-up">SignUp</TextLink>
+          처음이신가요? <TextLink to="/sign-up">회원가입</TextLink>
         </ExtraText>
 
         {/* 소셜 로그인 구분선 */}

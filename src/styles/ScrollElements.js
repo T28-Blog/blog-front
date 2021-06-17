@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const TopButton = styled.button`
     position: fixed;
-    bottom: 50px;
+    bottom: 80px;
     right: 50px;
     display: flex;
     justify-content: center;
