@@ -46,7 +46,7 @@ const Home = () => {
         <Slider></Slider>
       </MainSlider>
       <SectionTitle>
-        Latest articles
+        최신글
         <hr />
       </SectionTitle>
       <Section>
@@ -166,7 +166,7 @@ const Home = () => {
         </PostList>
       </Section>
       <SectionTitle>
-        Popular articles
+        인기글
         <hr />
       </SectionTitle>
       <Section>

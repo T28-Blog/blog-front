@@ -25,7 +25,7 @@ const Search = () => {
     return (
         <>
             <SearchContainer>
-                <SearchInputTitle>Search</SearchInputTitle>
+                <SearchInputTitle>검색하기</SearchInputTitle>
                 <SearchInputContainer>
                     <SearchInput onChange={event => {setSearch(event.target.value)}}></SearchInput>
                     <SearchIcon>

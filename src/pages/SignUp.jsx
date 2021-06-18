@@ -30,7 +30,7 @@ const SignUp = () => {
           <img src={logo} alt="logo" width="200px" />
         </Avatar>
         <StyledTitle color={colors.black} size={30}>
-          Sign Up
+          회원가입
         </StyledTitle>
         <Formik
           initialValues={{
@@ -96,13 +96,13 @@ const SignUp = () => {
                 placeholder="********"
               />
               <ButtonGroup>
-                <StyledFormButton type="submit">Sign Up</StyledFormButton>
+                <StyledFormButton type="submit">회원가입</StyledFormButton>
               </ButtonGroup>
             </Form>
           )}
         </Formik>
         <ExtraText>
-          Already hava an account? <TextLink to="/sign-in">SignIn</TextLink>
+          이미 계정이 있으신가요? <TextLink to="/sign-in">로그인</TextLink>
         </ExtraText>
       </StyledFormArea>
       <ScrollToTop />

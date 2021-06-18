@@ -104,14 +104,14 @@ const Header = () => {
                 <NavLink to="/writepost">writePost</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/my-blog">My blog</NavLink>
+                <NavLink to="/my-blog">MyBlog</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/contact-us">Contact Us</NavLink>
+                <NavLink to="/contact-us">ContactUs</NavLink>
               </NavItem>
               {!user && (
                 <NavItem>
-                  <NavLink to="/sign-up">Sign up</NavLink>
+                  <NavLink to="/sign-up">Sign Up</NavLink>
                 </NavItem>
               )}
               <NavItem>
@@ -122,12 +122,12 @@ const Header = () => {
               {user ? (
                 <NavItem>
                   <NavBtnLink to="/" onClick={doLogout}>
-                    Log out
+                    로그아웃
                   </NavBtnLink>
                 </NavItem>
               ) : (
                 <NavItem>
-                  <NavBtnLink to="/sign-in">Sign in</NavBtnLink>
+                  <NavBtnLink to="/sign-in">로그인</NavBtnLink>
                 </NavItem>
               )}
             </NavMenu>
