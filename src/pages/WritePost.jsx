@@ -14,6 +14,8 @@ import {
 } from 'styles/EditorElements';
 import ScrollToTop from "components/ScrollToTop";
 
+// import PostDB from 'api/PostDB';
+
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
@@ -23,6 +25,7 @@ export default function WritePost() {
   };
 
   const handleSubmit = () => {
+    // PostDB.createPostDB(title, contentEditor, hashtagArr);
     console.log("handle submit", title, contentEditor, hashtagArr);
   };
 
