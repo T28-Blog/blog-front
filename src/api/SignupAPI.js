@@ -26,7 +26,7 @@ const SignupAPI = {
             const errorMessage = error.message;
             console.log("error", errorCode, errorMessage);
           });
-        history.push("/sign-in");
+        history.push("/success");
       })
       .catch((error) => {
         const errorCode = error.code;
