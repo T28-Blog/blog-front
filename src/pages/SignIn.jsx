@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   FormContainer,
@@ -31,13 +31,7 @@ import { TextInput } from "../components/FormLib";
 import * as Yup from "yup";
 import styled from "styled-components";
 
-//handler함수 호출
-import confirmUser from "../tools/ConfirmUser";
-
 import { auth, provider } from "fbase/Fbase";
-
-import { ADD_JWT_WITH_GOOGLE, ADD_UID } from "action";
-import store from "store/store";
 
 import SigninAPI from "api/SigninAPI";
 
@@ -57,43 +51,23 @@ const SignIn = () => {
   const [emailVerified, setEmailVerified] = useState("hidden");
 
   const history = useHistory();
-  useEffect(() => {
-    const requestToken = new URL(window.location.href).searchParams.get("code"); //카카오 인증 코드 받아오기
-    if (requestToken) {
-      const res = confirmUser(requestToken);
-      res
-        .then((data) => {
-          console.log(data);
-          if (data.needUserData) {
-            store.dispatch({ type: ADD_UID, uid: data.userID });
-            history.push("/userinfo");
-          } else {
-            history.push("/");
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  }, []);
 
   const signInWithGoogle = () => {
     auth.signInWithPopup(provider).then((res) => {
-      console.log(res.user);
-      const jwt = null;
-      const at = null;
-      store.dispatch({ type: ADD_JWT_WITH_GOOGLE, jwt, at });
-      history.push("/");
+      const { uid } = res.user;
+      history.push("/loading", { oauth: "google", uid });
     });
   };
 
-  const [ modalState, setModalState ] = useState(false);
+  const [modalState, setModalState] = useState(false);
 
   const openModal = () => {
     setModalState(true);
-  }
+  };
 
   const closeModal = () => {
     setModalState(false);
-  }
+  };
 
   return (
     <FormContainer>
@@ -175,7 +149,12 @@ const SignIn = () => {
         </BtnContainer>
       </StyledFormArea>
       <ScrollToTop />
-      <Modal state={modalState} closeModal={closeModal} title="로그인 실패" desc="이메일 또는 비밀번호를 확인해주세요<br>신규가입자는 가입 후 발송된 인증메일을 확인해주세요"/>
+      <Modal
+        state={modalState}
+        closeModal={closeModal}
+        title="로그인 실패"
+        desc="이메일 또는 비밀번호를 확인해주세요<br>신규가입자는 가입 후 발송된 인증메일을 확인해주세요"
+      />
     </FormContainer>
   );
 };

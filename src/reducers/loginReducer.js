@@ -1,6 +1,8 @@
 import {
   ADD_UID,
-  ADD_JWT_OWN,
+  ADD_NAME,
+  ADD_JWT,
+  ADD_UID_OWN,
   ADD_JWT_WITH_KAKAO,
   LOG_OUT,
   ADD_JWT_WITH_GOOGLE,
@@ -11,14 +13,14 @@ const initialState = {
   jwt: null,
   accessToken: null,
   uid: null,
-  name: "익명", //임시 이름
+  name: "", //임시 이름
   oauth: false,
   service: null, //oauth : true인 경우, 소셜 로그인 제공 회사
 };
 const loginReducer = (state = initialState, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
-    case ADD_JWT_OWN:
+    case ADD_UID_OWN:
       state = {
         ...state,
         uid: action.uid,
@@ -28,10 +30,15 @@ const loginReducer = (state = initialState, action) => {
     case ADD_UID:
       state = { ...state, uid: action.uid };
       break;
+    case ADD_NAME:
+      state = { ...state, name: action.name };
+      break;
+    case ADD_JWT:
+      state = { ...state, jwt: action.jwt };
+      break;
     case ADD_JWT_WITH_KAKAO:
       state = {
         ...state,
-        jwt: action.jwt,
         isLogin: true,
         accessToken: action.at,
         oauth: true,
@@ -41,9 +48,7 @@ const loginReducer = (state = initialState, action) => {
     case ADD_JWT_WITH_GOOGLE:
       state = {
         ...state,
-        jwt: action.jwt,
         isLogin: true,
-        accessToken: action.at,
         oauth: true,
         service: "google",
       };
