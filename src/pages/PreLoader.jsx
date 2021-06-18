@@ -11,7 +11,7 @@ const PreLoader = () => {
     return (
         <LoaderContainer>
             <Loader>
-                <LoadingPlane img src={airplane} alt="airpalne"></LoadingPlane>
+                <LoadingPlane img src={airplane} alt="airplane"></LoadingPlane>
                 <LoadingTitle>Loading ...</LoadingTitle>
             </Loader>            
         </LoaderContainer>

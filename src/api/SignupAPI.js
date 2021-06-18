@@ -1,4 +1,5 @@
 import { firebaseInstance } from "fbase/Fbase";
+import LoginDB from './LoginDB';
 
 const SignupAPI = {
   signup: (email, password, history, setIsExistingEmail) => {
@@ -7,6 +8,8 @@ const SignupAPI = {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         setIsExistingEmail(false);
+
+        LoginDB.createUserDB(email);
 
         const actionCodeSettings = {
           url: "http://localhost:3000/sign-in",
@@ -23,7 +26,7 @@ const SignupAPI = {
             const errorMessage = error.message;
             console.log("error", errorCode, errorMessage);
           });
-        history.push("/sign-in");
+        history.push("/success");
       })
       .catch((error) => {
         const errorCode = error.code;

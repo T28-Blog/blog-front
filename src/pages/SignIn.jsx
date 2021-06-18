@@ -34,9 +34,9 @@ import styled from "styled-components";
 //handler함수 호출
 import confirmUser from "../tools/ConfirmUser";
 
-import { auth, provider } from "fbase/Fbase";
+import { auth, firebaseInstance, provider } from "fbase/Fbase";
 
-import { ADD_JWT_WITH_GOOGLE, ADD_UID } from "action";
+import { ADD_JWT_WITH_FACEBOOK, ADD_JWT_WITH_GOOGLE, ADD_UID } from "action";
 import store from "store/store";
 
 import SigninAPI from "api/SigninAPI";
@@ -84,6 +84,31 @@ const SignIn = () => {
       history.push("/");
     });
   };
+
+  const facebookProvider = new firebaseInstance.auth.FacebookAuthProvider();
+
+  const signInWithFacebook = () => {
+    firebaseInstance
+    .auth()
+    .signInWithPopup(facebookProvider)
+    .then((result) => {
+      // const credential = result.credential;
+      // const user = result.user;
+      // const accessToken = credential.accessToken;
+      const jwt = null;
+      const at = null;
+      store.dispatch({ type: ADD_JWT_WITH_FACEBOOK, jwt, at });
+      history.push("/");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // const email = error.email;
+      // const credential = error.credential;
+      console.log(errorCode, errorMessage);
+    });
+  
+  }
 
   const [ modalState, setModalState ] = useState(false);
 
@@ -171,7 +196,7 @@ const SignIn = () => {
         <BtnContainer>
           <Google image={google} onClick={signInWithGoogle} />
           <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
-          <Facebook image={facebook}></Facebook>
+          <Facebook image={facebook} onClick={signInWithFacebook}></Facebook>
         </BtnContainer>
       </StyledFormArea>
       <ScrollToTop />

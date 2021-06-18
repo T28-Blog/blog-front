@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const routes = require("./Router.js");
-const users = require("./Uers");
+const users = require("./Users");
+// const posts = require("./Posts");
 const token = require("./Token");
 const kakao = require("./KakaoUser");
 const app = express();
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 app.use("/kakao", kakao);
 
 app.use("/users", users); //새 유저 생성
+
+// app.use("/posts", posts); //새 포스트 생성
 
 app.use("/token", token); //jwt 생성
 

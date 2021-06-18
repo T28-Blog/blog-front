@@ -62,6 +62,7 @@ const Header = () => {
       const { service } = store.getState().userInfo;
       if (service === "kakao") {
         KakaoLogin.kakaoLogout();
+        history.push("/logout");
       }
       else if (service === "google") {
         firebaseInstance
@@ -69,7 +70,7 @@ const Header = () => {
         .signOut()
         .then(() => {
           store.dispatch({ type: LOG_OUT });
-          history.push("/");
+          history.push("/logout");
         })
         .catch((error) => console.log(error));
       }
@@ -80,7 +81,7 @@ const Header = () => {
         .signOut()
         .then(() => {
           store.dispatch({ type: LOG_OUT });
-          history.push("/");
+          history.push("/logout");
         })
         .catch((error) => console.log(error));
     }
