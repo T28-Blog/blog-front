@@ -1,5 +1,4 @@
 import { firebaseInstance } from "fbase/Fbase";
-import store from "store/store";
 import timeChanger from "tools/TimeChange";
 import { v4 } from "uuid";
 
@@ -57,7 +56,6 @@ const CommentsAPI = {
       );
   },
   deleteComment: (commentID) => {
-    console.log(commentID);
     const commentRef = firebaseInstance
       .database()
       .ref(`comments/${commentID}`)

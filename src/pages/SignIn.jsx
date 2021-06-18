@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   FormContainer,
@@ -34,12 +34,12 @@ import styled from "styled-components";
 //handler함수 호출
 import confirmUser from "../tools/ConfirmUser";
 
-import { auth, provider} from "fbase/Fbase";
+import { auth, firebaseInstance, provider } from "fbase/Fbase";
 
-import { ADD_JWT_WITH_GOOGLE, ADD_UID } from "action";
+import { ADD_JWT_WITH_FACEBOOK, ADD_JWT_WITH_GOOGLE, ADD_UID } from "action";
 import store from "store/store";
 
-import SigninAPI from 'api/SigninAPI';
+import SigninAPI from "api/SigninAPI";
 
 //소셜 로그인 버튼
 const BtnContainer = styled.div`
@@ -54,46 +54,50 @@ const SignIn = () => {
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
   // 'hidden(not verified)', 'shown(not verified but shown', 'verified'
-  const [emailVerified, setEmailVerified] = useState('hidden');
+  const [emailVerified, setEmailVerified] = useState("hidden");
 
   const history = useHistory();
-  useEffect(() => {
-    const requestToken = new URL(window.location.href).searchParams.get("code"); //카카오 인증 코드 받아오기
-    if (requestToken) {
-      const res = confirmUser(requestToken);
-      res
-        .then((data) => {
-          console.log(data);
-          if (data.needUserData) {
-            store.dispatch({ type: ADD_UID, uid: data.userID });
-            history.push("/userinfo");
-          } else {
-            history.push("/");
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  }, []);
 
   const signInWithGoogle = () => {
     auth.signInWithPopup(provider).then((res) => {
-      console.log(res.user);
-      const jwt = null;
-      const at = null;
-      store.dispatch({ type: ADD_JWT_WITH_GOOGLE, jwt, at });
-      history.push("/");
+      const { uid } = res.user;
+      history.push("/loading", { oauth: "google", uid });
     });
   };
 
-  const [ modalState, setModalState ] = useState(false);
+  const facebookProvider = new firebaseInstance.auth.FacebookAuthProvider();
+
+  const signInWithFacebook = () => {
+    firebaseInstance
+      .auth()
+      .signInWithPopup(facebookProvider)
+      .then((result) => {
+        // const credential = result.credential;
+        // const user = result.user;
+        // const accessToken = credential.accessToken;
+        const jwt = null;
+        const at = null;
+        store.dispatch({ type: ADD_JWT_WITH_FACEBOOK, jwt, at });
+        history.push("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // const email = error.email;
+        // const credential = error.credential;
+        console.log(errorCode, errorMessage);
+      });
+  };
+
+  const [modalState, setModalState] = useState(false);
 
   const openModal = () => {
     setModalState(true);
-  }
+  };
 
   const closeModal = () => {
     setModalState(false);
-  }
+  };
 
   return (
     <FormContainer>
@@ -121,7 +125,15 @@ const SignIn = () => {
               .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            SigninAPI.signin(values.email, values.password, history, emailVerified, setEmailVerified, setIsInvalidEmail, setIsInvalidPassword)
+            SigninAPI.signin(
+              values.email,
+              values.password,
+              history,
+              emailVerified,
+              setEmailVerified,
+              setIsInvalidEmail,
+              setIsInvalidPassword
+            );
           }}
         >
           {() => (
@@ -133,7 +145,7 @@ const SignIn = () => {
                 placeholder="abc123@gmail.com"
                 onInput={() => {
                   setIsInvalidEmail(false);
-                  setEmailVerified('hidden');
+                  setEmailVerified("hidden");
                 }}
                 isInvalidEmail={isInvalidEmail}
                 emailVerified={emailVerified}
@@ -163,11 +175,16 @@ const SignIn = () => {
         <BtnContainer>
           <Google image={google} onClick={signInWithGoogle} />
           <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
-          <Facebook image={facebook}></Facebook>
+          <Facebook image={facebook} onClick={signInWithFacebook}></Facebook>
         </BtnContainer>
       </StyledFormArea>
       <ScrollToTop />
-      <Modal state={modalState} closeModal={closeModal} title="로그인 실패" desc="이메일 또는 비밀번호를 확인해주세요<br>신규가입자는 가입 후 발송된 인증메일을 확인해주세요"/>
+      <Modal
+        state={modalState}
+        closeModal={closeModal}
+        title="로그인 실패"
+        desc="이메일 또는 비밀번호를 확인해주세요<br>신규가입자는 가입 후 발송된 인증메일을 확인해주세요"
+      />
     </FormContainer>
   );
 };

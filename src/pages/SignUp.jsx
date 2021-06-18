@@ -13,7 +13,7 @@ import {
 } from "../styles/SignElements";
 import logo from "../assets/Team28-logo.png";
 import ScrollToTop from "components/ScrollToTop";
-import SignupAPI from 'api/SignupAPI';
+import SignupAPI from "api/SignupAPI";
 
 // Formik
 import { Formik, Form } from "formik";
@@ -55,7 +55,13 @@ const SignUp = () => {
               .oneOf([Yup.ref("password")], "Passwords must match"), // 비밀번호 일치 확인을 위해 oneOf속성에 배열을 전달
           })}
           onSubmit={(values, { setSubmitting }) => {
-            SignupAPI.signup(values.email, values.password, history, setIsExistingEmail)
+            SignupAPI.signup(
+              values.email,
+              values.password,
+              values.name,
+              history,
+              setIsExistingEmail
+            );
           }}
         >
           {() => (

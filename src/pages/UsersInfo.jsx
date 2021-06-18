@@ -1,8 +1,11 @@
-import KakaoLogin from "api/KakaoAPI";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { SearchIcon } from "styles/SearchInputElements";
+import { firebaseInstance } from "fbase/Fbase";
+import OauthSignin from "api/OauthSignInAPI";
+import { ADD_NAME } from "action";
+import store from "store/store";
 
 const Container = styled.div`
   width: 100%;
@@ -35,7 +38,7 @@ const Form = styled.form`
   }
 `;
 
-const EmailInput = styled.input`
+const NicknameInput = styled.input`
   all: unset;
   width: 65%;
   height: 40px;
@@ -75,58 +78,61 @@ const Button = styled(SearchIcon)`
 `;
 
 const UserInfo = () => {
-  const [userEmail, setUserEmail] = useState(null);
-  const [isEmail, enrollEmail] = useState("none");
+  const [userName, setUserName] = useState(null);
+  const [isNickname, enrollNickname] = useState("none");
 
   const history = useHistory();
 
-  const checkEmail = () => {
-    const emailRegExp =
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    if (emailRegExp.test(userEmail)) {
-      enrollEmail("success");
-      const res = KakaoLogin.createUserDB(userEmail); //유저 정보 저장 성공 한 경우
-      res
-        .then((saved) => {
-          if (saved.isSaved) {
-            history.push("/");
-          } else {
-            alert(
-              "사용자 정보를 DB에 넣는데 실패했습니다. 잠시 후 다시 시도해주세요."
-            );
-          }
-        })
-        .catch((err) => alert(`sorry, ${err}`));
+  const checkUserName = async () => {
+    let overlap = false;
+
+    const checkOverlap = await firebaseInstance.database().ref("/users").get();
+    const result = await checkOverlap.forEach((data) => {
+      if (data.val().name === userName) {
+        overlap = true;
+      }
+    });
+    console.log(result);
+    if (overlap) {
+      enrollNickname("fail");
     } else {
-      enrollEmail("fail");
+      enrollNickname("success");
+      const { isSaved } = await OauthSignin.createUserDB(userName); //닉네임 서버 전송
+      if (isSaved) {
+        await store.dispatch({ type: ADD_NAME, name: userName });
+        history.push("/success");
+      } else {
+        alert("사용자 정보를 저장하는 데 실패했습니다. 다시 로그인 해주세요.");
+        history.push("/sign-in");
+      }
     }
   };
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    const email = e.target[0].value;
-    setUserEmail(email);
+    const name = e.target[0].value;
+    setUserName(name);
   };
 
   useEffect(() => {
-    if (userEmail) {
-      checkEmail();
+    if (userName) {
+      checkUserName();
     }
-  }, [userEmail]);
+  }, [userName]);
 
   return (
     <Container>
       <Title>🎉 Team28의 첫 방문을 환영합니다! 🎉 </Title>
       <Form onSubmit={onHandleSubmit}>
-        <EmailInput
-          placeholder="Team28에서 사용할 이메일을 적어주세요."
-          defaultValue={userEmail}
-        ></EmailInput>
-        {isEmail !== "none" && (
-          <CheckEmail color={isEmail}>
-            {isEmail === "success"
-              ? "등록 성공!"
-              : "유효하지 않은 이메일입니다. 다시 작성해주세요."}
+        <NicknameInput
+          placeholder="Team28에서 사용할 닉네임을 적어주세요."
+          defaultValue={userName}
+        ></NicknameInput>
+        {isNickname !== "none" && (
+          <CheckEmail color={isNickname}>
+            {isNickname === "success"
+              ? "등록 가능! 닉네임을 저장 중입니다. 잠시만 기다려주세요."
+              : "이미 사용하고 있는 닉네임입니다. 다른 닉네임을 사용해 주세요."}
           </CheckEmail>
         )}
         <Button type="submit">등록</Button>

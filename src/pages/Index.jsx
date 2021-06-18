@@ -24,10 +24,22 @@ import testMac from "../assets/test_mac.jpeg";
 import Slider from "components/Slider";
 import Hashtag from "components/Hashtag";
 import "styles/slider.css";
-import store from "store/store";
 import ScrollToTop from "components/ScrollToTop";
+import store from "store/store";
+import { useEffect } from "react";
+import OauthSignin from "api/OauthSignInAPI";
 
 const Home = () => {
+  const { name, uid, isLogin } = store.getState().userInfo;
+  console.log(store.getState());
+
+  useEffect(() => {
+    if (isLogin) {
+      //로그인일 때 jwt 발급
+      const res = OauthSignin.getJWT(uid, name);
+    }
+  }, []);
+
   return (
     <>
       <MainSlider>
