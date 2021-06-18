@@ -3,21 +3,19 @@ const jwt = require("jsonwebtoken");
 const configs = require("./config");
 const app = express();
 
-//const { verifyToken } = require("./VerifyJWT");
+const { verifyToken } = require("./VerifyJWT");
 
+//새로운 토큰 생성
 app.post("/create", async (req, res, next) => {
   try {
     console.log(req.body);
-    console.log(req.data);
-    console.log(req.query);
+
     const {
       config: { JWT_SECRET },
     } = configs;
-    console.log(JWT_SECRET);
 
-    const uid = "123123"; //가짜 uid
-    const nick = "젠킨스"; //user 이름 (또는 설정한 닉네임)
-
+    const { id: uid, name: nick } = req.body; //가짜 uid
+    console.log(uid, nick);
     const token = jwt.sign(
       {
         uid,
@@ -25,7 +23,7 @@ app.post("/create", async (req, res, next) => {
       },
       JWT_SECRET,
       {
-        expiresIn: "5m", // 5분
+        expiresIn: "2h",
         issuer: "토큰발급자",
       }
     );
@@ -43,5 +41,8 @@ app.post("/create", async (req, res, next) => {
     });
   }
 });
+
+//기존 토큰 유효성 검사
+app.get("/verify", verifyToken);
 
 module.exports = app;
