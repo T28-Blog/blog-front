@@ -26,17 +26,20 @@ const SigninAPI = {
             .then((result) => {
               const user = firebaseInstance.auth().currentUser;
               const setPassword = password;
+              const name = email.split('').splice(0, email.toString().indexOf('@')).join('');
               user
                 .updatePassword(setPassword)
                 .then(() => console.log("pw is set"))
                 .catch((error) => console.log(error));
-              store.dispatch({ type: ADD_UID_OWN, uid: user.uid });
+              console.log(email);
+                store.dispatch({ type: ADD_UID_OWN, uid: user.uid, name});
               history.push("/");
             })
             .catch((error) => console.log(error));
         } else if (userCredential.user.emailVerified) {
           const user = userCredential.user;
-          store.dispatch({ type: ADD_UID_OWN, uid: user.uid });
+          const name = email.split('').splice(0, email.toString().indexOf('@')).join('');
+          store.dispatch({ type: ADD_UID_OWN, uid: user.uid, name});
           history.push("/");
         } else {
           setEmailVerified("shown");

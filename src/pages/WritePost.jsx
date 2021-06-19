@@ -13,19 +13,22 @@ import {
   PageTitle
 } from 'styles/EditorElements';
 import ScrollToTop from "components/ScrollToTop";
-
-// import PostDB from 'api/PostDB';
+import store from "store/store";
+import PostDB from 'api/PostDB';
 
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
-  const [hashtagArr, setHashtagArr] = useState([]);
+  const [hashtagArr, setHashtagArr] = useState(['']);
   const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
 
   const handleSubmit = () => {
-    // PostDB.createPostDB(title, contentEditor, hashtagArr);
+    console.log('submit:', store.getState().userInfo);
+    const { name } = store.getState().userInfo;
+    console.log(name);
+    PostDB.createPostDB(name, title, contentEditor, hashtagArr);
     console.log("handle submit", title, contentEditor, hashtagArr);
   };
 
