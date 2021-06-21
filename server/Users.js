@@ -5,25 +5,37 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get("/", (req, res, next) => {
-  db.database.ref(`users/user_${req.user_id}`).then((res) => {
-    console.log(res);
-    console.log('get from DB server success')
-  });
-});
-
 app.post("/", (req, res, next) => {
-  const { id, email } = req.query;
-  const name = email.slice(0, email.indexOf("@"));
+  // 일반 로그인의 경우 email도 입력할 수 있도록
+  const { id, name, email } = req.query;
   //user가 없는 경우 새로 생성
   if (id) {
-    db.database()
+    // 이메일이 있을 시 이메일 서버에 넣기
+    if (email) {
+      db.database()
       .ref(`users/user_${id}`)
       .set({
         user_id: id,
         thumbnail: "img/defaultThumbnail.png",
         name,
-        email,
+        email
+      })
+      .then((response) => {
+        console.log("done");
+        res.json({ isSaved: true });
+      })
+      .catch((err) => {
+        res.json({ isSaved: false, messaage: err });
+      }); 
+    }
+    // 이메일이 없는 경우 이메일 제외
+    else {
+      db.database()
+      .ref(`users/user_${id}`)
+      .set({
+        user_id: id,
+        thumbnail: "img/defaultThumbnail.png",
+        name,
       })
       .then((response) => {
         console.log("done");
@@ -32,6 +44,7 @@ app.post("/", (req, res, next) => {
       .catch((err) => {
         res.json({ isSaved: false, messaage: err });
       });
+    }
   }
 });
 
