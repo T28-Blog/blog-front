@@ -19,17 +19,25 @@ import PostDB from 'api/PostDB';
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
-  const [hashtagArr, setHashtagArr] = useState(['']);
+  const [hashtagArr, setHashtagArr] = useState([]);
   const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
 
   const handleSubmit = () => {
-    console.log('submit:', store.getState().userInfo);
     const { name } = store.getState().userInfo;
-    console.log(name);
-    PostDB.createPostDB(name, title, contentEditor, hashtagArr);
-    console.log("handle submit", title, contentEditor, hashtagArr);
+    if (!title && !contentEditor) {
+      alert('제목 및 내용을 입력하세요')
+    }
+    else if (!title) {
+      alert('제목을 입력하세요')
+    }
+    else if (!contentEditor) {
+      alert('내용을 입력하세요')
+    }
+    else {
+      PostDB.createPostDB(name, title, contentEditor, hashtagArr);
+    }
   };
 
   const onHashtagEnter = (e) => {

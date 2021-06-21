@@ -25,7 +25,7 @@ const SignupAPI = {
             store.dispatch({
               type: ADD_UID_OWN,
               uid: user.uid,
-              name: email.split(0, email.indexOf("@")),
+              name,
             });
             history.push("/success", { email, name });
           })
