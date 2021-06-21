@@ -25,6 +25,7 @@ const loginReducer = (state = initialState, action) => {
     case ADD_UID_OWN:
       state = {
         ...state,
+        name: action.name,
         uid: action.uid,
         isLogin: true,
       };

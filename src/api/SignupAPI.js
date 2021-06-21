@@ -1,5 +1,7 @@
 import { firebaseInstance } from "fbase/Fbase";
 import LoginDB from "./LoginDB";
+import store from "store/store";
+import { ADD_UID_OWN } from "action";
 
 const SignupAPI = {
   signup: (email, password, name, history, setIsExistingEmail) => {
@@ -8,9 +10,8 @@ const SignupAPI = {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         setIsExistingEmail(false);
-
-        LoginDB.createUserDB(email);
-
+        const user = firebaseInstance.auth().currentUser;
+        // store.dispatch({ type: ADD_UID_OWN, uid: user.uid });
         const actionCodeSettings = {
           url: "http://localhost:3000/sign-in",
           handleCodeInApp: true,
@@ -20,6 +21,12 @@ const SignupAPI = {
           .sendSignInLinkToEmail(email, actionCodeSettings)
           .then((res) => {
             console.log("success");
+            LoginDB.createUserDB(email);
+            store.dispatch({
+              type: ADD_UID_OWN,
+              uid: user.uid,
+              name,
+            });
             history.push("/success", { email, name });
           })
           .catch((error) => {

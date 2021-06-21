@@ -62,7 +62,13 @@ const SignIn = () => {
     auth.signInWithPopup(provider).then((res) => {
       const { uid } = res.user;
       history.push("/loading", { oauth: "google", uid });
-    });
+    }).catch(error => {
+      const errorCode = error.code;
+      if (errorCode === "auth/popup-closed-by-user") {
+        alert("로그인 하기 전에 창을 닫았습니다.");
+      }
+    }
+    );
   };
 
   const facebookProvider = new firebaseInstance.auth.FacebookAuthProvider();

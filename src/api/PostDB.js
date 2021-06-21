@@ -1,29 +1,33 @@
-// import { firebaseInstance } from "fbase/Fbase";
-// import axios from "axios";
-// import { v4 } from "uuid";
+import { firebaseInstance } from "fbase/Fbase";
+import axios from "axios";
+import { v4 } from "uuid";
+import timeChanger from "tools/TimeChange";
 
-// const PostDB = {
-//   createPostDB: async (title, content, hashtag) => {
-//     //서버에 유저 생성 요청 call
-//     const uuid = firebaseInstance.auth().currentUser.uid;
-//     const name = await firebaseInstance.database().ref(`/users/user_${uuid}`).get();
-//     console.log('the name is', name);
-//     const post_id = v4();
-//     const res = await axios({
-//       method: "post",
-//       url: `http://localhost:4000/posts`,
-//       params: {
-//         user_id: uuid,
-//         date: Date(),
-//         post_id,
-//         title,
-//         content,
-//         hashtag,
-//         name: name.name
-//       },
-//     });
-//     return res.data;
-//   },
-// }
+const PostDB = {
+  createPostDB: async (name, title, content, hashtag) => {
+    const uuid = firebaseInstance.auth().currentUser.uid;
+    const post_id = v4();
+    const res = await axios({
+      method: "post",
+      url: `http://localhost:4000/posts`,
+      params: {
+        content,
+        date: timeChanger.nowTOutc(),
+        desc: "blog",
+        hashtag,
+        hits: 1,
+        img: "temp",
+        name,
+        post_id,
+        title,
+        user_id: uuid,
+      },
+    })
+      .catch((error) => {
+        console.log(error);
+      });
+    return res.data;
+  },
+};
 
-// export default PostDB;
+export default PostDB;

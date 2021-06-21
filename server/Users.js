@@ -5,8 +5,16 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.get("/", (req, res, next) => {
+  db.database.ref(`users/user_${req.user_id}`).then((res) => {
+    console.log(res);
+    console.log('get from DB server success')
+  });
+});
+
 app.post("/", (req, res, next) => {
-  const { id, name } = req.query;
+  const { id, email } = req.query;
+  const name = email.slice(0, email.indexOf("@"));
   //user가 없는 경우 새로 생성
   if (id) {
     db.database()
@@ -15,6 +23,7 @@ app.post("/", (req, res, next) => {
         user_id: id,
         thumbnail: "img/defaultThumbnail.png",
         name,
+        email,
       })
       .then((response) => {
         console.log("done");

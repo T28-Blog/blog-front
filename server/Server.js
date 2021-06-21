@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const routes = require("./Router.js");
 const users = require("./Users");
-// const posts = require("./Posts");
+const posts = require("./Posts");
 const token = require("./Token");
 const login = require("./KakaoUser");
 const app = express();
@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use("/login", login);
 app.use("/token", token); //jwt 생성 및 검증
 
-// app.use("/posts", posts); //새 포스트 생성
+app.use("/posts", posts); //새 포스트 생성
 
 app.use("/token", token); //jwt 생성
 app.use("/users", users); //새 유저 생성
