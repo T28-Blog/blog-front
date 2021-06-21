@@ -20,7 +20,7 @@ const MyProfile = () => {
         <MyProfileContainer>
             <MyProfileImg img src={Woman} alt="profile_img"></MyProfileImg>
             <MyName>김아무개</MyName>
-            <MyDesc>모르겠다...</MyDesc>
+            <MyDesc>프로필 내용을 설정해주세요.</MyDesc>
             <MySetting onClick={openModal}>프로필 수정</MySetting>
             <MyProfileModal showModal={showModal} setShowModal={setShowModal} />
         </MyProfileContainer>

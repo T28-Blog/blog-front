@@ -69,4 +69,8 @@ app.post("/", (req, res, next) => {
   }
 });
 
+app.get('/', (req, res) => {
+  
+});
+
 module.exports = app;

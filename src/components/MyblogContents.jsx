@@ -23,12 +23,11 @@ const MyblogContents = () => {
     // 서버에서 post data를 가져옴
     const getItems = useCallback(async () => {
         setLoading(true);
-        axios.get(`https://jsonplaceholder.typicode.com/posts?_page=${page}`).then((res) => {
+        await axios.get(`https://jsonplaceholder.typicode.com/posts?_page=${page}`).then((res) => {
             let response = res.data;
             response = response.slice(10)
             console.log(res);
             setItems(prevState => [...prevState, ...res.data])
-            // setItems(res.data);
         })
         .catch(error => {
             return console.log(error);
@@ -52,6 +51,7 @@ const MyblogContents = () => {
         <MyPostContainer>
             {
                 items.map((post, idx)  => (
+                    // ref를 div요소에 걸어주면 요소가 보이면 inView가 true, 안보이면 false
                     <MyPostContents key={idx} ref={ref}>
                         <MyPostContent>
                             <MyPostTitle>{post.title}</MyPostTitle>

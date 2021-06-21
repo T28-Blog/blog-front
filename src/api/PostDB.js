@@ -23,9 +23,9 @@ const PostDB = {
         user_id: uuid,
       },
     })
-      .catch((error) => {
-        console.log(error);
-      });
+    .catch((error) => {
+      console.log(error);
+    });
     return res.data;
   },
 };
