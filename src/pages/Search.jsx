@@ -18,12 +18,26 @@ import { FaSearch } from "react-icons/fa";
 import ScrollToTop from "components/ScrollToTop";
 import JSONDATA from "../assets/MOCK_DATA.json";
 import TokenAPI from "api/TokenAPI";
+import store from "store/store";
+import { Modal } from "bootstrap";
 
 const Search = () => {
   const [search, setSearch] = useState("");
+  const [isModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    TokenAPI.checkValidation();
+    const { uid } = store.getState().userInfo;
+    TokenAPI.checkValidation(uid)
+      .then((obj) => {
+        const { modal } = obj;
+        if (modal) {
+          setShowModal(true);
+          TokenAPI.clearJWT();
+        }
+      })
+      .catch((err) => {
+        //console.log(err);
+      });
   }, []);
 
   return (
@@ -65,6 +79,12 @@ const Search = () => {
         </SearchListContainer>
       ))}
       <ScrollToTop />
+      {isModal && (
+        <Modal
+          title="로그인 유효시간 종료"
+          desc="로그인 유지 시간이 종료되었습니다.<br>다시 로그인해주세요."
+        />
+      )}
     </>
   );
 };

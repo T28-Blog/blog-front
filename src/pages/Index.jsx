@@ -42,13 +42,14 @@ const Home = () => {
       TokenAPI.checkValidation(uid)
         .then((obj) => {
           const { modal } = obj;
-          console.log(modal);
           if (modal) {
             setShowModal(true);
             TokenAPI.clearJWT();
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          //console.log(err)
+        });
     }
   }, []);
 

@@ -15,12 +15,14 @@ import {
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
 import TokenAPI from "api/TokenAPI";
+import Modal from "components/Modal";
 // import PostDB from 'api/PostDB';
 
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
   const [hashtagArr, setHashtagArr] = useState([]);
+  const [isModal, setShowModal] = useState(false);
 
   const onTitleChange = (e) => {
     setTitle(e.target.value);
@@ -44,7 +46,17 @@ export default function WritePost() {
 
   useEffect(() => {
     const { uid } = store.getState().userInfo;
-    TokenAPI.checkValidation(uid);
+    TokenAPI.checkValidation(uid)
+      .then((obj) => {
+        const { modal } = obj;
+        if (modal) {
+          setShowModal(true);
+          TokenAPI.clearJWT();
+        }
+      })
+      .catch((err) => {
+        //console.log(err);
+      });
   }, []);
 
   return (
@@ -84,6 +96,12 @@ export default function WritePost() {
         </BottomWrapper>
       </EditorWrapper>
       <ScrollToTop />
+      {isModal && (
+        <Modal
+          title="로그인 유효시간 종료"
+          desc="로그인 유지 시간이 종료되었습니다.<br>다시 로그인해주세요."
+        />
+      )}
     </>
   );
 }
