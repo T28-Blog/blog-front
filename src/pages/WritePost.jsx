@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import TinyEditor from 'components/TinyEditor';
+import React, { useState, useEffect } from "react";
+import TinyEditor from "components/TinyEditor";
 import { FaTimes } from "react-icons/fa";
 import {
   EditorWrapper,
@@ -10,16 +10,18 @@ import {
   ButtonWrapper,
   Button,
   BottomWrapper,
-  PageTitle
-} from 'styles/EditorElements';
+  PageTitle,
+} from "styles/EditorElements";
 import ScrollToTop from "components/ScrollToTop";
-
+import store from "store/store";
+import TokenAPI from "api/TokenAPI";
 // import PostDB from 'api/PostDB';
 
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
   const [hashtagArr, setHashtagArr] = useState([]);
+
   const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -40,12 +42,23 @@ export default function WritePost() {
     setHashtagArr(hashtagArr.filter((elem) => hashtag !== elem));
   };
 
+  useEffect(() => {
+    const { uid } = store.getState().userInfo;
+    TokenAPI.checkValidation(uid);
+  }, []);
+
   return (
     <>
       <EditorWrapper>
-        <PageTitle>블로그 글쓰기<hr /></PageTitle>
+        <PageTitle>
+          블로그 글쓰기
+          <hr />
+        </PageTitle>
         <TitleArea onChange={onTitleChange}></TitleArea>
-        <TinyEditor contentEditor={contentEditor} setContentEditor={setContentEditor} ></TinyEditor>
+        <TinyEditor
+          contentEditor={contentEditor}
+          setContentEditor={setContentEditor}
+        ></TinyEditor>
         <BottomWrapper>
           <HashtagWrapper>
             {hashtagArr.map((hashtag) => {

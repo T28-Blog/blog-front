@@ -5,17 +5,18 @@ const app = express();
 
 const { verifyToken } = require("./VerifyJWT");
 
-//새로운 토큰 생성
-app.post("/create", async (req, res, next) => {
-  try {
-    console.log(req.body);
+//기존 토큰 유효성 검사
+app.get("/verify", verifyToken);
 
+//새로운 토큰 생성
+app.post("/create", (req, res, next) => {
+  try {
     const {
       config: { JWT_SECRET },
     } = configs;
 
-    const { id: uid, name: nick } = req.body; //가짜 uid
-    console.log(uid, nick);
+    const { id: uid, name: nick } = req.body;
+
     const token = jwt.sign(
       {
         uid,
@@ -23,18 +24,19 @@ app.post("/create", async (req, res, next) => {
       },
       JWT_SECRET,
       {
-        expiresIn: "2h",
-        issuer: "토큰발급자",
+        expiresIn: "24h",
+        issuer: "team28",
       }
     );
 
-    return res.json({
-      code: 200,
-      message: "토큰이 발급되었습니다.",
-      token,
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.cookie("jwt", token, {
+      maxAge: 3600 * 24 * 1000,
+      httpOnly: true,
     });
+    return res.json({ code: 200, message: "토큰이 발급되었습니다.", token });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({
       code: 500,
       message: "서버 에러",
@@ -42,7 +44,10 @@ app.post("/create", async (req, res, next) => {
   }
 });
 
-//기존 토큰 유효성 검사
-app.get("/verify", verifyToken);
+//토큰 삭제
+app.delete("/delete", (req, res, next) => {
+  res.clearCookie("jwt");
+  return res.json({ done: "delete jwt" });
+});
 
 module.exports = app;

@@ -4,10 +4,10 @@ import {
   ADD_JWT,
   ADD_UID_OWN,
   ADD_JWT_WITH_KAKAO,
+  REFRESH_PAGE,
   LOG_OUT,
   ADD_JWT_WITH_GOOGLE,
   ADD_JWT_WITH_FACEBOOK,
-
 } from "../action/index";
 
 const initialState = {
@@ -58,11 +58,18 @@ const loginReducer = (state = initialState, action) => {
     case ADD_JWT_WITH_FACEBOOK:
       state = {
         ...state,
-        jwt: action.jwt,
         isLogin: true,
-        accessToken: action.at,
         oauth: true,
         service: "facebook",
+      };
+      break;
+    case REFRESH_PAGE:
+      state = {
+        ...state,
+        isLogin: true,
+        uid: action.uid,
+        name: action.name,
+        jwt: action.jwt,
       };
       break;
     // eslint-disable-next-line no-fallthrough
