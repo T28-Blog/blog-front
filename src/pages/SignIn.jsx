@@ -51,10 +51,10 @@ const BtnContainer = styled.div`
 `;
 
 const SignIn = () => {
+  // 'hidden(not verified)', 'shown(not verified but shown)', 'verified'
+  const [emailVerified, setEmailVerified] = useState("hidden");
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
-  // 'hidden(not verified)', 'shown(not verified but shown', 'verified'
-  const [emailVerified, setEmailVerified] = useState("hidden");
 
   const history = useHistory();
 

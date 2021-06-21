@@ -4,6 +4,7 @@ import {
   ADD_JWT,
   ADD_UID_OWN,
   ADD_JWT_WITH_KAKAO,
+  ADD_EMAIL_OAUTH,
   LOG_OUT,
   ADD_JWT_WITH_GOOGLE,
   ADD_JWT_WITH_FACEBOOK,
@@ -18,6 +19,7 @@ const initialState = {
   name: "", //임시 이름
   oauth: false,
   service: null, //oauth : true인 경우, 소셜 로그인 제공 회사
+  isEmailAuth: false
 };
 const loginReducer = (state = initialState, action) => {
   // eslint-disable-next-line default-case
@@ -29,6 +31,9 @@ const loginReducer = (state = initialState, action) => {
         uid: action.uid,
         isLogin: true,
       };
+      break;
+    case ADD_EMAIL_OAUTH:
+      state = { ...state, isEmailAuth: true };
       break;
     case ADD_UID:
       state = { ...state, uid: action.uid };
@@ -74,7 +79,7 @@ const loginReducer = (state = initialState, action) => {
         accessToken: null,
         jwt: null, //한 번에 처리하는 게 아니므로 추후 코드 수정
         oauth: false,
-        service: null,
+        service: null
       };
       break;
   }
