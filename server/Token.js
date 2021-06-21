@@ -24,7 +24,7 @@ app.post("/create", (req, res, next) => {
       },
       JWT_SECRET,
       {
-        expiresIn: "20s",
+        expiresIn: "24h",
         issuer: "team28",
       }
     );
