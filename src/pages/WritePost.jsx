@@ -13,8 +13,8 @@ import {
   PageTitle
 } from 'styles/EditorElements';
 import ScrollToTop from "components/ScrollToTop";
-
-// import PostDB from 'api/PostDB';
+import store from "store/store";
+import PostDB from 'api/PostDB';
 
 export default function WritePost() {
   const [title, setTitle] = useState("");
@@ -25,8 +25,19 @@ export default function WritePost() {
   };
 
   const handleSubmit = () => {
-    // PostDB.createPostDB(title, contentEditor, hashtagArr);
-    console.log("handle submit", title, contentEditor, hashtagArr);
+    const { name } = store.getState().userInfo;
+    if (!title && !contentEditor) {
+      alert('제목 및 내용을 입력하세요')
+    }
+    else if (!title) {
+      alert('제목을 입력하세요')
+    }
+    else if (!contentEditor) {
+      alert('내용을 입력하세요')
+    }
+    else {
+      PostDB.createPostDB(name, title, contentEditor, hashtagArr);
+    }
   };
 
   const onHashtagEnter = (e) => {

@@ -6,10 +6,31 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post("/", (req, res, next) => {
-  const { id, name } = req.query;
+  // 일반 로그인의 경우 email도 입력할 수 있도록
+  const { id, name, email } = req.query;
   //user가 없는 경우 새로 생성
   if (id) {
-    db.database()
+    // 이메일이 있을 시 이메일 서버에 넣기
+    if (email) {
+      db.database()
+      .ref(`users/user_${id}`)
+      .set({
+        user_id: id,
+        thumbnail: "img/defaultThumbnail.png",
+        name,
+        email
+      })
+      .then((response) => {
+        console.log("done");
+        res.json({ isSaved: true });
+      })
+      .catch((err) => {
+        res.json({ isSaved: false, messaage: err });
+      }); 
+    }
+    // 이메일이 없는 경우 이메일 제외
+    else {
+      db.database()
       .ref(`users/user_${id}`)
       .set({
         user_id: id,
@@ -23,6 +44,7 @@ app.post("/", (req, res, next) => {
       .catch((err) => {
         res.json({ isSaved: false, messaage: err });
       });
+    }
   }
 });
 

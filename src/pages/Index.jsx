@@ -26,14 +26,24 @@ import Hashtag from "components/Hashtag";
 import "styles/slider.css";
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import OauthSignin from "api/OauthSignInAPI";
+import { firebaseInstance } from "fbase/Fbase";
+
+async function getPostDB() {
+  const data = await firebaseInstance.database().ref(`posts`).get();
+  const posts = data.val();
+  return posts;
+}
 
 const Home = () => {
   const { name, uid, isLogin } = store.getState().userInfo;
-  console.log(store.getState());
-
+  const [blogData, setBlogData] = useState({});
+ 
   useEffect(() => {
+    getPostDB().then(res => {
+      setBlogData(res)
+    });
     if (isLogin) {
       //로그인일 때 jwt 발급
       const res = OauthSignin.getJWT(uid, name);

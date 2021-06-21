@@ -2,7 +2,7 @@ import { firebaseInstance } from "fbase/Fbase";
 import axios from "axios";
 
 const LoginDB = {
-  createUserDB: async (email) => {
+  createUserDB: async (name, email) => {
     //서버에 유저 생성 요청 call
     const uuid = firebaseInstance.auth().currentUser.uid;
     console.log(firebaseInstance.auth().currentUser.getIdToken())
@@ -25,6 +25,7 @@ const LoginDB = {
       url: `http://localhost:4000/users`,
       params: {
         id: uuid,
+        name,
         email,
       },
     });

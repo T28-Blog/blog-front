@@ -1,6 +1,6 @@
 import { firebaseInstance } from "fbase/Fbase";
-import { ADD_UID_OWN } from "action";
 import store from "store/store";
+import { ADD_UID_OWN } from "action/index";
 
 const SigninAPI = {
   signin: (
@@ -26,17 +26,17 @@ const SigninAPI = {
             .then((result) => {
               const user = firebaseInstance.auth().currentUser;
               const setPassword = password;
+              const name = store.getState().name;
+              const uid = store.getState().uid;
+              store.dispatch({ type: ADD_UID_OWN, name, uid });
               user
                 .updatePassword(setPassword)
                 .then(() => console.log("pw is set"))
                 .catch((error) => console.log(error));
-              store.dispatch({ type: ADD_UID_OWN, uid: user.uid });
               history.push("/");
             })
             .catch((error) => console.log(error));
         } else if (userCredential.user.emailVerified) {
-          const user = userCredential.user;
-          store.dispatch({ type: ADD_UID_OWN, uid: user.uid });
           history.push("/");
         } else {
           setEmailVerified("shown");
