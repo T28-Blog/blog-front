@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useInView } from 'react-intersection-observer';
 import React, { useState, useCallback } from 'react';
 import { useEffect } from 'react';
 import {
@@ -10,62 +11,48 @@ import {
     MyPostDate,
     MyPostThumbnail
 } from 'styles/MyBlogElements';
-import MOCK from '../assets/MOCK_DATA.json'
 
 const MyblogContents = () => {
 
-    const [result, setResult] = useState([]);
-    const [item, setItem] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [items, setItems] = useState([]);
+    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
 
-    const fetchMoreData = async() => {
-        setIsLoading(true);
-        setResult(result.concat(item.slice(0, 10)));
-        setItem(item.slice(10));
-        setIsLoading(false);
-    }
+    const [ref, inView] = useInView();
 
-    const infiniteScroll = useCallback(() => {
-        let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-        let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-        let clientHeight = document.documentElement.clientHeight;
+    // 서버에서 post data를 가져옴
+    const getItems = useCallback(async () => {
+        setLoading(true);
+        axios.get(`https://jsonplaceholder.typicode.com/posts?_page=${page}`).then((res) => {
+            let response = res.data;
+            response = response.slice(10)
+            console.log(res);
+            setItems(prevState => [...prevState, ...res.data])
+            // setItems(res.data);
+        })
+        .catch(error => {
+            return console.log(error);
+        })
+        setLoading(false);
+    }, [page])
 
-        scrollHeight -= 100;
+    // 'getItems'가 바뀔 때마다 함수 실행
+    useEffect(() => {
+        getItems();
+    }, [getItems])
 
-        if(scrollTop + clientHeight >= scrollHeight && isLoading === false){
-            fetchMoreData();
+    // 사용자가 마지막 포스트를 보고 있고 로딩중이 아닐때 실행
+    useEffect(() => {
+        if(inView && !loading){
+            setPage(prevState => prevState + 1)
         }
-    }, [isLoading]);
-
-    const getFetchData = async() => {
-        await axios.get("https://jsonplaceholder.typicode.com/posts")
-            .then((res) => {
-                let response = res.data;
-                console.log(res)
-                setResult(response.slice(0, 10));
-                response = response.slice(10);
-                setItem(response);
-                setIsLoading(false);
-            })
-            .catch(error => {
-                return console.log(error);
-            });
-    }
-
-    useEffect(() => {
-        getFetchData();
-    }, []);
-
-    useEffect(() => {
-        window.addEventListener('scroll', infiniteScroll, true);
-        return () => window.removeEventListener('scroll', infiniteScroll, true);
-    }, [infiniteScroll]);
+    }, [inView, loading])
 
     return (
         <MyPostContainer>
             {
-                item.map((post, idx)  => (
-                    <MyPostContents key={idx}>
+                items.map((post, idx)  => (
+                    <MyPostContents key={idx} ref={ref}>
                         <MyPostContent>
                             <MyPostTitle>{post.title}</MyPostTitle>
                             <MyPostDesc>{post.body}</MyPostDesc>
