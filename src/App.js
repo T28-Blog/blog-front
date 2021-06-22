@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Search from "./pages/Search";
 import WritePost from "pages/WritePost";
+import DetailPost from "pages/DetailPost";
 import Footer from "./components/Footer";
 import Comments from "components/Comments";
 import Error from "pages/Error";
@@ -25,6 +26,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/writepost" exact component={WritePost} />
+        <Route path="/detailPost" exact component={DetailPost} />
         <Route path="/my-blog" exact component={MyBlog} />
         <Route path="/contact-us" exact component={ContactUs} />
         <Route path="/sign-in" exact component={SignIn} />
