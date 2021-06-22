@@ -11,7 +11,7 @@ const ProfileDB = {
             params: {
                 user_id: uuid,
                 img: "",
-                name: "",
+                name,
                 say: "saysomething"
             }
         })
