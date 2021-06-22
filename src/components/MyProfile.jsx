@@ -4,7 +4,9 @@ import {
     MyProfileImg,
     MyName,
     MyDesc,
-    MySetting
+    MySetting,
+    WriteButton,
+    WriteLink
 } from 'styles/MyBlogElements'
 import Woman from '../assets/woman.jpg'
 import { MyProfileModal } from './MyProfileModal'
@@ -22,6 +24,9 @@ const MyProfile = () => {
             <MyName>김아무개</MyName>
             <MyDesc>프로필 내용을 설정해주세요.</MyDesc>
             <MySetting onClick={openModal}>프로필 수정</MySetting>
+            <WriteButton>
+                  <WriteLink to="/writepost">글쓰기</WriteLink>
+            </WriteButton>
             <MyProfileModal showModal={showModal} setShowModal={setShowModal} />
         </MyProfileContainer>
     )

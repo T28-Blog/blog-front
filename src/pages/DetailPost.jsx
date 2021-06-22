@@ -13,6 +13,7 @@ import {
 import { FaEye } from 'react-icons/fa'
 import nature from '../assets/nature4.jpeg'
 import profile from '../assets/woman.jpg'
+import Comments from '../components/Comments'
 
 const DetailPost = () => {
     return (
@@ -65,7 +66,9 @@ const DetailPost = () => {
                 id tempor neque faucibus at. Curabitur mollis purus metus, at pellentesque neque
                 hendrerit id. Nam aliquet ligula non ornare aliquet. Phasellus consequat
                 convallis turpis eu porttitor.
+            <hr />
             </DetailBody>
+            <Comments />
         </DetailContainer>
     )
 }

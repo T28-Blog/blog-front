@@ -69,4 +69,8 @@ export const DetailHits = styled.p`
 
 export const DetailBody = styled.div`
     padding: 0 30px;
+
+    hr {
+        margin: 50px 0 30px 0;
+    }
 `
