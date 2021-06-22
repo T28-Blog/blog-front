@@ -44,10 +44,23 @@ const ModalContent = styled.div`
     line-height: 1.8;
     color: #141414;
 
+    label {
+        display: inline-inline-block;
+        font-size: 12px;
+        color: #6c757d;
+    }
+
     input {
+        display: flex;
         width: 250px;
         margin-bottom: 1rem;
         padding-left: 10px;
+        font-size: 16px;
+    }
+
+    .photo {
+        padding-left: 0;
+        margin-bottom: 50px;
     }
 
     button {
@@ -95,7 +108,7 @@ export const MyProfileModal = ({showModal, setShowModal}) => {
         say: '',
     });
 
-    const { username, say } = inputs;
+    const { username, say, userphoto } = inputs;
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -110,24 +123,41 @@ export const MyProfileModal = ({showModal, setShowModal}) => {
             {showModal ? (
                 <Background ref={modalRef} onClick={closeModal}>
                     <ModalWrapper showModal={showModal}>
-                        <ModalImg src={woman} alt='woman' />
+                        <ModalImg src={woman} alt='woman' id="photoInput"/>
                         <ModalContent>
                             <h1>프로필 변경</h1>
-                            <input
-                                type="text"
-                                name="username"
-                                placeholder="이름"
-                                value={username}
-                                onChange={onChange}
-                            />
-                            <input
-                                type="text"
-                                name="say"
-                                placeholder="하고싶은 말"
-                                value={say}
-                                onChange={onChange}
-                            />
-                            <button type='submit'>저장하기</button>
+                            <label>
+                                이름
+                                <input
+                                    type="text"
+                                    name="username"
+                                    placeholder="이름"
+                                    value={username}
+                                    onChange={onChange}
+                                />
+                            </label>
+                            <label>
+                                하고 싶은 말
+                                <input
+                                    type="text"
+                                    name="say"
+                                    placeholder="하고싶은 말"
+                                    value={say}
+                                    onChange={onChange}
+                                />
+                            </label>
+                            <label>
+                                프로필 이미지
+                                <input
+                                    type="file"
+                                    name="userphoto"
+                                    className="photo"
+                                    id="photoInput"
+                                    value={userphoto}
+                                    onChange={onChange}
+                                />
+                            </label>
+                            <button type='submit' value="저장하기">저장하기</button>
                         </ModalContent>
                         <CloseModalButton aria-label='Close modal' onClick={() => setShowModal(prev => !prev)} />
                     </ModalWrapper>
