@@ -74,7 +74,7 @@ export default function WritePost() {
             <HashtagInput onKeyPress={onHashtagEnter}></HashtagInput>
           </HashtagWrapper>
           <ButtonWrapper>
-            <Button type="button">임시저장</Button>
+            <Button type="button" onClick={handleSubmit}>임시저장</Button>
             <Button type="button" onClick={handleSubmit}>
               저장
             </Button>

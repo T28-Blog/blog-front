@@ -7,7 +7,7 @@ import {
   LOG_OUT,
   ADD_JWT_WITH_GOOGLE,
   ADD_JWT_WITH_FACEBOOK,
-
+  
 } from "../action/index";
 
 const initialState = {
