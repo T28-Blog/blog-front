@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const MainSlider = styled.div`
   width: 100%;
-  height: 400px;
-  background-color: #000;
+  height: 350px;
   color: white;
   font-size: 40px;
   text-align: center;

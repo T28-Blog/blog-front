@@ -18,10 +18,12 @@ import SuccessSignUp from "./pages/SuccessSignUp";
 import SuccessLogout from "./pages/SuccessLogout";
 import UserInfo from "pages/UsersInfo";
 import PreLoader from "pages/PreLoader";
+import GlobalStyle from "styles/GlobalStyles";
 
 function App() {
   return (
     <Router>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route path="/" exact component={Home} />
