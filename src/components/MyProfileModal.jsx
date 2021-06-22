@@ -1,8 +1,6 @@
-import React, { useRef, useEffect, useCallback } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { FaBolt } from 'react-icons/fa'
-import woman from '../assets/woman.jpg'
-import { useState } from 'react'
 
 const Background = styled.div`
     width: 100%;
@@ -103,6 +101,8 @@ export const MyProfileModal = ({showModal, setShowModal}) => {
         return () => document.removeEventListener('keydown', keyPress)
     }, [keyPress])
 
+
+    // input value값 데이터에 저장
     const [inputs, setInputs] = useState({
         username: '',
         say: '',
@@ -118,12 +118,22 @@ export const MyProfileModal = ({showModal, setShowModal}) => {
         });
     }
 
+    // image 미리보기
+    const [fileUrl, setFileUrl] = useState(null);
+
+    const processImage = (e) => {
+        const imageFile = e.target.files[0];
+        const imageUrl = URL.createObjectURL(imageFile);
+        setFileUrl(imageUrl);
+    }
+
+
     return (
         <>
             {showModal ? (
                 <Background ref={modalRef} onClick={closeModal}>
                     <ModalWrapper showModal={showModal}>
-                        <ModalImg src={woman} alt='woman' id="photoInput"/>
+                        <ModalImg src={fileUrl} alt='profile_image' id="photoInput"/>
                         <ModalContent>
                             <h1>프로필 변경</h1>
                             <label>
@@ -154,7 +164,8 @@ export const MyProfileModal = ({showModal, setShowModal}) => {
                                     className="photo"
                                     id="photoInput"
                                     value={userphoto}
-                                    onChange={onChange}
+                                    onChange={processImage}
+                                    accept="image/*"
                                 />
                             </label>
                             <button type='submit' value="저장하기">저장하기</button>

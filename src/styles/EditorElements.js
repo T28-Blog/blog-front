@@ -25,6 +25,7 @@ export const EditorWrapper = styled.div`
 export const PageTitle = styled.h2`
   width: 100%;
   margin: 0;
+  margin-top: 50px;
   padding: 0;
   font-size: 40px;
   text-align: left;
