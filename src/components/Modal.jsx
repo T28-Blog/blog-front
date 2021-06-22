@@ -12,11 +12,14 @@ import {
 } from "styles/ModalElements";
 
 const Modal = (props) => {
-  const { title, desc } = props;
+  const { title, desc, reopenFn } = props; //reopenFn : 댓글창 여러 번 선택 시 계속 팝업이 뜨도록 하기 위한 useState 콜백함수
   const [modalState, setModalState] = useState(true);
 
   const closeModal = () => {
     setModalState(false);
+    if (reopenFn) {
+      reopenFn(false);
+    }
   };
 
   return modalState ? (
