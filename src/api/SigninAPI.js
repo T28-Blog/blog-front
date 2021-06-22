@@ -1,6 +1,6 @@
 import { firebaseInstance } from "fbase/Fbase";
 import store from "store/store";
-import { ADD_UID_OWN } from "action/index";
+import { ADD_UID_OWN, TOGGLE_EMAIL_OAUTH } from "action/index";
 
 const SigninAPI = {
   signin: (
@@ -42,7 +42,7 @@ const SigninAPI = {
                   console.log('The read failed: ' + errorObject.name);
                 });
               store.dispatch({ type: ADD_UID_OWN, name, uid });
-              // store.dispatch({ type: ADD_EMAIL_OAUTH });
+              store.dispatch({ type: TOGGLE_EMAIL_OAUTH });
               history.push("/");
             })
             .catch((error) => console.log(error));
@@ -67,12 +67,12 @@ const SigninAPI = {
         }
       })
       .catch((error) => {
-        console.log("is email auth", store.getState().emailInfo.isEmailAuth)
         const errorCode = error.code;
         setEmailVerified(false);
         setIsInvalidEmail(false);
         setIsInvalidPassword(false);
         console.log(errorCode);
+        console.log('here!!!!!!!!', store.getState().emailAuthReducer)
         if (errorCode === "auth/user-not-found") setIsInvalidEmail(true);
         // 링크로 인증할 때 비밀번호가 틀리면 비밀번호가 틀렸다고 표시하기
         else if (
@@ -84,7 +84,7 @@ const SigninAPI = {
         // 이미 로그인을 했었을 때 비밀번호가 틀리면 표시하기
         else if (
           errorCode === "auth/wrong-password" &&
-          store.getState().emailInfo.isEmailAuth
+          store.getState().emailAuthReducer
         ) {
           setIsInvalidPassword(true);
         }
