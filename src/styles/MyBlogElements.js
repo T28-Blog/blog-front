@@ -92,7 +92,7 @@ export const MyPostThumbnail = styled.img`
 
 
 
-// ----------- MyblogContents.jsx 부분 -----------
+// ----------- MyProfile.jsx 부분 -----------
 
 export const MyProfileContainer = styled.div`
     display: flex;

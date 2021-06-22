@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     MyProfileContainer,
     MyProfileImg,
@@ -7,14 +7,22 @@ import {
     MySetting
 } from 'styles/MyBlogElements'
 import Woman from '../assets/woman.jpg'
-
+import { MyProfileModal } from './MyProfileModal'
 const MyProfile = () => {
+
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = () => {
+        setShowModal(prev => !prev)
+    }
+
     return (
         <MyProfileContainer>
             <MyProfileImg img src={Woman} alt="profile_img"></MyProfileImg>
-            <MyName>홍길동</MyName>
-            <MyDesc>여행을 가고 수기를 씁니다. 종종 길을 잃기도 하지만 그래도 한걸음씩 나아갑니다.</MyDesc>
-            <MySetting>프로필 수정</MySetting>
+            <MyName>김아무개</MyName>
+            <MyDesc>프로필 내용을 설정해주세요.</MyDesc>
+            <MySetting onClick={openModal}>프로필 수정</MySetting>
+            <MyProfileModal showModal={showModal} setShowModal={setShowModal} />
         </MyProfileContainer>
     )
 }

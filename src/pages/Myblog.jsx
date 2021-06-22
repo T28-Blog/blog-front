@@ -1,5 +1,5 @@
 import ScrollToTop from 'components/ScrollToTop'
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Container,
     MyblogContainer,
@@ -12,6 +12,7 @@ import MyblogContents from 'components/MyblogContents'
 import MyProfile from '../components/MyProfile'
 
 const MyBlog = () => {
+    
     return (
         <Container>
             <MyblogTitle>Travel Story</MyblogTitle>
