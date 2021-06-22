@@ -10,7 +10,8 @@ import {
   ButtonWrapper,
   Button,
   BottomWrapper,
-  PageTitle
+  PageTitle,
+  ThumbInput
 } from 'styles/EditorElements';
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
@@ -57,6 +58,12 @@ export default function WritePost() {
         <PageTitle>블로그 글쓰기<hr /></PageTitle>
         <TitleArea onChange={onTitleChange}></TitleArea>
         <TinyEditor contentEditor={contentEditor} setContentEditor={setContentEditor} ></TinyEditor>
+        <ThumbInput
+            type="file"
+            name="thumbimg"
+            className="thumbimg"
+            accept="image/*"
+        />
         <BottomWrapper>
           <HashtagWrapper>
             {hashtagArr.map((hashtag) => {

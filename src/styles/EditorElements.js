@@ -110,3 +110,12 @@ export const BottomWrapper = styled.div`
   align-items: center;
   width: 100%;
 `;
+
+export const ThumbInput = styled.input`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 10px auto;
+  color: #6c757d;
+  font-size: 14px;
+`
