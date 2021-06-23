@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -128,4 +129,38 @@ export const MySetting = styled.button`
     border: none;
     color: #6c757d;
     outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 10px;
+
+    &:hover{
+        transition: all 0.2s ease-in-out;
+        background: #52595f;
+        color: #fff;
+    }
+`
+export const WriteButton = styled.div`
+    width: 100%;
+`
+
+export const WriteLink = styled(Link)`
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: 1px solid #256ce1;
+    padding: 5px 22px;
+    color: #256ce1;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    text-align: center;
+
+    &:hover{
+        transition: all 0.2s ease-in-out;
+        background: #256ce1;
+        color: #fff;
+    }
 `

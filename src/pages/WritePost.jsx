@@ -11,6 +11,7 @@ import {
   Button,
   BottomWrapper,
   PageTitle,
+  ThumbInput
 } from "styles/EditorElements";
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
@@ -78,11 +79,16 @@ export default function WritePost() {
         </PageTitle>
         <TitleArea onChange={onTitleChange}></TitleArea>
         <TinyEditor
-          contentEditor={contentEditor}
-          setContentEditor={setContentEditor}
-          onlyText={onlyText}
-          setOnlyText={setOnlyText}
-        ></TinyEditor>
+            contentEditor={contentEditor}
+            setContentEditor={setContentEditor}
+            nlyText={onlyText}
+            setOnlyText={setOnlyText}></TinyEditor>
+        <ThumbInput
+            type="file"
+            name="thumbimg"
+            className="thumbimg"
+            accept="image/*"
+        />
         <BottomWrapper>
           <HashtagWrapper>
             {hashtagArr.map((hashtag, idx) => {

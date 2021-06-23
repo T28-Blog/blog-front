@@ -4,15 +4,17 @@ import { colors } from "styles/SignElements";
 
 export const Section = styled.section`
   width: 1000px;
-  height: 800px; /**변경예정 */
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+
   @media screen and (max-width: 768px) {
     width: 650px;
     margin-left: 4px;
     margin-bottom: 8px;
   }
+
   @media screen and (max-width: 375px) {
     display: block;
     width: 375px;
@@ -22,11 +24,10 @@ export const Section = styled.section`
 
 export const InputContainer = styled.article`
   width: 100%;
-  height: 200px;
-  padding: 20px;
   display: flex;
-  justify-content: space-evenly;
-  align-items: flex-end;
+  flex-direction: column;
+  padding: 0 30px;
+
   @media screen and (max-width: 768px) {
     flex-direction: column;
     row-gap: 20px;
@@ -35,13 +36,15 @@ export const InputContainer = styled.article`
 `;
 
 export const TextArea = styled.textarea`
-  width: 80%;
+  width: 100%;
   height: 150px;
+  font-size: 14px;
   font-weight: 300;
   resize: none;
   border: none;
   outline: none;
-  padding: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
   @media screen and (max-width: 768px) {
     width: 90%;
@@ -52,10 +55,15 @@ export const TextArea = styled.textarea`
 `;
 
 export const SubmitBtn = styled(StyledFormButton)`
-  width: 60px;
-  height: 30px;
-  line-height: 12px;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 0 auto;
+  width: 50px;
+  height: 20px;
+  line-height: 3px;
   border-width: 1px;
+  font-size: 14px;
+
   @media screen and (max-width: 768px) {
     height: 20px;
     line-height: 2px;
@@ -66,7 +74,7 @@ export const SubmitBtn = styled(StyledFormButton)`
 `;
 
 export const hr = {
-  width: "90%",
+  width: "100%",
   margin: "0px",
 };
 
@@ -77,12 +85,11 @@ export const highlight = {
 
 export const CommentContainer = styled.article`
   width: 100%;
-  height: 400px;
   display: flex;
   flex-direction: column;
   padding: 24px;
   row-gap: 10px;
-  align-items: center;
+  
   @media screen and (max-width: 375px) {
     padding: 10px;
   }
@@ -91,8 +98,9 @@ export const CommentContainer = styled.article`
 export const CommentTitle = styled.div`
   width: 200px;
   font-weight: 300;
-  font-size: 1.1rem;
-  transform: translateX(-165%);
+  font-size: 14px;
+  padding-left: 20px;
+
   @media screen and (max-width: 768px) {
     transform: translate(-90%);
   }
@@ -102,7 +110,7 @@ export const CommentTitle = styled.div`
 `;
 
 export const CommentBox = styled.div`
-  width: 90%;
+  width: 100%;
   height: fit-content;
   display: flex;
   padding: 10px;
@@ -137,7 +145,7 @@ export const ID = styled.span`
   height: 40px;
   line-height: 40px;
   vertical-align: middle;
-  font-size: 0.9rem;
+  font-size: 14px;
   color: #8395a7;
   text-align: center;
 `;
@@ -147,7 +155,7 @@ export const Date = styled.span`
   height: 40px;
   line-height: 40px;
   vertical-align: middle;
-  font-size: 0.9rem;
+  font-size: 12px;
   padding-left: 10px;
   color: #b0bec5;
   text-align: center;
@@ -157,14 +165,16 @@ export const Text = styled.div`
   width: 90%;
   height: fit-content;
   color: #222f3e;
-  font-size: 0.9rem;
+  font-size: 14px;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.2rem;
   max-height: 3.6rem;
+  margin-bottom: 10px;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  
   &.show {
     max-height: fit-content;
     overflow: visible;
