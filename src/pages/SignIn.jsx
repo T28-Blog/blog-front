@@ -31,12 +31,9 @@ import { TextInput } from "../components/FormLib";
 import * as Yup from "yup";
 import styled from "styled-components";
 
-//handler함수 호출
-import confirmUser from "../tools/ConfirmUser";
-
 import { auth, firebaseInstance, provider } from "fbase/Fbase";
 
-import { ADD_JWT_WITH_FACEBOOK, ADD_JWT_WITH_GOOGLE, ADD_UID } from "action";
+import { ADD_JWT_WITH_FACEBOOK } from "action";
 import store from "store/store";
 
 import SigninAPI from "api/SigninAPI";
@@ -93,16 +90,6 @@ const SignIn = () => {
         // const credential = error.credential;
         console.log(errorCode, errorMessage);
       });
-  };
-
-  const [modalState, setModalState] = useState(false);
-
-  const openModal = () => {
-    setModalState(true);
-  };
-
-  const closeModal = () => {
-    setModalState(false);
   };
 
   return (
@@ -185,12 +172,6 @@ const SignIn = () => {
         </BtnContainer>
       </StyledFormArea>
       <ScrollToTop />
-      <Modal
-        state={modalState}
-        closeModal={closeModal}
-        title="로그인 실패"
-        desc="이메일 또는 비밀번호를 확인해주세요<br>신규가입자는 가입 후 발송된 인증메일을 확인해주세요"
-      />
     </FormContainer>
   );
 };

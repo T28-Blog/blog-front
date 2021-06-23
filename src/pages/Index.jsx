@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   MainSlider,
   Section,
@@ -26,7 +26,9 @@ import Hashtag from "components/Hashtag";
 import "styles/slider.css";
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
-import { useState, useEffect } from "react";
+import TokenAPI from "api/TokenAPI";
+import Modal from "components/Modal";
+
 import OauthSignin from "api/OauthSignInAPI";
 import { firebaseInstance } from "fbase/Fbase";
 
@@ -37,16 +39,26 @@ async function getPostDB() {
 }
 
 const Home = () => {
-  const { name, uid, isLogin } = store.getState().userInfo;
-  const [blogData, setBlogData] = useState({});
- 
+  const { name, uid, isLogin, jwt } = store.getState().userInfo;
+
+  const [isModal, setShowModal] = useState(false);
+
   useEffect(() => {
-    getPostDB().then(res => {
-      setBlogData(res)
-    });
-    if (isLogin) {
+    if (isLogin && !jwt) {
       //로그인일 때 jwt 발급
-      const res = OauthSignin.getJWT(uid, name);
+      TokenAPI.getJWT(uid, name);
+    } else {
+      TokenAPI.checkValidation(uid)
+        .then((obj) => {
+          const { modal } = obj;
+          if (modal) {
+            setShowModal(true);
+            TokenAPI.clearJWT();
+          }
+        })
+        .catch((err) => {
+          //console.log(err)
+        });
     }
   }, []);
 
@@ -314,6 +326,12 @@ const Home = () => {
         </PostList>
         <ScrollToTop />
       </Section>
+      {isModal && (
+        <Modal
+          title="로그인 유효시간 종료"
+          desc="로그인 유지 시간이 종료되었습니다.<br>다시 로그인해주세요."
+        />
+      )}
     </>
   );
 };
