@@ -38,18 +38,18 @@ const SigninAPI = {
               const ref = await firebaseInstance
                 .database()
                 .ref(`/users/user_${uid}`);
-              await ref.on(
+              ref.on(
                 "value",
                 (snapshot) => {
                   name = snapshot.val().name;
                   store.dispatch({ type: ADD_UID_OWN, name, uid });
                   store.dispatch({ type: TOGGLE_EMAIL_OAUTH });
+                  history.push("/");
                 },
                 (errorObject) => {
                   console.log("The read failed: " + errorObject.name);
                 }
               );
-              await history.push("/");
             })
             .catch((error) => console.log(error));
         }
@@ -58,20 +58,29 @@ const SigninAPI = {
           const uid = firebaseInstance.auth().currentUser.uid;
           let name = "";
           // realtime database에서 정보 fetch 해오기
-          const ref = await firebaseInstance
-            .database()
-            .ref(`/users/user_${uid}`);
-          await ref.on(
-            "value",
-            (snapshot) => {
-              name = snapshot.val().name;
-              store.dispatch({ type: ADD_UID_OWN, name, uid });
-            },
-            (errorObject) => {
-              console.log("The read failed: " + errorObject.name);
-            }
-          );
-          await history.push("/");
+          const dbRef = await firebaseInstance.database().ref();
+          dbRef
+            .child("users")
+            .child(`user_${uid}`)
+            .get()
+            .then((snapshot) => {
+              try {
+                if (snapshot.exists()) {
+                  name = snapshot.val().name;
+                  store.dispatch({ type: ADD_UID_OWN, name, uid });
+                } else {
+                  console.log("No data available");
+                }
+              } catch (e) {
+                throw new Error(e);
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            })
+            .finally(() => {
+              history.push("/");
+            });
           // 이메일 인증 안 함
         } else {
           setEmailVerified("shown");
