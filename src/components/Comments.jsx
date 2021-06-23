@@ -21,7 +21,9 @@ const Comments = () => {
   const [loading, setLoading] = useState(true); //댓글 로딩 상태
   const [refs, setRefs] = useState([]);
   const [first, setNext] = useState(true);
+
   const [isModal, setShowModal] = useState(false);
+
   const textArea = useRef(null); //새 댓글 생성 창
 
   useEffect(() => {
@@ -46,7 +48,6 @@ const Comments = () => {
           setComments(data);
         })
         .catch((e) => {
-          console.log(e);
           setError(true);
         })
         .finally(() => {
@@ -65,6 +66,7 @@ const Comments = () => {
       getComments();
     }
   };
+
   //로그인 한 유저만 댓글 작성 가능
   const checkLogin = (e) => {
     const { isLogin } = store.getState().userInfo;

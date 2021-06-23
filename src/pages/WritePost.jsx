@@ -15,12 +15,14 @@ import {
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
 import PostDB from "api/PostDB";
+
 import TokenAPI from "api/TokenAPI";
 import Modal from "components/Modal";
 
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
+  const [onlyText, setOnlyText] = useState(""); //editor 내 text만 추출하기
   const [hashtagArr, setHashtagArr] = useState([]);
   const [isModal, setShowModal] = useState(false);
 
@@ -37,7 +39,7 @@ export default function WritePost() {
     } else if (!contentEditor) {
       alert("내용을 입력하세요");
     } else {
-      PostDB.createPostDB(name, title, contentEditor, hashtagArr);
+      PostDB.createPostDB(name, title, contentEditor, hashtagArr, onlyText);
     }
   };
 
@@ -78,14 +80,17 @@ export default function WritePost() {
         <TinyEditor
           contentEditor={contentEditor}
           setContentEditor={setContentEditor}
+          onlyText={onlyText}
+          setOnlyText={setOnlyText}
         ></TinyEditor>
         <BottomWrapper>
           <HashtagWrapper>
-            {hashtagArr.map((hashtag) => {
+            {hashtagArr.map((hashtag, idx) => {
               return (
                 <>
                   <span>#{hashtag} </span>
                   <FaTimes
+                    key={idx}
                     style={{ fill: "gray", marginRight: "0.2em" }}
                     onClick={() => onHashtagRemove(hashtag)}
                   />
