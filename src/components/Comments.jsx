@@ -18,7 +18,7 @@ const Comments = () => {
   const [error, setError] = useState(false); //댓글 불러오기 실패 시 에러 처리
   const [loading, setLoading] = useState(true); //댓글 로딩 상태
   const [refs, setRefs] = useState([]);
-  const [first, setNext] = useState(0);
+  const [first, setNext] = useState(true);
   const textArea = useRef(null); //새 댓글 생성 창
 
   const getComments = () => {
@@ -39,10 +39,10 @@ const Comments = () => {
   };
 
   useEffect(() => {
-    if (!first) {
+    if (first) {
       //무한 데이터 call 막기
       getComments();
-      setNext(10);
+      setNext(false);
     }
     if (comments && comments.length > 0) {
       for (let a of comments) {

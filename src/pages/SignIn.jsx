@@ -59,16 +59,18 @@ const SignIn = () => {
   const history = useHistory();
 
   const signInWithGoogle = () => {
-    auth.signInWithPopup(provider).then((res) => {
-      const { uid } = res.user;
-      history.push("/loading", { oauth: "google", uid });
-    }).catch(error => {
-      const errorCode = error.code;
-      if (errorCode === "auth/popup-closed-by-user") {
-        alert("로그인 하기 전에 창을 닫았습니다.");
-      }
-    }
-    );
+    auth
+      .signInWithPopup(provider)
+      .then((res) => {
+        const { uid } = res.user;
+        history.push("/loading", { oauth: "google", uid });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        if (errorCode === "auth/popup-closed-by-user") {
+          alert("로그인 하기 전에 창을 닫았습니다.");
+        }
+      });
   };
 
   const facebookProvider = new firebaseInstance.auth.FacebookAuthProvider();
@@ -93,16 +95,6 @@ const SignIn = () => {
         // const credential = error.credential;
         console.log(errorCode, errorMessage);
       });
-  };
-
-  const [modalState, setModalState] = useState(false);
-
-  const openModal = () => {
-    setModalState(true);
-  };
-
-  const closeModal = () => {
-    setModalState(false);
   };
 
   return (
@@ -185,12 +177,6 @@ const SignIn = () => {
         </BtnContainer>
       </StyledFormArea>
       <ScrollToTop />
-      <Modal
-        state={modalState}
-        closeModal={closeModal}
-        title="로그인 실패"
-        desc="이메일 또는 비밀번호를 확인해주세요<br>신규가입자는 가입 후 발송된 인증메일을 확인해주세요"
-      />
     </FormContainer>
   );
 };

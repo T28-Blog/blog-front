@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TinyEditor from 'components/TinyEditor';
+import TinyEditor from "components/TinyEditor";
 import { FaTimes } from "react-icons/fa";
 import {
   EditorWrapper,
@@ -10,15 +10,16 @@ import {
   ButtonWrapper,
   Button,
   BottomWrapper,
-  PageTitle
-} from 'styles/EditorElements';
+  PageTitle,
+} from "styles/EditorElements";
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
-import PostDB from 'api/PostDB';
+import PostDB from "api/PostDB";
 
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
+  const [onlyText, setOnlyText] = useState(""); //editor 내 text만 추출하기
   const [hashtagArr, setHashtagArr] = useState([]);
   const onTitleChange = (e) => {
     setTitle(e.target.value);
@@ -27,16 +28,13 @@ export default function WritePost() {
   const handleSubmit = () => {
     const { name } = store.getState().userInfo;
     if (!title && !contentEditor) {
-      alert('제목 및 내용을 입력하세요')
-    }
-    else if (!title) {
-      alert('제목을 입력하세요')
-    }
-    else if (!contentEditor) {
-      alert('내용을 입력하세요')
-    }
-    else {
-      PostDB.createPostDB(name, title, contentEditor, hashtagArr);
+      alert("제목 및 내용을 입력하세요");
+    } else if (!title) {
+      alert("제목을 입력하세요");
+    } else if (!contentEditor) {
+      alert("내용을 입력하세요");
+    } else {
+      PostDB.createPostDB(name, title, contentEditor, hashtagArr, onlyText);
     }
   };
 
@@ -54,16 +52,25 @@ export default function WritePost() {
   return (
     <>
       <EditorWrapper>
-        <PageTitle>블로그 글쓰기<hr /></PageTitle>
+        <PageTitle>
+          블로그 글쓰기
+          <hr />
+        </PageTitle>
         <TitleArea onChange={onTitleChange}></TitleArea>
-        <TinyEditor contentEditor={contentEditor} setContentEditor={setContentEditor} ></TinyEditor>
+        <TinyEditor
+          contentEditor={contentEditor}
+          setContentEditor={setContentEditor}
+          onlyText={onlyText}
+          setOnlyText={setOnlyText}
+        ></TinyEditor>
         <BottomWrapper>
           <HashtagWrapper>
-            {hashtagArr.map((hashtag) => {
+            {hashtagArr.map((hashtag, idx) => {
               return (
                 <>
                   <span>#{hashtag} </span>
                   <FaTimes
+                    key={idx}
                     style={{ fill: "gray", marginRight: "0.2em" }}
                     onClick={() => onHashtagRemove(hashtag)}
                   />
@@ -74,7 +81,9 @@ export default function WritePost() {
             <HashtagInput onKeyPress={onHashtagEnter}></HashtagInput>
           </HashtagWrapper>
           <ButtonWrapper>
-            <Button type="button" onClick={handleSubmit}>임시저장</Button>
+            <Button type="button" onClick={handleSubmit}>
+              임시저장
+            </Button>
             <Button type="button" onClick={handleSubmit}>
               저장
             </Button>

@@ -1,16 +1,14 @@
 import styled, { keyframes } from "styled-components";
 
 export const LoaderContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #77b3d4;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: ${(props) => (props.color ? props.color : "#77b3d4")};
+`;
 
-export const Loader = styled.div`
-
-`
+export const Loader = styled.div``;
 
 export const airplane = keyframes`
     from {
@@ -19,17 +17,17 @@ export const airplane = keyframes`
     to {
         transform: translateY(50px)
     }
-`
+`;
 
 export const LoadingPlane = styled.img`
-    height: 250px;
-    margin-bottom: 50px;
+  height: 250px;
+  margin-bottom: 50px;
 
-    animation: ${airplane} 1s ease infinite alternate;
-`
+  animation: ${airplane} 1s ease infinite alternate;
+`;
 
 export const LoadingTitle = styled.h3`
-    font-size: 35px;
-    color: #fff;
-    text-align: center;
-`
+  font-size: 35px;
+  color: #fff;
+  text-align: center;
+`;

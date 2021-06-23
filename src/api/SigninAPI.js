@@ -32,17 +32,23 @@ const SigninAPI = {
                 .updatePassword(setPassword)
                 .then(() => console.log("pw is set"))
                 .catch((error) => console.log(error));
-                const uid = firebaseInstance.auth().currentUser.uid;
-                let name = '';
-                // realtime database에서 정보 fetch 해오기
-                const ref = await firebaseInstance.database().ref(`/users/user_${uid}`);
-                ref.on('value', (snapshot) => {
+              const uid = firebaseInstance.auth().currentUser.uid;
+              let name = "";
+              // realtime database에서 정보 fetch 해오기
+              const ref = await firebaseInstance
+                .database()
+                .ref(`/users/user_${uid}`);
+              await ref.on(
+                "value",
+                (snapshot) => {
                   name = snapshot.val().name;
-                }, (errorObject) => {
-                  console.log('The read failed: ' + errorObject.name);
-                });
-              store.dispatch({ type: ADD_UID_OWN, name, uid });
-              store.dispatch({ type: TOGGLE_EMAIL_OAUTH });
+                  store.dispatch({ type: ADD_UID_OWN, name, uid });
+                  store.dispatch({ type: TOGGLE_EMAIL_OAUTH });
+                },
+                (errorObject) => {
+                  console.log("The read failed: " + errorObject.name);
+                }
+              );
               history.push("/");
             })
             .catch((error) => console.log(error));
@@ -50,15 +56,21 @@ const SigninAPI = {
         // 로그인 성공적, 재로그인
         else if (userCredential.user.emailVerified) {
           const uid = firebaseInstance.auth().currentUser.uid;
-          let name = '';
+          let name = "";
           // realtime database에서 정보 fetch 해오기
-          const ref = await firebaseInstance.database().ref(`/users/user_${uid}`);
-          ref.on('value', (snapshot) => {
-            name = snapshot.val().name;
-          }, (errorObject) => {
-            console.log('The read failed: ' + errorObject.name);
-          });
-          store.dispatch({ type: ADD_UID_OWN, name, uid });
+          const ref = await firebaseInstance
+            .database()
+            .ref(`/users/user_${uid}`);
+          await ref.on(
+            "value",
+            (snapshot) => {
+              name = snapshot.val().name;
+              store.dispatch({ type: ADD_UID_OWN, name, uid });
+            },
+            (errorObject) => {
+              console.log("The read failed: " + errorObject.name);
+            }
+          );
           history.push("/");
           // 이메일 인증 안 함
         } else {
@@ -72,7 +84,7 @@ const SigninAPI = {
         setIsInvalidEmail(false);
         setIsInvalidPassword(false);
         console.log(errorCode);
-        console.log('here!!!!!!!!', store.getState().emailAuthReducer)
+        console.log("here!!!!!!!!", store.getState().emailAuthReducer);
         if (errorCode === "auth/user-not-found") setIsInvalidEmail(true);
         // 링크로 인증할 때 비밀번호가 틀리면 비밀번호가 틀렸다고 표시하기
         else if (
