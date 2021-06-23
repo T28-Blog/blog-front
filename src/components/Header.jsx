@@ -101,9 +101,6 @@ const Header = () => {
                 <NavLink to="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/writepost">writePost</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink to="/my-blog">MyBlog</NavLink>
               </NavItem>
               <NavItem>
