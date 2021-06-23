@@ -126,19 +126,6 @@ export const Writer = styled.p`
   }
 `;
 
-// export const HashtagContainer = styled.div`
-//   width: 300px;
-//   height: 350px;
-//   background-color: blue;
-//   color: white;
-//   font-size: 30px;
-//   text-align: center;
-
-//   @media screen and (max-width: 768px) {
-//     display: none;
-//   }
-// `;
-
 export const PostList = styled.div`
   position: relative;
   width: 1000px;
@@ -198,6 +185,8 @@ export const Post = styled.div`
   }
 `;
 export const SubThumbnail = styled.div`
+  width: 300px;
+  height: 250px;
   margin-bottom: 10px;
 `;
 export const SubTitle = styled.h4`
@@ -226,7 +215,8 @@ export const SubWriter = styled.p`
 `;
 
 export const PopularContainer = styled.div`
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   width: 1000px;
   height: 100%;
   margin-bottom: 40px;
@@ -277,5 +267,6 @@ export const PopularPost = styled.div`
 
 export const PopularThumbnail = styled.div`
   width: 100%;
+  height: 70%;
   margin-bottom: 20px;
 `;

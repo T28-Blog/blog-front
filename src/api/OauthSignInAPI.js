@@ -23,17 +23,6 @@ const OauthSignin = {
     });
     return res.data;
   },
-  getJWT: (id, name) => {
-    const res = axios({
-      method: "post",
-      url: "http://localhost:4000/token/create",
-      data: {
-        id,
-        name,
-      },
-    });
-    console.log(res);
-  },
 };
 
 export default OauthSignin;

@@ -1,81 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
-import { SearchIcon } from "styles/SearchInputElements";
 import { firebaseInstance } from "fbase/Fbase";
 import OauthSignin from "api/OauthSignInAPI";
 import { ADD_NAME } from "action";
 import store from "store/store";
-
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Title = styled.h2`
-  width: fit-content;
-  font-weight: 400;
-  @media screen and (max-width: 375px) {
-    font-size: medium;
-  }
-`;
-
-const Form = styled.form`
-  width: 50%;
-  height: 38%;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-
-  @media screen and (max-width: 768px) {
-    width: 80%;
-  }
-`;
-
-const NicknameInput = styled.input`
-  all: unset;
-  width: 65%;
-  height: 40px;
-  outline: none;
-  text-align: center;
-  border-bottom: 1px solid #333;
-
-  @media screen and (max-width: 768px) {
-    width: 90%;
-    font-size: 0.9rem;
-  }
-  @media screen and (max-width: 375px) {
-    width: 100%;
-    font-size: 0.8rem;
-  }
-`;
-
-const CheckEmail = styled.span`
-  width: fit-content;
-  height: fit-content;
-  font-size: 0.8rem;
-  color: ${(props) => (props.color === "success" ? "green" : "red")};
-`;
-
-const Button = styled(SearchIcon)`
-  width: 180px;
-  color: #fff;
-  border-radius: 40px;
-
-  &:hover {
-    transform: scale(0.98);
-  }
-  @media screen and (max-width: 375px) {
-    width: 120px;
-    font-size: 0.9rem;
-  }
-`;
+import {
+  Container,
+  Title,
+  Form,
+  NicknameInput,
+  CheckNickname,
+  Button,
+} from "styles/UserInfoElements";
 
 const UserInfo = () => {
   const [userName, setUserName] = useState(null);
@@ -87,12 +23,12 @@ const UserInfo = () => {
     let overlap = false;
 
     const checkOverlap = await firebaseInstance.database().ref("/users").get();
-    const result = await checkOverlap.forEach((data) => {
+    await checkOverlap.forEach((data) => {
       if (data.val().name === userName) {
         overlap = true;
       }
     });
-    console.log(result);
+
     if (overlap) {
       enrollNickname("fail");
     } else {
@@ -115,6 +51,10 @@ const UserInfo = () => {
   };
 
   useEffect(() => {
+    const { uid, jwt } = store.getState().userInfo;
+    if (!uid && !jwt) {
+      history.push("/");
+    }
     if (userName) {
       checkUserName();
     }
@@ -129,11 +69,11 @@ const UserInfo = () => {
           defaultValue={userName}
         ></NicknameInput>
         {isNickname !== "none" && (
-          <CheckEmail color={isNickname}>
+          <CheckNickname color={isNickname}>
             {isNickname === "success"
               ? "등록 가능! 닉네임을 저장 중입니다. 잠시만 기다려주세요."
               : "이미 사용하고 있는 닉네임입니다. 다른 닉네임을 사용해 주세요."}
-          </CheckEmail>
+          </CheckNickname>
         )}
         <Button type="submit">등록</Button>
       </Form>

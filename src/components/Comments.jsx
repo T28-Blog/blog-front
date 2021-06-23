@@ -12,37 +12,25 @@ import {
   highlight,
 } from "styles/CommentElements";
 import CommentUser from "./CommentUser";
+import store from "store/store";
+import Modal from "components/Modal";
 
 const Comments = () => {
   const [comments, setComments] = useState(null); //기존에 달린 댓글
   const [error, setError] = useState(false); //댓글 불러오기 실패 시 에러 처리
   const [loading, setLoading] = useState(true); //댓글 로딩 상태
   const [refs, setRefs] = useState([]);
-  const [first, setNext] = useState(0);
+  const [first, setNext] = useState(true);
+
+  const [isModal, setShowModal] = useState(false);
+
   const textArea = useRef(null); //새 댓글 생성 창
 
-  const getComments = () => {
-    const res = CommentsAPI.getComments();
-    if (res) {
-      res
-        .then((data) => {
-          setComments(data);
-        })
-        .catch((e) => {
-          console.log(e);
-          setError(true);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-  };
-
   useEffect(() => {
-    if (!first) {
+    if (first) {
       //무한 데이터 call 막기
       getComments();
-      setNext(10);
+      setNext(false);
     }
     if (comments && comments.length > 0) {
       for (let a of comments) {
@@ -51,12 +39,40 @@ const Comments = () => {
     }
   }, [comments]);
 
+  //기존 댓글 DB에서 불러오는 함수
+  const getComments = () => {
+    const res = CommentsAPI.getComments();
+    if (res) {
+      res
+        .then((data) => {
+          setComments(data);
+        })
+        .catch((e) => {
+          setError(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  };
+
   //포스트 생성 확인 버튼 핸들링 함수
   const onSubmitComment = async (e) => {
-    const texts = textArea.current.value;
-    await CommentsAPI.createComment(texts);
-    textArea.current.value = "";
-    getComments();
+    const { isLogin } = store.getState().userInfo;
+    if (isLogin) {
+      const texts = textArea.current.value;
+      await CommentsAPI.createComment(texts);
+      textArea.current.value = "";
+      getComments();
+    }
+  };
+
+  //로그인 한 유저만 댓글 작성 가능
+  const checkLogin = (e) => {
+    const { isLogin } = store.getState().userInfo;
+    if (!isLogin) {
+      setShowModal(true);
+    }
   };
 
   return (
@@ -64,7 +80,8 @@ const Comments = () => {
       <InputContainer>
         <TextArea
           ref={textArea}
-          placeholder="지금 로그인하고 댓글을 작성해보세요!"
+          placeholder="새 댓글을 작성해보세요!"
+          onFocus={checkLogin}
         />
         <SubmitBtn onClick={onSubmitComment}>확인</SubmitBtn>
       </InputContainer>
@@ -105,6 +122,13 @@ const Comments = () => {
           </>
         )}
       </CommentContainer>
+      {isModal && (
+        <Modal
+          title="로그인 필요"
+          desc={"로그인 후 이용 가능합니다.<br> 로그인을 해주세요."}
+          reopenFn={setShowModal}
+        ></Modal>
+      )}
     </Section>
   );
 };

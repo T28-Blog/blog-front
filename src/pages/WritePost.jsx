@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import TinyEditor from 'components/TinyEditor';
+import React, { useState, useEffect } from "react";
+import TinyEditor from "components/TinyEditor";
 import { FaTimes } from "react-icons/fa";
 import {
   EditorWrapper,
@@ -12,15 +12,21 @@ import {
   BottomWrapper,
   PageTitle,
   ThumbInput
-} from 'styles/EditorElements';
+} from "styles/EditorElements";
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
-import PostDB from 'api/PostDB';
+import PostDB from "api/PostDB";
+
+import TokenAPI from "api/TokenAPI";
+import Modal from "components/Modal";
 
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
+  const [onlyText, setOnlyText] = useState(""); //editor 내 text만 추출하기
   const [hashtagArr, setHashtagArr] = useState([]);
+  const [isModal, setShowModal] = useState(false);
+
   const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -28,16 +34,13 @@ export default function WritePost() {
   const handleSubmit = () => {
     const { name } = store.getState().userInfo;
     if (!title && !contentEditor) {
-      alert('제목 및 내용을 입력하세요')
-    }
-    else if (!title) {
-      alert('제목을 입력하세요')
-    }
-    else if (!contentEditor) {
-      alert('내용을 입력하세요')
-    }
-    else {
-      PostDB.createPostDB(name, title, contentEditor, hashtagArr);
+      alert("제목 및 내용을 입력하세요");
+    } else if (!title) {
+      alert("제목을 입력하세요");
+    } else if (!contentEditor) {
+      alert("내용을 입력하세요");
+    } else {
+      PostDB.createPostDB(name, title, contentEditor, hashtagArr, onlyText);
     }
   };
 
@@ -52,12 +55,34 @@ export default function WritePost() {
     setHashtagArr(hashtagArr.filter((elem) => hashtag !== elem));
   };
 
+  useEffect(() => {
+    const { uid } = store.getState().userInfo;
+    TokenAPI.checkValidation(uid)
+      .then((obj) => {
+        const { modal } = obj;
+        if (modal) {
+          setShowModal(true);
+          TokenAPI.clearJWT();
+        }
+      })
+      .catch((err) => {
+        //console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <EditorWrapper>
-        <PageTitle>블로그 글쓰기<hr /></PageTitle>
+        <PageTitle>
+          블로그 글쓰기
+          <hr />
+        </PageTitle>
         <TitleArea onChange={onTitleChange}></TitleArea>
-        <TinyEditor contentEditor={contentEditor} setContentEditor={setContentEditor} ></TinyEditor>
+        <TinyEditor
+            contentEditor={contentEditor}
+            setContentEditor={setContentEditor}
+            nlyText={onlyText}
+            setOnlyText={setOnlyText}></TinyEditor>
         <ThumbInput
             type="file"
             name="thumbimg"
@@ -66,11 +91,12 @@ export default function WritePost() {
         />
         <BottomWrapper>
           <HashtagWrapper>
-            {hashtagArr.map((hashtag) => {
+            {hashtagArr.map((hashtag, idx) => {
               return (
                 <>
                   <span>#{hashtag} </span>
                   <FaTimes
+                    key={idx}
                     style={{ fill: "gray", marginRight: "0.2em" }}
                     onClick={() => onHashtagRemove(hashtag)}
                   />
@@ -81,7 +107,9 @@ export default function WritePost() {
             <HashtagInput onKeyPress={onHashtagEnter}></HashtagInput>
           </HashtagWrapper>
           <ButtonWrapper>
-            <Button type="button">임시저장</Button>
+            <Button type="button" onClick={handleSubmit}>
+              임시저장
+            </Button>
             <Button type="button" onClick={handleSubmit}>
               저장
             </Button>
@@ -89,6 +117,12 @@ export default function WritePost() {
         </BottomWrapper>
       </EditorWrapper>
       <ScrollToTop />
+      {isModal && (
+        <Modal
+          title="로그인 유효시간 종료"
+          desc="로그인 유지 시간이 종료되었습니다.<br>다시 로그인해주세요."
+        />
+      )}
     </>
   );
 }

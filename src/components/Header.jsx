@@ -100,9 +100,16 @@ const Header = () => {
               <NavItem>
                 <NavLink to="/">Home</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink to="/my-blog">MyBlog</NavLink>
-              </NavItem>
+              {user && (
+                <NavItem>
+                  <NavLink to="/writepost">write Post</NavLink>
+                </NavItem>
+              )}
+              {user && (
+                <NavItem>
+                  <NavLink to="/my-blog">MyBlog</NavLink>
+                </NavItem>
+              )}
               <NavItem>
                 <NavLink to="/contact-us">ContactUs</NavLink>
               </NavItem>

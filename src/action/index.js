@@ -5,4 +5,6 @@ export const ADD_UID_OWN = "ADD_UID_OWN_LOGIN";
 export const ADD_UID = "ADD_ONLY_UID";
 export const ADD_NAME = "ADD_ONLY_NAME";
 export const ADD_JWT = "ADD_ONLY_JSON_WEB_TOKEN";
+export const REFRESH_PAGE = "ADD_USER_INFO_WHEN_PAGE_IS_REFRESHED";
 export const LOG_OUT = "LOG_OUT_USER";
+export const TOGGLE_EMAIL_OAUTH = "ADD_IS_EMAIL_OAUTH";

@@ -31,7 +31,7 @@ const ConfirmUser = {
   diff: async (uid, service) => {
     try {
       const { userData, userID } = await OauthSignIn.getUserInfo(uid);
-      console.log(userData, userID);
+
       if (service === "google") {
         store.dispatch({ type: ADD_JWT_WITH_GOOGLE });
       }
