@@ -1,14 +1,9 @@
 const express = require("express");
 const axios = require("axios");
-const cors = require("cors");
-const bodyParser = require("body-parser");
 const db = require("./FirebaseDB.js");
 const app = express();
 
 let userID = null;
-
-app.use(cors());
-app.use(bodyParser.json());
 
 //카카오 회원번호 가져오기 및 DB에 해당 유저 저장되어 있는지 확인
 app.post("/kakao", async (req, res, next) => {

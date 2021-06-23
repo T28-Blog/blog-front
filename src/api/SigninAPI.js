@@ -49,7 +49,7 @@ const SigninAPI = {
                   console.log("The read failed: " + errorObject.name);
                 }
               );
-              history.push("/");
+              await history.push("/");
             })
             .catch((error) => console.log(error));
         }
@@ -71,7 +71,7 @@ const SigninAPI = {
               console.log("The read failed: " + errorObject.name);
             }
           );
-          history.push("/");
+          await history.push("/");
           // 이메일 인증 안 함
         } else {
           setEmailVerified("shown");
