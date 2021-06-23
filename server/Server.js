@@ -8,7 +8,7 @@ const token = require("./Token");
 const login = require("./KakaoUser");
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(bodyParser.json());
 
 //(카카오의 경우, 카카오 회원번호 가져오기) 및 DB에 해당 유저 저장되어 있는지 확인

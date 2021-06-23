@@ -1,11 +1,6 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const db = require("./FirebaseDB.js");
 const app = express();
-const cors = require("cors");
-
-app.use(cors());
-app.use(bodyParser.json());
 
 app.post("/", (req, res, next) => {
   const {
@@ -19,6 +14,7 @@ app.post("/", (req, res, next) => {
     post_id,
     title,
     user_id,
+    text,
   } = req.query;
   //post가 없는 경우 새로 생성
   if (post_id) {
@@ -30,12 +26,13 @@ app.post("/", (req, res, next) => {
           date,
           desc,
           hashtag,
-          hits,
+          hits: +hits,
           img,
           name,
           post_id,
           title,
           user_id,
+          text,
         })
         .then((response) => {
           console.log("done");
@@ -51,12 +48,13 @@ app.post("/", (req, res, next) => {
           content,
           date,
           desc,
-          hits,
+          hits: +hits,
           img,
           name,
           post_id,
           title,
           user_id,
+          text,
         })
         .then((response) => {
           console.log("done");
@@ -67,10 +65,6 @@ app.post("/", (req, res, next) => {
         });
     }
   }
-});
-
-app.get('/', (req, res) => {
-  
 });
 
 module.exports = app;
