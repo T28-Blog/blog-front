@@ -21,6 +21,8 @@ import TokenAPI from "api/TokenAPI";
 import Modal from "components/Modal";
 import { useRef } from "react";
 
+import { useHistory } from "react-router-dom";
+
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
@@ -29,6 +31,7 @@ export default function WritePost() {
   const [isModal, setShowModal] = useState(false);
 
   const imgRef = useRef(null);
+  const history = useHistory();
 
   const onTitleChange = (e) => {
     setTitle(e.target.value);
@@ -54,6 +57,20 @@ export default function WritePost() {
         onlyText,
         img
       );
+      history.push("/my-blog");
+    }
+  };
+
+  const handleTempSaveSubmit = () => {
+    const { name } = store.getState().userInfo;
+    if (!title && !contentEditor) {
+      alert("제목 및 내용을 입력하세요");
+    } else if (!title) {
+      alert("제목을 입력하세요");
+    } else if (!contentEditor) {
+      alert("내용을 입력하세요");
+    } else {
+      PostDB.savePostDB(name, title, contentEditor, hashtagArr, onlyText);
     }
   };
 
@@ -127,7 +144,7 @@ export default function WritePost() {
             <HashtagInput onKeyPress={onHashtagEnter}></HashtagInput>
           </HashtagWrapper>
           <ButtonWrapper>
-            <Button type="button" onClick={handleSubmit}>
+            <Button type="button" onClick={handleTempSaveSubmit}>
               임시저장
             </Button>
             <Button type="button" onClick={handleSubmit}>

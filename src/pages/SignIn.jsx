@@ -6,7 +6,6 @@ import {
   StyledFormButton,
   DividerLine,
   OtherAccount,
-  Facebook,
   Google,
   Kakao,
   Avatar,
@@ -17,7 +16,6 @@ import {
   ButtonGroup,
 } from "../styles/SignElements";
 import logo from "../assets/Team28-logo.png";
-import facebook from "../assets/facebook.png";
 import kakao from "../assets/kakao.png";
 import google from "../assets/google.png";
 import KakaoLogin from "../api/KakaoAPI";
@@ -33,7 +31,6 @@ import styled from "styled-components";
 
 import { auth, firebaseInstance, provider } from "fbase/Fbase";
 
-import { ADD_JWT_WITH_FACEBOOK } from "action";
 import store from "store/store";
 
 import SigninAPI from "api/SigninAPI";
@@ -67,30 +64,6 @@ const SignIn = () => {
         if (errorCode === "auth/popup-closed-by-user") {
           alert("로그인 하기 전에 창을 닫았습니다.");
         }
-      });
-  };
-
-  const facebookProvider = new firebaseInstance.auth.FacebookAuthProvider();
-
-  const signInWithFacebook = () => {
-    firebaseInstance
-      .auth()
-      .signInWithPopup(facebookProvider)
-      .then((result) => {
-        // const credential = result.credential;
-        // const user = result.user;
-        // const accessToken = credential.accessToken;
-        const jwt = null;
-        const at = null;
-        store.dispatch({ type: ADD_JWT_WITH_FACEBOOK, jwt, at });
-        history.push("/");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // const email = error.email;
-        // const credential = error.credential;
-        console.log(errorCode, errorMessage);
       });
   };
 
@@ -170,7 +143,6 @@ const SignIn = () => {
         <BtnContainer>
           <Google image={google} onClick={signInWithGoogle} />
           <Kakao image={kakao} onClick={KakaoLogin.getRequestToken}></Kakao>
-          <Facebook image={facebook} onClick={signInWithFacebook}></Facebook>
         </BtnContainer>
       </StyledFormArea>
       <ScrollToTop />

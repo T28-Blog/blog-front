@@ -1,6 +1,6 @@
 import { firebaseInstance } from "fbase/Fbase";
 import store from "store/store";
-import { ADD_UID_OWN, TOGGLE_EMAIL_OAUTH } from "action/index";
+import { ADD_UID_OWN, CHECK_EMAIL_AUTH } from "action/index";
 
 const SigninAPI = {
   signin: (
@@ -35,21 +35,22 @@ const SigninAPI = {
               const uid = firebaseInstance.auth().currentUser.uid;
               let name = "";
               // realtime database에서 정보 fetch 해오기
-              const ref = await firebaseInstance
-                .database()
-                .ref(`/users/user_${uid}`);
-              ref.on(
-                "value",
-                (snapshot) => {
-                  name = snapshot.val().name;
-                  store.dispatch({ type: ADD_UID_OWN, name, uid });
-                  store.dispatch({ type: TOGGLE_EMAIL_OAUTH });
-                  history.push("/");
-                },
-                (errorObject) => {
-                  console.log("The read failed: " + errorObject.name);
-                }
-              );
+              const dbRef = await firebaseInstance.database().ref();
+              dbRef
+                .child("users")
+                .child(`user_${uid}`)
+                .get()
+                .then(
+                  (snapshot) => {
+                    name = snapshot.val().name;
+                    store.dispatch({ type: ADD_UID_OWN, name, uid });
+                    store.dispatch({ type: CHECK_EMAIL_AUTH });
+                    history.push("/");
+                  },
+                  (errorObject) => {
+                    console.log("The read failed: " + errorObject.name);
+                  }
+                );
             })
             .catch((error) => console.log(error));
         }
@@ -105,7 +106,7 @@ const SigninAPI = {
         // 이미 로그인을 했었을 때 비밀번호가 틀리면 표시하기
         else if (
           errorCode === "auth/wrong-password" &&
-          store.getState().emailAuthReducer
+          store.getState().emailAuthReducer.isLoginCheck
         ) {
           setIsInvalidPassword(true);
         }

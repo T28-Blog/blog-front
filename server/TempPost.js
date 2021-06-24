@@ -19,7 +19,7 @@ app.post("/", (req, res, next) => {
   if (post_id) {
     if (hashtag) {
       db.database()
-        .ref(`posts/post_${post_id}`)
+        .ref(`temp_post`)
         .set({
           content,
           date,
@@ -34,14 +34,14 @@ app.post("/", (req, res, next) => {
         })
         .then((response) => {
           console.log("done");
-          res.json({ isSaved: true });
+          res.json({ isSaved: false });
         })
         .catch((err) => {
           res.json({ isSaved: false, messaage: err });
         });
     } else {
       db.database()
-        .ref(`posts/post_${post_id}`)
+        .ref(`temp_post`)
         .set({
           content,
           date,
@@ -55,7 +55,7 @@ app.post("/", (req, res, next) => {
         })
         .then((response) => {
           console.log("done");
-          res.json({ isSaved: true });
+          res.json({ isSaved: false });
         })
         .catch((err) => {
           res.json({ isSaved: false, messaage: err });

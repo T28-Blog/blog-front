@@ -24,9 +24,9 @@ export const TextInput = ({ ...props }) => {
           {...props}
         />
       )}
-      {isExistingEmail && <ErrorMsg>Email exists</ErrorMsg>}
-      {(emailVerified ==='shown') && <ErrorMsg>Email is not verified</ErrorMsg>}
-      {isInvalidEmail && <ErrorMsg>Email does not exist</ErrorMsg>}
+      {isExistingEmail && <ErrorMsg>이메일이 존재합니다</ErrorMsg>}
+      {(emailVerified ==='shown') && <ErrorMsg>이메일 인증이 되지 않았습니다</ErrorMsg>}
+      {isInvalidEmail && <ErrorMsg>이메일이 존재하지 않습니다</ErrorMsg>}
 
       {props.type === "password" && (
         <StyledTextInput
@@ -35,7 +35,7 @@ export const TextInput = ({ ...props }) => {
           {...props}
         />
       )}
-      {isInvalidPassword && <ErrorMsg>Password is not valid</ErrorMsg>}
+      {isInvalidPassword && <ErrorMsg>비밀번호가 틀렸습니다</ErrorMsg>}
 
       {meta.touched && meta.error ? (
         <ErrorMsg>{meta.error}</ErrorMsg>

@@ -179,18 +179,6 @@ export const OtherAccount = styled.p`
   margin-top: 30px;
 `;
 
-export const Facebook = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  background-image: url(${(props) => props.image});
-  background-size: cover;
-  background-position: center;
-  margin: 0 10px 0 auto;
-  display: inline;
-  cursor: pointer;
-`;
-
 export const Google = styled.div`
   width: 50px;
   height: 50px;
