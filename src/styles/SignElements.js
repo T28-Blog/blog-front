@@ -13,43 +13,6 @@ export const colors = {
   black: '#000',
 };
 
-// export const DividerLine = styled.div`
-//   width: 100%;
-//   height: 1px;
-//   background-color: ${colors.black};
-// `;
-
-// export const OtherAccount = styled.p`
-//   font-size: 14px;
-//   text-align: center;
-//   color: ${colors.black};
-//   margin-top: 30px;
-// `;
-
-// export const Google = styled.div`
-//   width: 50px;
-//   height: 50px;
-//   border-radius: 50px;
-//   background-image: url(${(props) => props.image});
-//   background-size: cover;
-//   background-position: center;
-//   margin: 0 10px 0 auto;
-//   display: inline;
-//   cursor: pointer;
-// `;
-
-// export const Kakao = styled.div`
-//   width: 50px;
-//   height: 50px;
-//   border-radius: 50px;
-//   background-image: url(${(props) => props.image});
-//   background-size: cover;
-//   background-position: center;
-//   margin: 0 auto;
-//   display: inline;
-//   cursor: pointer;
-// `;
-
 // FormLib 부분
 export const StyledLabel = styled.p`
   text-align: left;
@@ -162,7 +125,7 @@ export const ExtraText = styled.p`
   color: ${(props) => (props.color ? props.color : colors.dark2)};
   padding: 2px;
   margin-top: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   font-size: 12px;
 `
 export const TextLink = styled(Link)`
@@ -178,9 +141,44 @@ export const TextLink = styled(Link)`
 `
 
 // 로그인 부분 
-export const DividerLine = styled.div``
-export const OtherAccount = styled.div``
-export const BtnContainer = styled.div``
-export const Google = styled.div``
-export const Kakao = styled.div``
+export const DividerLine = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${colors.black};
+`
+export const BtnContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+export const OtherAccount = styled.p`
+  font-size: 14px;
+  text-align: center;
+  color: ${colors.black};
+  margin-top: 30px;
+`;
+export const Google = styled.div`
+  width: 100%;
+  height: 60px;
+  background-image: url(${(props) => props.image});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  cursor: pointer;
+  margin-bottom: 5px;
+`;
+export const Kakao = styled.div`
+  width: 100%;
+  height: 60px;
+  background-image: url(${(props) => props.image});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline;
+  cursor: pointer;
+`;
 

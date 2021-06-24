@@ -28,10 +28,6 @@ const SignUp = () => {
   return (
     <FormContainer>
       <StyleSideArea img src={join}>
-        {/* 
-        <StyledTitle color={colors.black} size={30}>
-          회원가입
-        </StyledTitle> */}
       </StyleSideArea>  
       <StyledFormArea>
         <Avatar>
