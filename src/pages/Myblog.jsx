@@ -45,7 +45,7 @@ const MyBlog = () => {
           <MyblogContents />
           <SideContainer>
             <MyProfile />
-            <Hashtag />
+            <Hashtag myBlog={true} />
           </SideContainer>
           <ScrollToTop />
         </MyblogContainer>
