@@ -20,12 +20,16 @@ import PostDB from "api/PostDB";
 import TokenAPI from "api/TokenAPI";
 import Modal from "components/Modal";
 
+import { useHistory } from "react-router-dom";
+
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
   const [onlyText, setOnlyText] = useState(""); //editor 내 text만 추출하기
   const [hashtagArr, setHashtagArr] = useState([]);
   const [isModal, setShowModal] = useState(false);
+
+  const history = useHistory();
 
   const onTitleChange = (e) => {
     setTitle(e.target.value);
@@ -41,6 +45,7 @@ export default function WritePost() {
       alert("내용을 입력하세요");
     } else {
       PostDB.createPostDB(name, title, contentEditor, hashtagArr, onlyText);
+      history.push('/my-blog');
     }
   };
 
