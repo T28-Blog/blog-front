@@ -35,7 +35,7 @@ export default function WritePost() {
     setTitle(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSaveSubmit = () => {
     const { name } = store.getState().userInfo;
     if (!title && !contentEditor) {
       alert("제목 및 내용을 입력하세요");
@@ -48,6 +48,19 @@ export default function WritePost() {
       history.push('/my-blog');
     }
   };
+
+  const handleTempSaveSubmit = () => {
+    const { name } = store.getState().userInfo;
+    if (!title && !contentEditor) {
+      alert("제목 및 내용을 입력하세요");
+    } else if (!title) {
+      alert("제목을 입력하세요");
+    } else if (!contentEditor) {
+      alert("내용을 입력하세요");
+    } else {
+      PostDB.savePostDB(name, title, contentEditor, hashtagArr, onlyText);
+    }
+  }
 
   const onHashtagEnter = (e) => {
     if (e.code === "Enter") {
@@ -112,10 +125,10 @@ export default function WritePost() {
             <HashtagInput onKeyPress={onHashtagEnter}></HashtagInput>
           </HashtagWrapper>
           <ButtonWrapper>
-            <Button type="button" onClick={handleSubmit}>
+            <Button type="button" onClick={handleTempSaveSubmit}>
               임시저장
             </Button>
-            <Button type="button" onClick={handleSubmit}>
+            <Button type="button" onClick={handleSaveSubmit}>
               저장
             </Button>
           </ButtonWrapper>
