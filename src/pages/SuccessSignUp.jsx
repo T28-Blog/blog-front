@@ -44,7 +44,7 @@ const SuccessSignUp = (props) => {
       <SuccessLogo img src={logo} alt="Logo"></SuccessLogo>
       <SuccessTitle>환영합니다!</SuccessTitle>
       <SuccessDesc>
-        {name || ownName}님, 회원가입을 축하합니다.<br></br>
+        {ownName || name}님, 회원가입을 축하합니다.<br></br>
         {!oauth &&
           `${email} 으로 회원가입 인증메일이 발송되었습니다. 메일함을 확인해주세요.`}
         <br></br>

@@ -37,9 +37,7 @@ const MyblogContents = () => {
   useEffect(() => {
     return () => {
       unsubscribe();
-      setItemCount(null);
-      setItemCount(0);
-      setPosts(null);
+      setItems(null);
     };
   }, []);
 

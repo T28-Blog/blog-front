@@ -67,7 +67,6 @@ const Home = () => {
       setPopularPosts(response[1]);
       setLoading(false);
     });
-
     if (isLogin && !jwt) {
       //로그인일 때 jwt 발급
       TokenAPI.getJWT(uid, name);
@@ -84,6 +83,10 @@ const Home = () => {
           //console.log(err)
         });
     }
+    return () => {
+      setLatestPosts(null);
+      setPopularPosts(null);
+    };
   }, []);
 
   return error ? (

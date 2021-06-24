@@ -16,7 +16,7 @@ const PostDB = {
         date: timeChanger.nowTOutc(),
         hashtag,
         hits: 0,
-        img: "https://images.unsplash.com/photo-1621570273800-1b50b0173a97?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80",
+        img,
         name,
         post_id,
         title,
@@ -28,7 +28,7 @@ const PostDB = {
     });
     return res.data;
   },
-  savePostDB: async (name, title, content, hashtag, text) => {
+  savePostDB: async (name, title, content, hashtag, text, img) => {
     const uuid = firebaseInstance.auth().currentUser.uid;
     const post_id = v4();
     const res = await axios({
@@ -51,7 +51,7 @@ const PostDB = {
     });
     return res.data;
   },
-  fetchMyPosts: async (count) => {
+  fetchMyPosts: async () => {
     try {
       const { uid } = store.getState().userInfo;
       const posts = [];

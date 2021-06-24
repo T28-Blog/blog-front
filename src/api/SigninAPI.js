@@ -40,17 +40,15 @@ const SigninAPI = {
                 .child("users")
                 .child(`user_${uid}`)
                 .get()
-                .then(
-                  (snapshot) => {
-                    name = snapshot.val().name;
-                    store.dispatch({ type: ADD_UID_OWN, name, uid });
-                    store.dispatch({ type: CHECK_EMAIL_AUTH });
-                    history.push("/");
-                  },
-                  (errorObject) => {
-                    console.log("The read failed: " + errorObject.name);
-                  }
-                );
+                .then((snapshot) => {
+                  name = snapshot.val().name;
+                  store.dispatch({ type: ADD_UID_OWN, name, uid });
+                  store.dispatch({ type: CHECK_EMAIL_AUTH });
+                })
+                .catch((err) => console.log(err))
+                .finally(() => {
+                  history.push("/");
+                });
             })
             .catch((error) => console.log(error));
         }

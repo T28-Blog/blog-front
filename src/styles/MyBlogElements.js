@@ -88,7 +88,7 @@ export const MyPostDate = styled.p`
 export const MyPostThumbnail = styled.img`
   width: 150px;
   height: 100px;
-  object-fit: contain;
+  object-fit: fill;
 `;
 
 // ----------- MyProfile.jsx 부분 -----------
