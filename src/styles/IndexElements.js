@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const MainContainer = styled.div`
+  min-height: 100%;
+  margin-bottom: 150px;
+`
+
 export const MainSlider = styled.div`
   width: 100%;
   height: 350px;

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
-import { FaBolt } from 'react-icons/fa'
+import { FaTimes } from 'react-icons/fa'
 
 const Background = styled.div`
     width: 100%;
@@ -69,7 +69,7 @@ const ModalContent = styled.div`
     }
 `
 
-const CloseModalButton = styled(FaBolt)`
+const CloseModalButton = styled(FaTimes)`
     cursor: pointer;
     position: absolute;
     top: 20px;

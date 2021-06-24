@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   StyledFormArea,
+  StyleSideArea,
   StyledFormButton,
   Avatar,
   colors,
@@ -14,6 +15,7 @@ import {
 import logo from "../assets/Team28-logo.png";
 import ScrollToTop from "components/ScrollToTop";
 import SignupAPI from "api/SignupAPI";
+import join from "../assets/join.jpeg"
 
 // Formik
 import { Formik, Form } from "formik";
@@ -25,13 +27,16 @@ const SignUp = () => {
   const [isExistingEmail, setIsExistingEmail] = useState(false);
   return (
     <FormContainer>
+      <StyleSideArea img src={join}>
+        {/* 
+        <StyledTitle color={colors.black} size={30}>
+          회원가입
+        </StyledTitle> */}
+      </StyleSideArea>  
       <StyledFormArea>
         <Avatar>
           <img src={logo} alt="logo" width="200px" />
         </Avatar>
-        <StyledTitle color={colors.black} size={30}>
-          회원가입
-        </StyledTitle>
         <Formik
           initialValues={{
             // 객체형태 초기값
