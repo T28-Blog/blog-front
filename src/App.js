@@ -19,10 +19,12 @@ import SuccessLogout from "./pages/SuccessLogout";
 import UserInfo from "pages/UsersInfo";
 import PreLoader from "pages/PreLoader";
 import GlobalStyle from "styles/GlobalStyles";
+import PageLocationTop from "components/PageLocationTop";
 
 function App() {
   return (
     <Router>
+      <PageLocationTop/>
       <GlobalStyle />
       <Header />
       <Switch>

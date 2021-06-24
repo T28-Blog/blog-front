@@ -6,6 +6,7 @@ const users = require("./Users");
 const posts = require("./Posts");
 const token = require("./Token");
 const login = require("./KakaoUser");
+const tempPost = require("./TempPost");
 const app = express();
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
@@ -16,6 +17,7 @@ app.use("/login", login);
 app.use("/token", token); //jwt 생성 및 검증
 
 app.use("/posts", posts); //새 포스트 생성
+app.use("/temp_post", tempPost)
 
 app.use("/token", token); //jwt 생성
 app.use("/users", users); //새 유저 생성

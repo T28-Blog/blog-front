@@ -20,6 +20,8 @@ import PostDB from "api/PostDB";
 import TokenAPI from "api/TokenAPI";
 import Modal from "components/Modal";
 
+import { useHistory } from "react-router-dom";
+
 export default function WritePost() {
   const [title, setTitle] = useState("");
   const [contentEditor, setContentEditor] = useState();
@@ -27,11 +29,13 @@ export default function WritePost() {
   const [hashtagArr, setHashtagArr] = useState([]);
   const [isModal, setShowModal] = useState(false);
 
+  const history = useHistory();
+
   const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSaveSubmit = () => {
     const { name } = store.getState().userInfo;
     if (!title && !contentEditor) {
       alert("제목 및 내용을 입력하세요");
@@ -41,8 +45,22 @@ export default function WritePost() {
       alert("내용을 입력하세요");
     } else {
       PostDB.createPostDB(name, title, contentEditor, hashtagArr, onlyText);
+      history.push('/my-blog');
     }
   };
+
+  const handleTempSaveSubmit = () => {
+    const { name } = store.getState().userInfo;
+    if (!title && !contentEditor) {
+      alert("제목 및 내용을 입력하세요");
+    } else if (!title) {
+      alert("제목을 입력하세요");
+    } else if (!contentEditor) {
+      alert("내용을 입력하세요");
+    } else {
+      PostDB.savePostDB(name, title, contentEditor, hashtagArr, onlyText);
+    }
+  }
 
   const onHashtagEnter = (e) => {
     if (e.code === "Enter") {
@@ -107,10 +125,10 @@ export default function WritePost() {
             <HashtagInput onKeyPress={onHashtagEnter}></HashtagInput>
           </HashtagWrapper>
           <ButtonWrapper>
-            <Button type="button" onClick={handleSubmit}>
+            <Button type="button" onClick={handleTempSaveSubmit}>
               임시저장
             </Button>
-            <Button type="button" onClick={handleSubmit}>
+            <Button type="button" onClick={handleSaveSubmit}>
               저장
             </Button>
           </ButtonWrapper>

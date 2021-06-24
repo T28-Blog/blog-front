@@ -1,10 +1,10 @@
-import { TOGGLE_EMAIL_OAUTH } from "../action/index";
+import { CHECK_EMAIL_AUTH } from "../action/index";
 
-const emailAuthReducer = (state = false, action) => {
+const emailAuthReducer = (state = {isLoginCheck: false}, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
-    case TOGGLE_EMAIL_OAUTH:
-      return !state;
+    case CHECK_EMAIL_AUTH:
+      state = { ...state, isLoginCheck: true}
   }
   return state;
 };
