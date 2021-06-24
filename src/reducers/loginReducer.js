@@ -7,7 +7,6 @@ import {
   REFRESH_PAGE,
   LOG_OUT,
   ADD_JWT_WITH_GOOGLE,
-  ADD_JWT_WITH_FACEBOOK,
 } from "../action/index";
 
 const initialState = {
@@ -54,14 +53,6 @@ const loginReducer = (state = initialState, action) => {
         isLogin: true,
         oauth: true,
         service: "google",
-      };
-      break;
-    case ADD_JWT_WITH_FACEBOOK:
-      state = {
-        ...state,
-        isLogin: true,
-        oauth: true,
-        service: "facebook",
       };
       break;
     case REFRESH_PAGE:
