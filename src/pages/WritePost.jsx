@@ -48,7 +48,6 @@ export default function WritePost() {
   };
 
   const handleSubmit = async () => {
-    console.log(imgRef.current.files);
     let img =
       imgURL ||
       "https://images.unsplash.com/photo-1624380779294-5376549277ce?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80";
@@ -74,6 +73,11 @@ export default function WritePost() {
   };
 
   const handleTempSaveSubmit = () => {
+    let url = ""; //이미지 썸네일 임시저장 시, default 이미지값 빈 string
+    if (imgURL) {
+      url = imgURL;
+    }
+
     const { name } = store.getState().userInfo;
     if (!title && !contentEditor) {
       alert("제목 및 내용을 입력하세요");
@@ -82,7 +86,7 @@ export default function WritePost() {
     } else if (!contentEditor) {
       alert("내용을 입력하세요");
     } else {
-      PostDB.savePostDB(name, title, contentEditor, hashtagArr, onlyText);
+      PostDB.savePostDB(name, title, contentEditor, hashtagArr, onlyText, url);
     }
   };
 
@@ -97,6 +101,7 @@ export default function WritePost() {
     setHashtagArr(hashtagArr.filter((elem) => hashtag !== elem));
   };
 
+  //이미지가 등록되면 firebase storage에 File 객체를 업로드하고 사용 가능한 resource url을 받아서 DB에 저장
   const onHandleImgChange = async (e) => {
     const selectedFile = imgRef.current.files;
     if (selectedFile.length) {
