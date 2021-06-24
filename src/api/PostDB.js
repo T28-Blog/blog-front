@@ -13,7 +13,6 @@ const PostDB = {
       params: {
         content,
         date: timeChanger.nowTOutc(),
-        desc: "blog",
         hashtag,
         hits: 0,
         img: "https://images.unsplash.com/photo-1621570273800-1b50b0173a97?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80",

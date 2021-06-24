@@ -6,7 +6,6 @@ app.post("/", (req, res, next) => {
   const {
     content,
     date,
-    desc,
     hashtag,
     hits,
     img,
@@ -24,7 +23,6 @@ app.post("/", (req, res, next) => {
         .set({
           content,
           date,
-          desc,
           hashtag,
           hits: +hits,
           img,
@@ -47,7 +45,6 @@ app.post("/", (req, res, next) => {
         .set({
           content,
           date,
-          desc,
           hits: +hits,
           img,
           name,
