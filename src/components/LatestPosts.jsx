@@ -39,7 +39,7 @@ const LatestPosts = ({ posts }) => {
               <MainDesc>{posts[0].text}</MainDesc>
               <Writer>{posts[0].name}</Writer>
             </MainPost>
-            <Hashtag />
+            <Hashtag posts={posts} />
           </PostContainer>
           <PostList>
             {left.length &&
