@@ -11,7 +11,7 @@ import {
   Button,
   BottomWrapper,
   PageTitle,
-  ThumbInput
+  ThumbInput,
 } from "styles/EditorElements";
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
@@ -19,6 +19,7 @@ import PostDB from "api/PostDB";
 
 import TokenAPI from "api/TokenAPI";
 import Modal from "components/Modal";
+import { useRef } from "react";
 
 export default function WritePost() {
   const [title, setTitle] = useState("");
@@ -27,11 +28,16 @@ export default function WritePost() {
   const [hashtagArr, setHashtagArr] = useState([]);
   const [isModal, setShowModal] = useState(false);
 
+  const imgRef = useRef(null);
+
   const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
 
   const handleSubmit = () => {
+    console.log(imgRef.current.files);
+    console.log(URL.createObjectURL(imgRef.current.files[0]));
+    const img = URL.createObjectURL(imgRef.current.files[0]);
     const { name } = store.getState().userInfo;
     if (!title && !contentEditor) {
       alert("제목 및 내용을 입력하세요");
@@ -40,7 +46,14 @@ export default function WritePost() {
     } else if (!contentEditor) {
       alert("내용을 입력하세요");
     } else {
-      PostDB.createPostDB(name, title, contentEditor, hashtagArr, onlyText);
+      PostDB.createPostDB(
+        name,
+        title,
+        contentEditor,
+        hashtagArr,
+        onlyText,
+        img
+      );
     }
   };
 
@@ -53,6 +66,10 @@ export default function WritePost() {
 
   const onHashtagRemove = (hashtag) => {
     setHashtagArr(hashtagArr.filter((elem) => hashtag !== elem));
+  };
+
+  const onHandleImgChange = (e) => {
+    console.log(e);
   };
 
   useEffect(() => {
@@ -79,15 +96,18 @@ export default function WritePost() {
         </PageTitle>
         <TitleArea onChange={onTitleChange}></TitleArea>
         <TinyEditor
-            contentEditor={contentEditor}
-            setContentEditor={setContentEditor}
-            nlyText={onlyText}
-            setOnlyText={setOnlyText}></TinyEditor>
+          contentEditor={contentEditor}
+          setContentEditor={setContentEditor}
+          nlyText={onlyText}
+          setOnlyText={setOnlyText}
+        ></TinyEditor>
         <ThumbInput
-            type="file"
-            name="thumbimg"
-            className="thumbimg"
-            accept="image/*"
+          type="file"
+          name="thumbimg"
+          className="thumbimg"
+          accept="image/*"
+          ref={imgRef}
+          onChange={onHandleImgChange}
         />
         <BottomWrapper>
           <HashtagWrapper>

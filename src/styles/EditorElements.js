@@ -10,16 +10,15 @@ export const EditorWrapper = styled.div`
   align-items: center;
   padding-bottom: 50px;
 
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 768px) {
     width: 100%;
     padding: 0 50px;
   }
 
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: 375px) {
     width: 100%;
     padding: 0 20px 50px 20px;
   }
-
 `;
 
 export const PageTitle = styled.h2`
@@ -31,11 +30,11 @@ export const PageTitle = styled.h2`
   text-align: left;
   margin-bottom: 30px;
 
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: 375px) {
     margin: 30px 0 10px 0;
-    font-size: 28px
+    font-size: 28px;
   }
-`
+`;
 
 export const TitleArea = styled.input.attrs({
   type: "text",
@@ -48,7 +47,7 @@ export const TitleArea = styled.input.attrs({
   padding-left: 20px;
   margin: 10px 0;
   border: 1px rgb(219, 218, 227) solid;
-  
+
   &:focus {
     outline: none;
     border: 1px black solid;
@@ -73,7 +72,6 @@ export const HashtagInput = styled.input.attrs({
   font-weight: 300;
   border: none;
   color: #c6c6c6;
-
 `;
 
 export const ButtonWrapper = styled.div`
@@ -96,8 +94,8 @@ export const Button = styled.button`
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   margin-left: 10px;
-  
-  &:hover{
+
+  &:hover {
     transition: all 0.2s ease-in-out;
     background: #256ce1;
     color: #fff;
@@ -113,9 +111,10 @@ export const BottomWrapper = styled.div`
 
 export const ThumbInput = styled.input`
   width: 100%;
+  height: 100px;
   display: flex;
   align-items: center;
   margin: 10px auto;
   color: #6c757d;
   font-size: 14px;
-`
+`;
