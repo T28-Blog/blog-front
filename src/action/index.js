@@ -7,4 +7,4 @@ export const ADD_NAME = "ADD_ONLY_NAME";
 export const ADD_JWT = "ADD_ONLY_JSON_WEB_TOKEN";
 export const REFRESH_PAGE = "ADD_USER_INFO_WHEN_PAGE_IS_REFRESHED";
 export const LOG_OUT = "LOG_OUT_USER";
-export const TOGGLE_EMAIL_OAUTH = "ADD_IS_EMAIL_OAUTH";
+export const CHECK_EMAIL_AUTH = "ADD_IS_EMAIL_AUTH";
