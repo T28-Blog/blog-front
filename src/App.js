@@ -29,7 +29,7 @@ function App() {
       <Header />
       <Route render={props => (
         <>
-          {props.location.pathname !== '/search' ? <Footer /> : null}
+          {/* {props.location.pathname !== '/search' ? <Footer /> : null} */}
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/writepost" exact component={WritePost} />
@@ -46,7 +46,7 @@ function App() {
             <Route path="/loading" exact component={PreLoader} />
             {/* 404 Error Page */}
             <Route path={"*"} exact component={Error} />
-            <Footer />
+            {/* <Footer /> */}
           </Switch>
         </>
         )}

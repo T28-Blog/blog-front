@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const EditorWrapper = styled.div`
   display: flex;
   max-width: 1000px;
-  height: 100vh;
-  margin: 0 auto;
+  height: 100%;
+  margin: 0 auto 150px auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -113,9 +113,11 @@ export const BottomWrapper = styled.div`
 
 export const ThumbInput = styled.input`
   width: 100%;
+  height: 50px;
   display: flex;
   align-items: center;
   margin: 10px auto;
+  padding: 0;
   color: #6c757d;
   font-size: 14px;
 `
