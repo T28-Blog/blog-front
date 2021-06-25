@@ -9,9 +9,12 @@ import {
   PopularPost,
   PopularThumbnail,
   PopularContainer,
+  MainFooter,
+  WriterImg
 } from "../styles/IndexElements";
 import ScrollToTop from "components/ScrollToTop";
 import IndexPost from "./IndexPost";
+import winter from "../assets/winter.jpeg";
 
 const PopularPosts = ({ posts }) => {
   const bigs = posts.slice(0, 2);
@@ -27,18 +30,19 @@ const PopularPosts = ({ posts }) => {
           {bigs.length &&
             bigs.map((post) => (
               <PopularPost key={post.post_id}>
-                <PopularThumbnail>
-                  <img
+                <PopularThumbnail img
                     src={post.img}
                     alt="Google"
                     width="100%"
                     height="100%"
-                    object-fit="cover"
-                  />
+                >
                 </PopularThumbnail>
                 <MainTitle>{post.title}</MainTitle>
                 <MainDesc>{post.text}</MainDesc>
-                <Writer>{post.name}</Writer>
+                <MainFooter>
+                  <WriterImg img src={winter}></WriterImg>
+                  <Writer>{posts.name}</Writer>
+                </MainFooter>
               </PopularPost>
             ))}
         </PopularContainer>

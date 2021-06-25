@@ -82,11 +82,12 @@ export const MainPost = styled.div`
   }
 `;
 
-export const MainThumbnail = styled.div`
+export const MainThumbnail = styled.img`
   width: 100%;
   height: 350px;
   margin-bottom: 20px;
-  border-radius: 50px;
+  border-radius: 10px;
+  object-fit: cover;
 `;
 
 export const MainTitle = styled.h3`
@@ -121,8 +122,24 @@ export const MainDesc = styled.p`
   }
 `;
 
+export const MainFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+export const WriterImg = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: green;
+  margin-right: 8px;
+  object-fit: cover;
+`
+
 export const Writer = styled.p`
+  height: 30px;
   font-size: 12px;
+  line-height: 30px;
   color: blue;
   margin-bottom: 0;
 
@@ -151,8 +168,8 @@ export const PostList = styled.div`
 export const Post = styled.div`
   display: inline-block;
   vertical-align: top;
-  width: 300px;
-  margin: 0 50px 30px 0;
+  width: 320px;
+  margin: 0 20px 20px 0;
   overflow: hidden;
 
   &:nth-child(3) {
@@ -190,13 +207,15 @@ export const Post = styled.div`
   }
 `;
 export const SubThumbnail = styled.div`
-  width: 300px;
+  width: 100%;
   height: 250px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  object-fit: cover;
+  border-radius: 10px;
 `;
 export const SubTitle = styled.h4`
   font-size: 20px;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
@@ -205,6 +224,18 @@ export const SubTitle = styled.h4`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
+export const SubFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+export const SubProfileImg = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: green;
+  margin-right: 8px;
+  object-fit: cover;
+`
 export const SubDesc = styled.p`
   font-size: 14px;
   margin-bottom: 2px;
@@ -214,7 +245,10 @@ export const SubDesc = styled.p`
   text-overflow: ellipsis;
 `;
 export const SubWriter = styled.p`
+  height: 30px;
+  margin-bottom: 0;
   font-size: 12px;
+  line-height: 30px;
   color: blue;
   white-space: nowrap;
 `;
@@ -270,8 +304,10 @@ export const PopularPost = styled.div`
   }
 `;
 
-export const PopularThumbnail = styled.div`
+export const PopularThumbnail = styled.img`
   width: 100%;
-  height: 70%;
+  height: 250px;
   margin-bottom: 20px;
+  border-radius: 10px;
+  object-fit: cover;
 `;

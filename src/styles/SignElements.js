@@ -58,7 +58,7 @@ export const FormContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 50px auto;
+  margin: 100px auto;
   width: 900px;
   height: 100%;
   box-shadow: 8px 8px 20px 8px ${colors.light2};
@@ -161,8 +161,8 @@ export const OtherAccount = styled.p`
   margin-top: 30px;
 `;
 export const Google = styled.div`
-  width: 100%;
-  height: 60px;
+  width: 200px;
+  height: 40px;
   background-image: url(${(props) => props.image});
   background-size: cover;
   background-repeat: no-repeat;
@@ -172,8 +172,8 @@ export const Google = styled.div`
   margin-bottom: 5px;
 `;
 export const Kakao = styled.div`
-  width: 100%;
-  height: 60px;
+  width: 200px;
+  height: 40px;
   background-image: url(${(props) => props.image});
   background-size: cover;
   background-repeat: no-repeat;

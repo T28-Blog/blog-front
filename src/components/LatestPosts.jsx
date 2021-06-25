@@ -9,9 +9,12 @@ import {
   MainDesc,
   Writer,
   PostList,
+  MainFooter,
+  WriterImg
 } from "../styles/IndexElements";
 import Hashtag from "components/Hashtag";
 import IndexPost from "./IndexPost";
+import winter from "../assets/winter.jpeg";
 
 const LatestPosts = ({ posts }) => {
   const left = posts.slice(1);
@@ -26,18 +29,19 @@ const LatestPosts = ({ posts }) => {
         <Section>
           <PostContainer>
             <MainPost>
-              <MainThumbnail>
-                <img
+              <MainThumbnail img
                   src={posts[0].img}
                   alt="unplash"
                   width="100%"
                   height="100%"
-                  object-fit="cover"
-                />
+              >
               </MainThumbnail>
               <MainTitle>{posts[0].title}</MainTitle>
               <MainDesc>{posts[0].text}</MainDesc>
-              <Writer>{posts[0].name}</Writer>
+              <MainFooter>
+                <WriterImg img src={winter}></WriterImg>
+                <Writer>{posts[0].name}</Writer>
+              </MainFooter>
             </MainPost>
             <Hashtag />
           </PostContainer>
