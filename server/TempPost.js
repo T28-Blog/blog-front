@@ -10,16 +10,16 @@ app.post("/", (req, res, next) => {
     hits,
     img,
     name,
-    post_id,
+    // post_id,
     title,
     user_id,
     text,
   } = req.query;
   //post가 없는 경우 새로 생성
-  if (post_id) {
+  // if (post_id) {
     if (hashtag) {
       db.database()
-        .ref(`temp_post`)
+        .ref(`temp_post/post_${user_id}`)
         .set({
           content,
           date,
@@ -27,7 +27,7 @@ app.post("/", (req, res, next) => {
           hits: +hits,
           img,
           name,
-          post_id,
+          // post_id,
           title,
           user_id,
           text,
@@ -41,14 +41,14 @@ app.post("/", (req, res, next) => {
         });
     } else {
       db.database()
-        .ref(`temp_post`)
+        .ref(`temp_post/post_${user_id}`)
         .set({
           content,
           date,
           hits: +hits,
           img,
           name,
-          post_id,
+          // post_id,
           title,
           user_id,
           text,
@@ -61,7 +61,7 @@ app.post("/", (req, res, next) => {
           res.json({ isSaved: false, messaage: err });
         });
     }
-  }
+  // }
 });
 
 module.exports = app;

@@ -27,13 +27,15 @@ import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { storage } from "fbase/Fbase";
 import { v4 } from "uuid";
+import { Post } from "styles/IndexElements";
 
 export default function WritePost() {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState();
   const [contentEditor, setContentEditor] = useState();
   const [onlyText, setOnlyText] = useState(""); //editor 내 text만 추출하기
   const [hashtagArr, setHashtagArr] = useState([]);
   const [isModal, setShowModal] = useState(false);
+  const [isTempSave, setIsTempSave] = useState(false);
 
   //포스팅 썸네일 관련 state 변수들
   const [imgName, setImgName] = useState("");
@@ -85,10 +87,47 @@ export default function WritePost() {
       alert("제목을 입력하세요");
     } else if (!contentEditor) {
       alert("내용을 입력하세요");
+    } else if (isTempSave) {
+      const result = window.confirm(
+        "이미 임시저장되어 있는 글이 있습니다. 해당 글을 삭제하고 현재 글을 저장하겠습니까?"
+      );
+      if (result) {
+        // 기존 글 삭제 코드 필요
+        PostDB.deleteTempPost();
+        PostDB.savePostDB(
+          name,
+          title,
+          contentEditor,
+          hashtagArr,
+          onlyText,
+          url
+        );
+      } else return;
     } else {
       PostDB.savePostDB(name, title, contentEditor, hashtagArr, onlyText, url);
+      alert("임시저장 되었습니다");
     }
+    setIsTempSave(true);
   };
+
+  const callTempSave = async () => {
+    let isCallTempSave = true;
+    if (title || contentEditor || hashtagArr.length) {
+      isCallTempSave = window.confirm(
+        "기존에 쓰시던 글을 지우고 임시저장된 글을 불러오겠습니까?"
+      );
+    }
+    if (isCallTempSave) {
+      const post = await PostDB.fetchTempPost();
+      setTitle(post.title);
+      setContentEditor(post.content);
+      if (post.hashtag) setHashtagArr(post.hashtag);
+      // 임시저장된 글 지우기
+      PostDB.deleteTempPost();
+      setIsTempSave(false);
+    }
+  }
+  
 
   const onHashtagEnter = (e) => {
     if (e.code === "Enter") {
@@ -129,7 +168,8 @@ export default function WritePost() {
     }
   };
 
-  useEffect(() => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
     const { uid } = store.getState().userInfo;
     TokenAPI.checkValidation(uid)
       .then((obj) => {
@@ -142,6 +182,9 @@ export default function WritePost() {
       .catch((err) => {
         //console.log(err);
       });
+
+    const post = await PostDB.fetchTempPost();
+    if (post) setIsTempSave(true);
   }, []);
 
   return (
@@ -151,7 +194,7 @@ export default function WritePost() {
           블로그 글쓰기
           <hr />
         </PageTitle>
-        <TitleArea onChange={onTitleChange}></TitleArea>
+        <TitleArea value={title} onChange={onTitleChange}></TitleArea>
         <TinyEditor
           contentEditor={contentEditor}
           setContentEditor={setContentEditor}
@@ -194,6 +237,11 @@ export default function WritePost() {
             <HashtagInput onKeyPress={onHashtagEnter}></HashtagInput>
           </HashtagWrapper>
           <ButtonWrapper>
+            {isTempSave && (
+              <Button type="button" onClick={callTempSave}>
+                불러오기
+              </Button>
+            )}
             <Button type="button" onClick={handleTempSaveSubmit}>
               임시저장
             </Button>
