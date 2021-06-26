@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Section,
   SectionTitle,
@@ -14,8 +14,16 @@ import ScrollToTop from "components/ScrollToTop";
 import IndexPost from "./IndexPost";
 
 const PopularPosts = ({ posts }) => {
-  const bigs = posts.slice(0, 2);
-  const left = posts.slice(2);
+  const [bigs, setBigs] = useState(null);
+  const [left, setLeft] = useState(null);
+
+  useEffect(() => {
+    if (posts) {
+      setBigs(posts.slice(0, 2));
+      setLeft(posts.slice(2));
+    }
+  }, [posts]);
+
   return (
     <>
       <SectionTitle>
@@ -24,7 +32,8 @@ const PopularPosts = ({ posts }) => {
       </SectionTitle>
       <Section>
         <PopularContainer>
-          {bigs.length &&
+          {bigs &&
+            bigs.length &&
             bigs.map((post) => (
               <PopularPost key={post.post_id}>
                 <PopularThumbnail>
@@ -43,7 +52,8 @@ const PopularPosts = ({ posts }) => {
             ))}
         </PopularContainer>
         <PostList>
-          {left.length &&
+          {left &&
+            left.length &&
             left.map((post) => (
               <IndexPost
                 key={post.post_id}

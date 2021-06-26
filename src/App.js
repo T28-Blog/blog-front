@@ -12,7 +12,6 @@ import Search from "./pages/Search";
 import WritePost from "pages/WritePost";
 import DetailPost from "pages/DetailPost";
 import Footer from "./components/Footer";
-import Comments from "components/Comments";
 import Error from "pages/Error";
 import SuccessSignUp from "./pages/SuccessSignUp";
 import SuccessLogout from "./pages/SuccessLogout";
@@ -20,11 +19,12 @@ import UserInfo from "pages/UsersInfo";
 import PreLoader from "pages/PreLoader";
 import GlobalStyle from "styles/GlobalStyles";
 import PageLocationTop from "components/PageLocationTop";
+import TopicPage from "pages/TopicPage";
 
 function App() {
   return (
     <Router>
-      <PageLocationTop/>
+      <PageLocationTop />
       <GlobalStyle />
       <Header />
       <Switch>
@@ -36,11 +36,11 @@ function App() {
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/search" exact component={Search} />
         <Route path="/sign-up" exact component={SignUp} />
-        <Route path="/comment" exact component={Comments} />
         <Route path="/success" exact component={SuccessSignUp} />
         <Route path="/logout" exact component={SuccessLogout} />
         <Route path="/userinfo" exact component={UserInfo} />
         <Route path="/loading" exact component={PreLoader} />
+        <Route path="/topic/:hashtag" exact component={TopicPage} />
         {/* 404 Error Page */}
         <Route path={"*"} exact component={Error} />
       </Switch>

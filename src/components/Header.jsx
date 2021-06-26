@@ -102,16 +102,11 @@ const Header = () => {
               </NavItem>
               {user && (
                 <NavItem>
-                  <NavLink to="/writepost">write Post</NavLink>
-                </NavItem>
-              )}
-              {user && (
-                <NavItem>
-                  <NavLink to="/my-blog">MyBlog</NavLink>
+                  <NavLink to="/my-blog">My Blog</NavLink>
                 </NavItem>
               )}
               <NavItem>
-                <NavLink to="/contact-us">ContactUs</NavLink>
+                <NavLink to="/contact-us">Contact Us</NavLink>
               </NavItem>
               {!user && (
                 <NavItem>
