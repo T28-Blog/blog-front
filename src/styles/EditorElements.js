@@ -55,6 +55,7 @@ export const TitleArea = styled.input.attrs({
 `;
 
 export const HashtagWrapper = styled.div`
+  width: 80%;
   margin-top: 0.5em;
 `;
 

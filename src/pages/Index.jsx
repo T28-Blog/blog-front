@@ -73,14 +73,16 @@ const Home = () => {
     } else {
       TokenAPI.checkValidation(uid)
         .then((obj) => {
-          const { modal } = obj;
-          if (modal) {
-            setShowModal(true);
-            TokenAPI.clearJWT();
+          if (obj) {
+            const { modal } = obj;
+            if (modal) {
+              setShowModal(true);
+              TokenAPI.clearJWT();
+            }
           }
         })
         .catch((err) => {
-          //console.log(err)
+          console.error(err);
         });
     }
     return () => {

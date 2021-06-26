@@ -23,8 +23,8 @@ export const Container = styled.div`
 
 export const HashContainer = styled.div`
   width: 100%;
-  height: ${(props) => (props.more || props.myBlog ? "inherit" : "100px")};
-  min-height: 100px;
+  height: ${(props) => (props.more || props.myBlog ? "inherit" : "130px")};
+  min-height: 130px;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
