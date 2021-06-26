@@ -21,7 +21,6 @@ import google from "../assets/google.png";
 import KakaoLogin from "../api/KakaoAPI";
 // import GoogleLogin from "react-google-login";
 import ScrollToTop from "components/ScrollToTop";
-import Modal from "components/Modal";
 
 // Formik
 import { Formik, Form } from "formik";
@@ -29,9 +28,7 @@ import { TextInput } from "../components/FormLib";
 import * as Yup from "yup";
 import styled from "styled-components";
 
-import { auth, firebaseInstance, provider } from "fbase/Fbase";
-
-import store from "store/store";
+import { auth, provider } from "fbase/Fbase";
 
 import SigninAPI from "api/SigninAPI";
 

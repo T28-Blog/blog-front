@@ -10,27 +10,27 @@ import {
   MyPostDate,
   MyPostThumbnail,
 } from "styles/MyBlogElements";
-import styeld from "styled-components";
+import styled from "styled-components";
 import timeChanger from "tools/TimeChange";
 
-const Container = styeld.section`
-    width: 100%;
-    height : 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content:flex-start;
-    align-items : center;
-    row-gap : 28px;
+const Container = styled.section`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 28px;
 `;
 
-const Title = styeld.div`
-    font-weight: 400;
-    font-size : 24px;
-    margin-top : 20px;
-    width: 100%;
-    hegith : fit-content;
-    text-align : center;
-  `;
+const Title = styled.div`
+  font-weight: 400;
+  font-size: 24px;
+  margin-top: 20px;
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+`;
 
 const TopicPage = () => {
   const {
