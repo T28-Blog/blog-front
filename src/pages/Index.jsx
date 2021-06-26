@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MainSlider } from "../styles/IndexElements";
+import { MainSlider, MainContainer } from "../styles/IndexElements";
 import Slider from "components/Slider";
 import "styles/slider.css";
 import store from "store/store";
@@ -73,14 +73,16 @@ const Home = () => {
     } else {
       TokenAPI.checkValidation(uid)
         .then((obj) => {
-          const { modal } = obj;
-          if (modal) {
-            setShowModal(true);
-            TokenAPI.clearJWT();
+          if (obj) {
+            const { modal } = obj;
+            if (modal) {
+              setShowModal(true);
+              TokenAPI.clearJWT();
+            }
           }
         })
         .catch((err) => {
-          //console.log(err)
+          console.error(err);
         });
     }
     return () => {
@@ -92,7 +94,7 @@ const Home = () => {
   return error ? (
     <LoadingTitle>복구 중입니다. 잠시만 기다려주세요 ... 🙇‍♂️</LoadingTitle>
   ) : (
-    <>
+    <MainContainer>
       <MainSlider>
         <Slider></Slider>
       </MainSlider>
@@ -112,7 +114,7 @@ const Home = () => {
           desc="로그인 유지 시간이 종료되었습니다.<br>다시 로그인해주세요."
         />
       )}
-    </>
+    </MainContainer>
   );
 };
 

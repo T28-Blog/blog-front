@@ -19,6 +19,7 @@ import {
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
 import PostDB from "api/PostDB";
+import GoogleMapComponent from "../components/GoogleMap"
 
 import TokenAPI from "api/TokenAPI";
 import Modal from "components/Modal";
@@ -70,7 +71,7 @@ export default function WritePost() {
         onlyText,
         img
       );
-      history.push("/my-blog");
+      history.push("/");
     }
   };
 
@@ -250,6 +251,7 @@ export default function WritePost() {
             </Button>
           </ButtonWrapper>
         </BottomWrapper>
+        <GoogleMapComponent />
       </EditorWrapper>
       <ScrollToTop />
       {isModal && (

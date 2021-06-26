@@ -58,7 +58,7 @@ const Search = () => {
       </SearchContainer>
       {JSONDATA.filter((val) => {
         if (search === "") {
-          return val;
+          return false
         } else if (val.title.toLowerCase().includes(search.toLowerCase())) {
           return val;
         } else if (val.desc.toLowerCase().includes(search.toLowerCase())) {

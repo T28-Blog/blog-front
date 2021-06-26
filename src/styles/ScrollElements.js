@@ -12,4 +12,5 @@ export const TopButton = styled.button`
     border: none;
     background-color: #256ce1;
     cursor: pointer;
+    z-index: 999;
 `

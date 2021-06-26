@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Section,
   SectionTitle,
@@ -9,13 +9,24 @@ import {
   PopularPost,
   PopularThumbnail,
   PopularContainer,
+  MainFooter,
+  WriterImg
 } from "../styles/IndexElements";
 import ScrollToTop from "components/ScrollToTop";
 import IndexPost from "./IndexPost";
+import winter from "../assets/winter.jpeg";
 
 const PopularPosts = ({ posts }) => {
-  const bigs = posts.slice(0, 2);
-  const left = posts.slice(2);
+  const [bigs, setBigs] = useState(null);
+  const [left, setLeft] = useState(null);
+
+  useEffect(() => {
+    if (posts) {
+      setBigs(posts.slice(0, 2));
+      setLeft(posts.slice(2));
+    }
+  }, [posts]);
+
   return (
     <>
       <SectionTitle>
@@ -24,26 +35,29 @@ const PopularPosts = ({ posts }) => {
       </SectionTitle>
       <Section>
         <PopularContainer>
-          {bigs.length &&
+          {bigs &&
+            bigs.length &&
             bigs.map((post) => (
               <PopularPost key={post.post_id}>
-                <PopularThumbnail>
-                  <img
+                <PopularThumbnail img
                     src={post.img}
                     alt="Google"
                     width="100%"
                     height="100%"
-                    object-fit="cover"
-                  />
+                >
                 </PopularThumbnail>
                 <MainTitle>{post.title}</MainTitle>
                 <MainDesc>{post.text}</MainDesc>
-                <Writer>{post.name}</Writer>
+                <MainFooter>
+                  <WriterImg img src={winter}></WriterImg>
+                  <Writer>{posts.name}</Writer>
+                </MainFooter>
               </PopularPost>
             ))}
         </PopularContainer>
         <PostList>
-          {left.length &&
+          {left &&
+            left.length &&
             left.map((post) => (
               <IndexPost
                 key={post.post_id}

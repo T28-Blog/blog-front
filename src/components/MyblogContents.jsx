@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useInView } from "react-intersection-observer";
 import React, { useState, useCallback } from "react";
 import { useEffect } from "react";

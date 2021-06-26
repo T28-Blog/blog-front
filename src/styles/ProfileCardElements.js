@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const ProfileContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
 
   @media screen and (max-width: 768px) {
     width: 768px;
@@ -20,15 +23,15 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
+  width: 300px;
   height: 100%;
-  margin: 30px auto;
+  /* margin: 30px auto; */
   background-color: #2c3a47;
   box-shadow: 5px 3px 8px 5px #e1e1e1;
 
   @media screen and (max-width: 768px) {
     display: flex;
-    width: 500px;
+    width: 300px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -108,7 +111,7 @@ export const Email = styled.button`
 `;
 export const CardFooter = styled.div`
   display: flex;
-  width: 500px;
+  width: 300px;
   height: 40px;
   padding: 10px;
   background-color: #adb5bd;
