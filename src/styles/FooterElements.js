@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Footer = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    position: fixed;
+    bottom: 0;
     width: 100%;
     height: 150px;
     padding: 20px 0;
     background-color: #555;
     margin-top: auto;
+    z-index: 100;
 
     @media screen and (max-width: 768px){
     }

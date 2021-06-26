@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import styled from "styled-components";
-import { FaBolt } from "react-icons/fa";
+import React, {useState, useRef, useEffect, useCallback} from 'react'
+import styled from 'styled-components'
+import {FaTimes} from 'react-icons/fa'
 import store from "store/store";
 
 const Background = styled.div`
@@ -42,13 +42,11 @@ const ModalContent = styled.div`
   align-items: center;
   line-height: 1.8;
   color: #141414;
-
   label {
     display: inline-inline-block;
     font-size: 12px;
     color: #6c757d;
   }
-
   input {
     display: flex;
     width: 250px;
@@ -56,12 +54,10 @@ const ModalContent = styled.div`
     padding-left: 10px;
     font-size: 16px;
   }
-
   .photo {
     padding-left: 0;
     margin-bottom: 50px;
   }
-
   button {
     padding: 10px 24px;
     background: #141414;
@@ -70,7 +66,7 @@ const ModalContent = styled.div`
   }
 `;
 
-const CloseModalButton = styled(FaBolt)`
+const CloseModalButton = styled(FaTimes)`
   cursor: pointer;
   position: absolute;
   top: 20px;

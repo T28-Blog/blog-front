@@ -14,6 +14,8 @@ import {
   TextLink,
   ExtraText,
   ButtonGroup,
+  BtnContainer,
+  StyleSideArea
 } from "../styles/SignElements";
 import logo from "../assets/Team28-logo.png";
 import kakao from "../assets/kakao.png";
@@ -21,6 +23,8 @@ import google from "../assets/google.png";
 import KakaoLogin from "../api/KakaoAPI";
 // import GoogleLogin from "react-google-login";
 import ScrollToTop from "components/ScrollToTop";
+import Modal from "components/Modal";
+import login from "../assets/login.jpeg";
 
 // Formik
 import { Formik, Form } from "formik";
@@ -31,15 +35,8 @@ import styled from "styled-components";
 import { auth, provider } from "fbase/Fbase";
 
 import SigninAPI from "api/SigninAPI";
+import { width } from "dom-helpers";
 
-//소셜 로그인 버튼
-const BtnContainer = styled.div`
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const SignIn = () => {
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
@@ -66,13 +63,12 @@ const SignIn = () => {
 
   return (
     <FormContainer>
+      <StyleSideArea img src={login}>
+      </StyleSideArea>
       <StyledFormArea>
         <Avatar>
           <img src={logo} alt="logo" width="200px" />
         </Avatar>
-        <StyledTitle color={colors.black} size={30}>
-          로그인
-        </StyledTitle>
         <Formik
           initialValues={{
             // 객체형태 초기값
