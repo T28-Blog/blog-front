@@ -10,16 +10,15 @@ export const EditorWrapper = styled.div`
   align-items: center;
   padding-bottom: 50px;
 
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 768px) {
     width: 100%;
     padding: 0 50px;
   }
 
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: 375px) {
     width: 100%;
     padding: 0 20px 50px 20px;
   }
-
 `;
 
 export const PageTitle = styled.h2`
@@ -31,11 +30,11 @@ export const PageTitle = styled.h2`
   text-align: left;
   margin-bottom: 30px;
 
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: 375px) {
     margin: 30px 0 10px 0;
-    font-size: 28px
+    font-size: 28px;
   }
-`
+`;
 
 export const TitleArea = styled.input.attrs({
   type: "text",
@@ -48,7 +47,7 @@ export const TitleArea = styled.input.attrs({
   padding-left: 20px;
   margin: 10px 0;
   border: 1px rgb(219, 218, 227) solid;
-  
+
   &:focus {
     outline: none;
     border: 1px black solid;
@@ -56,6 +55,7 @@ export const TitleArea = styled.input.attrs({
 `;
 
 export const HashtagWrapper = styled.div`
+  width: 80%;
   margin-top: 0.5em;
 `;
 
@@ -73,7 +73,8 @@ export const HashtagInput = styled.input.attrs({
   font-weight: 300;
   border: none;
   color: #c6c6c6;
-
+  outline: none;
+  border-bottom: 1px solid #999;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -96,8 +97,8 @@ export const Button = styled.button`
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   margin-left: 10px;
-  
-  &:hover{
+
+  &:hover {
     transition: all 0.2s ease-in-out;
     background: #256ce1;
     color: #fff;
@@ -112,12 +113,41 @@ export const BottomWrapper = styled.div`
 `;
 
 export const ThumbInput = styled.input`
-  width: 100%;
+  /*width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
   margin: 10px auto;
   padding: 0;
   color: #6c757d;
-  font-size: 14px;
-`
+  font-size: 14px;*/
+  display: none;
+`;
+
+export const ThumbContainer = styled.div`
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 10px;
+  align-items: center;
+  align-self: flex-start;
+  margin: 20px 0;
+`;
+
+export const ThumbInputLabel = styled.label`
+  width: 120px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #256ce1;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+`;
+
+export const Progress = styled.span`
+  font-size: 0.9rem;
+  color: #4a69bd;
+`;

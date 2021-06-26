@@ -8,7 +8,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  row-gap: 4px;
+  row-gap: 8px;
   @media screen and (max-width: 768px) {
     width: 650px;
     margin-bottom: 30px;
@@ -23,18 +23,19 @@ export const Container = styled.div`
 
 export const HashContainer = styled.div`
   width: 100%;
-  height: ${(props) => (props.more ? "inherit" : "110px")};
+  height: ${(props) => (props.more || props.myBlog ? "inherit" : "130px")};
+  min-height: 130px;
   overflow: hidden;
-  padding-top: 4px;
-  justify-items: center;
   display: flex;
+  align-items: flex-start;
   flex-wrap: wrap;
-  column-gap: 4px;
-  row-gap: 8px;
+  row-gap: 6px;
   transition: heigth 2s ease-in;
+  border-top: 1px solid #dfe6e9;
   @media screen and (max-width: 768px) {
     column-gap: 2px;
-    height: ${(props) => (props.more ? "fit-content" : "68px")};
+    height: ${(props) => (props.more ? "inherit" : "68px")};
+    min-height: 68px;
   }
 `;
 
@@ -52,6 +53,7 @@ export const HashtagBtn = styled.div`
   height: 28px;
   line-height: 28px;
   padding: 0px 4px;
+  margin-top: 10px;
   margin-right: 8px;
   text-align: center;
   align-self: center;
@@ -60,6 +62,7 @@ export const HashtagBtn = styled.div`
   cursor: pointer;
   &:hover {
     transform: scale(0.98);
+    border: 1px solid #256ce1;
   }
 `;
 
@@ -72,13 +75,13 @@ export const Span = styled.span`
 export const MoreBtn = styled.button`
   all: unset;
   font-size: 0.8rem;
-  width: fit-content;
+  width: 40px;
   padding-left: 2px;
   height: 20px;
   line-height: 20px;
   text-align: start;
   font-weight: 350;
   color: #256ce1;
-  border-bottom: 1px solid #d2dae2;
-  z-index: 1;
+  text-align: center;
+  border-radius: 4px;
 `;

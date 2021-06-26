@@ -22,10 +22,12 @@ const MyBlog = () => {
     const { uid } = store.getState().userInfo;
     TokenAPI.checkValidation(uid)
       .then((obj) => {
-        const { modal } = obj;
-        if (modal) {
-          setShowModal(true);
-          TokenAPI.clearJWT();
+        if (obj) {
+          const { modal } = obj;
+          if (modal) {
+            setShowModal(true);
+            TokenAPI.clearJWT();
+          }
         }
       })
       .catch((err) => {
@@ -45,7 +47,7 @@ const MyBlog = () => {
           <MyblogContents />
           <SideContainer>
             <MyProfile />
-            <Hashtag />
+            <Hashtag myBlog={true} />
           </SideContainer>
           <ScrollToTop />
         </MyblogContainer>

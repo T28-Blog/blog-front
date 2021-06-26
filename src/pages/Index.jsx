@@ -67,23 +67,28 @@ const Home = () => {
       setPopularPosts(response[1]);
       setLoading(false);
     });
-
     if (isLogin && !jwt) {
       //로그인일 때 jwt 발급
       TokenAPI.getJWT(uid, name);
     } else {
       TokenAPI.checkValidation(uid)
         .then((obj) => {
-          const { modal } = obj;
-          if (modal) {
-            setShowModal(true);
-            TokenAPI.clearJWT();
+          if (obj) {
+            const { modal } = obj;
+            if (modal) {
+              setShowModal(true);
+              TokenAPI.clearJWT();
+            }
           }
         })
         .catch((err) => {
-          //console.log(err)
+          console.error(err);
         });
     }
+    return () => {
+      setLatestPosts(null);
+      setPopularPosts(null);
+    };
   }, []);
 
   return error ? (

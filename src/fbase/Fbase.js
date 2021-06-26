@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/database";
+import "firebase/storage";
 
 const REALTIMEDB_URL =
   "https://team28blog-1e912-default-rtdb.asia-southeast1.firebasedatabase.app/";
@@ -21,9 +22,10 @@ firebase.initializeApp(firebaseConfig);
 
 const firebaseInstance = firebase;
 const auth = firebase.auth();
+const storage = firebase.storage();
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
-export { firebaseInstance, auth, provider };
+export { firebaseInstance, auth, provider, storage };
 
 export default firebase;

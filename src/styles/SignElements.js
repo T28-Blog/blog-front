@@ -1,16 +1,16 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const colors = {
-  primary: '#fff',
-  theme: '#256ce1',
-  light1: '#f3f4f6',
-  light2: '#e5e7eb',
-  dark1: '#1f2937',
-  dark2: '#4b5563',
-  dark3: '#9ca3af',
-  red: '#dc2626',
-  black: '#000',
+  primary: "#fff",
+  theme: "#256ce1",
+  light1: "#f3f4f6",
+  light2: "#e5e7eb",
+  dark1: "#1f2937",
+  dark2: "#4b5563",
+  dark3: "#9ca3af",
+  red: "#dc2626",
+  black: "#000",
 };
 
 // FormLib 부분

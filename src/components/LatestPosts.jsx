@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Section,
   SectionTitle,
@@ -17,9 +17,16 @@ import IndexPost from "./IndexPost";
 import winter from "../assets/winter.jpeg";
 
 const LatestPosts = ({ posts }) => {
-  const left = posts.slice(1);
+  const [left, setLeft] = useState(null);
+
+  useEffect(() => {
+    if (posts) {
+      setLeft(posts.slice(1));
+    }
+  }, [posts]);
 
   return (
+    posts &&
     posts.length && (
       <>
         <SectionTitle>
@@ -43,10 +50,11 @@ const LatestPosts = ({ posts }) => {
                 <Writer>{posts[0].name}</Writer>
               </MainFooter>
             </MainPost>
-            <Hashtag />
+            <Hashtag posts={posts} />
           </PostContainer>
           <PostList>
-            {left.length &&
+            {left &&
+              left.length &&
               left.map((post) => (
                 <IndexPost
                   key={post.post_id}
