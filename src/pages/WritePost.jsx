@@ -68,7 +68,7 @@ export default function WritePost() {
         onlyText,
         img
       );
-      history.push("/my-blog");
+      history.push("/");
     }
   };
 

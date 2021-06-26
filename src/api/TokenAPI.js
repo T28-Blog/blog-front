@@ -29,6 +29,7 @@ const TokenAPI = {
         params: { id },
         withCredentials: true,
       });
+
       if (res.data) {
         const { uid, nick: name, token: jwt } = res.data;
         store.dispatch({ type: REFRESH_PAGE, uid, name, jwt });
@@ -43,7 +44,10 @@ const TokenAPI = {
         //토큰 만료 또는 유효하지 않은 토큰
         return { modal: true };
       }
-      return null;
+      if (code === 403) {
+        //로그인 전
+        console.warn("로그인 전");
+      }
     }
   },
   clearJWT: async () => {

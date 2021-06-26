@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import hashtagAPI from "api/HashtagAPI";
+import { useHistory } from "react-router-dom";
 import {
   Container,
   HashContainer,
@@ -26,9 +26,14 @@ const Hashtag = ({ posts, myBlog = false }) => {
       setUser(store.getState().userInfo.uid); //페이지 새로고침 시, 유저 정보 setState
     }
   });
+  const history = useHistory();
 
-  const filterFn = (hash) => hashtagAPI.filterPostByHashtag(hash);
-  const timer = useDebounce(nowClick, selectedHash, filterFn); //현재 클릭에 따라 useDebouce return 값 갱신
+  const filterFn = (hash) => {
+    if (hash) {
+      history.push(`/topic/${hash}`);
+    }
+  };
+  useDebounce(nowClick, selectedHash, filterFn); //현재 클릭에 따라 useDebouce return 값 갱신
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
@@ -89,7 +94,7 @@ const Hashtag = ({ posts, myBlog = false }) => {
         </HashContainer>
       ) : (
         <>
-          <HashContainer myBlog={true} more={openBtn} onClick={onHandleClick}>
+          <HashContainer myBlog={myBlog} more={openBtn} onClick={onHandleClick}>
             {!loading ? (
               hashtag.length ? (
                 hashtag.map((child, idx) => (
