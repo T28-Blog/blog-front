@@ -151,3 +151,8 @@ export const Progress = styled.span`
   font-size: 0.9rem;
   color: #4a69bd;
 `;
+
+export const IsImageDownloaded = styled.span`
+  font-size: 0.9rem;
+  color: #4a69bd;
+`;

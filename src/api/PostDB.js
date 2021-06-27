@@ -28,28 +28,55 @@ const PostDB = {
     });
     return res.data;
   },
-  savePostDB: async (name, title, content, hashtag, text, img) => {
+  savePostDB: async (name, title, content, hashtag, img, imgName) => {
     const uuid = firebaseInstance.auth().currentUser.uid;
-    const post_id = v4();
+    // const post_id = v4();
     const res = await axios({
       method: "post",
       url: `http://localhost:4000/temp_post`,
       params: {
         content,
-        date: timeChanger.nowTOutc(),
         hashtag,
-        hits: 0,
         img,
+        imgName,
         name,
-        post_id,
+        // post_id,
         title,
         user_id: uuid,
-        text,
       },
     }).catch((error) => {
       console.log(error);
     });
     return res.data;
+  },
+  fetchTempPost: async () => {
+    try {
+      const uid = firebaseInstance.auth().currentUser.uid;
+      let post = null;
+      const ref = await firebaseInstance
+        .database()
+        .ref("temp_post")
+        .get();
+      await ref.forEach((data) => {
+        if(data.val().user_id === uid) post = data.val();
+      });
+      return post;
+    } catch (e) {
+      return null;
+    }
+  },
+  deleteTempPost: async () => {
+    try {
+      const uid = firebaseInstance.auth().currentUser.uid;
+      console.log(uid);
+      await firebaseInstance
+        .database()
+        .ref(`temp_post/post_${uid}`)
+        .remove();
+    } catch (e) {
+      console.log(e)
+      return null;
+    }
   },
   fetchMyPosts: async () => {
     try {

@@ -27,7 +27,6 @@ function App() {
       <PageLocationTop />
       <GlobalStyle />
       <Header />
-<<<<<<< HEAD
       <Route render={props => (
         <>
           {/* {props.location.pathname !== '/search' ? <Footer /> : null} */}
@@ -40,11 +39,11 @@ function App() {
             <Route path="/sign-in" exact component={SignIn} />
             <Route path="/search" exact component={Search} />
             <Route path="/sign-up" exact component={SignUp} />
-            <Route path="/comment" exact component={Comments} />
             <Route path="/success" exact component={SuccessSignUp} />
             <Route path="/logout" exact component={SuccessLogout} />
             <Route path="/userinfo" exact component={UserInfo} />
             <Route path="/loading" exact component={PreLoader} />
+            <Route path="/topic/:hashtag" exact component={TopicPage}/>
             {/* 404 Error Page */}
             <Route path={"*"} exact component={Error} />
             {/* <Footer /> */}
@@ -53,26 +52,6 @@ function App() {
         )}
       />
       {/* <Footer /> */}
-=======
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/writepost" exact component={WritePost} />
-        <Route path="/detailPost" exact component={DetailPost} />
-        <Route path="/my-blog" exact component={MyBlog} />
-        <Route path="/contact-us" exact component={ContactUs} />
-        <Route path="/sign-in" exact component={SignIn} />
-        <Route path="/search" exact component={Search} />
-        <Route path="/sign-up" exact component={SignUp} />
-        <Route path="/success" exact component={SuccessSignUp} />
-        <Route path="/logout" exact component={SuccessLogout} />
-        <Route path="/userinfo" exact component={UserInfo} />
-        <Route path="/loading" exact component={PreLoader} />
-        <Route path="/topic/:hashtag" exact component={TopicPage} />
-        {/* 404 Error Page */}
-        <Route path={"*"} exact component={Error} />
-      </Switch>
-      <Footer />
->>>>>>> a814b493b430bda690242da605efdcaebc6e1cd5
     </Router>
   );
 }
