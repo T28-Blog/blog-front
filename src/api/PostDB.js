@@ -28,7 +28,7 @@ const PostDB = {
     });
     return res.data;
   },
-  savePostDB: async (name, title, content, hashtag, text, img) => {
+  savePostDB: async (name, title, content, hashtag, img, imgName) => {
     const uuid = firebaseInstance.auth().currentUser.uid;
     // const post_id = v4();
     const res = await axios({
@@ -36,15 +36,13 @@ const PostDB = {
       url: `http://localhost:4000/temp_post`,
       params: {
         content,
-        date: timeChanger.nowTOutc(),
         hashtag,
-        hits: 0,
         img,
+        imgName,
         name,
         // post_id,
         title,
         user_id: uuid,
-        text,
       },
     }).catch((error) => {
       console.log(error);

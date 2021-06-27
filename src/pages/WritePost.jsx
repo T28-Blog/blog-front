@@ -15,11 +15,12 @@ import {
   ThumbInputLabel,
   Progress,
   ThumbContainer,
+  IsImageDownloaded,
 } from "styles/EditorElements";
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
 import PostDB from "api/PostDB";
-import GoogleMapComponent from "../components/GoogleMap"
+import GoogleMapComponent from "../components/GoogleMap";
 
 import TokenAPI from "api/TokenAPI";
 import Modal from "components/Modal";
@@ -43,6 +44,8 @@ export default function WritePost() {
   const [imgURL, setImgURL] = useState(null);
   const [persentage, setPersentage] = useState(0);
   const imgRef = useRef(null);
+
+  const [isImageCalled, setIsImageCalled] = useState(false);
 
   const history = useHistory();
 
@@ -77,8 +80,10 @@ export default function WritePost() {
 
   const handleTempSaveSubmit = () => {
     let url = ""; //이미지 썸네일 임시저장 시, default 이미지값 빈 string
+    let coverImgURL = ";";
     if (imgURL) {
       url = imgURL;
+      coverImgURL = imgName;
     }
 
     const { name } = store.getState().userInfo;
@@ -100,12 +105,19 @@ export default function WritePost() {
           title,
           contentEditor,
           hashtagArr,
-          onlyText,
-          url
+          url,
+          coverImgURL
         );
       } else return;
     } else {
-      PostDB.savePostDB(name, title, contentEditor, hashtagArr, onlyText, url);
+      PostDB.savePostDB(
+        name,
+        title,
+        contentEditor,
+        hashtagArr,
+        url,
+        coverImgURL
+      );
       alert("임시저장 되었습니다");
     }
     setIsTempSave(true);
@@ -122,13 +134,17 @@ export default function WritePost() {
       const post = await PostDB.fetchTempPost();
       setTitle(post.title);
       setContentEditor(post.content);
+      if (post.img) {
+        setImgURL(post.img);
+        setImgName(post.imgName);
+        setIsImageCalled(true);
+      }
       if (post.hashtag) setHashtagArr(post.hashtag);
       // 임시저장된 글 지우기
       PostDB.deleteTempPost();
       setIsTempSave(false);
     }
-  }
-  
+  };
 
   const onHashtagEnter = (e) => {
     if (e.code === "Enter") {
@@ -219,6 +235,11 @@ export default function WritePost() {
                 ? `업로드 완료! 선택하신 이미지는 ${imgName}입니다.`
                 : "이미지 업로딩...⏱"}
             </Progress>
+          )}
+          {isImageCalled && (
+            <IsImageDownloaded>
+              {`선택된 이미지는 ${imgName}입니다`}
+            </IsImageDownloaded>
           )}
         </ThumbContainer>
         <BottomWrapper>
