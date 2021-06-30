@@ -15,7 +15,7 @@ import {
   ExtraText,
   ButtonGroup,
   BtnContainer,
-  StyleSideArea
+  StyleSideArea,
 } from "../styles/SignElements";
 import logo from "../assets/Team28-logo.png";
 import kakao from "../assets/kakao.png";
@@ -23,20 +23,16 @@ import google from "../assets/google.png";
 import KakaoLogin from "../api/KakaoAPI";
 // import GoogleLogin from "react-google-login";
 import ScrollToTop from "components/ScrollToTop";
-import Modal from "components/Modal";
 import login from "../assets/login.jpeg";
 
 // Formik
 import { Formik, Form } from "formik";
 import { TextInput } from "../components/FormLib";
 import * as Yup from "yup";
-import styled from "styled-components";
 
 import { auth, provider } from "fbase/Fbase";
 
 import SigninAPI from "api/SigninAPI";
-import { width } from "dom-helpers";
-
 
 const SignIn = () => {
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
@@ -63,8 +59,7 @@ const SignIn = () => {
 
   return (
     <FormContainer>
-      <StyleSideArea img src={login}>
-      </StyleSideArea>
+      <StyleSideArea img src={login}></StyleSideArea>
       <StyledFormArea>
         <Avatar>
           <img src={logo} alt="logo" width="200px" />

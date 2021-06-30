@@ -19,7 +19,7 @@ import {
 import ScrollToTop from "components/ScrollToTop";
 import store from "store/store";
 import PostDB from "api/PostDB";
-import GoogleMapComponent from "../components/GoogleMap"
+import GoogleMapComponent from "../components/GoogleMap";
 
 import TokenAPI from "api/TokenAPI";
 import Modal from "components/Modal";
