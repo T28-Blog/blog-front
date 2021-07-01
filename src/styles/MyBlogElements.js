@@ -116,7 +116,7 @@ export const MyPostDelete = styled.p`
 export const MyPostThumbnail = styled.img`
   width: 150px;
   height: 120px;
-  object-fit: fill;
+  object-fit: cover;
   border-radius: 10px;
 `;
 

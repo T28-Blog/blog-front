@@ -50,7 +50,7 @@ const PopularPosts = ({ posts }) => {
                 <MainDesc>{post.text}</MainDesc>
                 <MainFooter>
                   <WriterImg img src={winter}></WriterImg>
-                  <Writer>{posts.name}</Writer>
+                  <Writer>{post.name}</Writer>
                 </MainFooter>
               </PopularPost>
             ))}
