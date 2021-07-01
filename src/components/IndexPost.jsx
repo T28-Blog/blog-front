@@ -12,7 +12,7 @@ import winter from "../assets/winter.jpeg"
 
 const IndexPost = ({ text, image, name, title }) => {
   return (
-    <Post>
+    <Post as="a" href="https://www.naver.com">
       <SubThumbnail>
         <img
           src={image}

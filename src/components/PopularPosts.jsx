@@ -38,7 +38,7 @@ const PopularPosts = ({ posts }) => {
           {bigs &&
             bigs.length &&
             bigs.map((post) => (
-              <PopularPost key={post.post_id}>
+              <PopularPost key={post.post_id}  as="a" href="https://www.naver.com">
                 <PopularThumbnail img
                     src={post.img}
                     alt="Google"

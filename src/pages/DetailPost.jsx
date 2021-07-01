@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     DetailContainer,
     DetailHeader,
@@ -14,17 +14,41 @@ import { FaEye } from 'react-icons/fa'
 import nature from '../assets/nature4.jpeg'
 import profile from '../assets/woman.jpg'
 import Comments from '../components/Comments'
+import { firebaseInstance } from "fbase/Fbase";
+import store from 'store/store'
 
 const DetailPost = () => {
+
+    const database = firebaseInstance.database();
+
+    const detailPost = database.ref();
+
+    detailPost.child("posts").child(`post_${post_id}`).get()
+        .then((snapshot) => {
+            if(snapshot.exists()){
+                console.log(snapshot.val())
+                // title = snapshot.val().title;
+                // content = snapshot.val().content;
+                // name = snapshot.val().name;
+                // date = snapshot.val().date;
+                // hits = snapshot.val().hits;
+                store.getState().userInfo.post_id;
+            } else {
+                console.log('No data available')
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+
     return (
         <DetailContainer>
             <DetailHeader>
-                <DetailTitle>No-code and Low-code: an Engineering tale from modern times</DetailTitle>
+                <DetailTitle></DetailTitle>
                 <DetailInfo>
                     <DetailImg img src={profile} alt="profile_image"></DetailImg>
-                    <DetailWriter>루시퍼 모닝스타</DetailWriter>
-                    <DetailDate>2021. 06. 22</DetailDate>
-                    <DetailHits><FaEye/> 124</DetailHits>
+                    <DetailWriter></DetailWriter>
+                    <DetailDate></DetailDate>
+                    <DetailHits><FaEye/></DetailHits>
                 </DetailInfo>
             <hr />
             </DetailHeader>

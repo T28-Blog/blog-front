@@ -35,7 +35,7 @@ const LatestPosts = ({ posts }) => {
         </SectionTitle>
         <Section>
           <PostContainer>
-            <MainPost>
+            <MainPost as="a" href="https://www.naver.com">
               <MainThumbnail img
                   src={posts[0].img}
                   alt="unplash"
