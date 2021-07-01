@@ -22,14 +22,11 @@ const CommentUser = ({
   texts,
   onHandleComments,
 }) => {
-  const [userName, setUserName] = useState(null);
-  const [userThumbnail, setUserThumbnail] = useState(null);
+  const { name, thumbnail } = store.getState().userInfo;
+  const [userName, setUserName] = useState(name);
+  const [userThumbnail, setUserThumbnail] = useState(thumbnail);
   const [isEditing, setEdit] = useState(false);
   const [contents, setContents] = useState(texts);
-
-  const {
-    userInfo: { name },
-  } = store.getState();
 
   useEffect(() => {
     const res = CommentsAPI.getCommentUserID(userID);

@@ -7,6 +7,7 @@ import {
   REFRESH_PAGE,
   LOG_OUT,
   ADD_JWT_WITH_GOOGLE,
+  CHANGE_PROFILE,
 } from "../action/index";
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
   jwt: null,
   accessToken: null,
   uid: null,
-  name: "", //임시 이름
+  name: "",
+  profile: "",
   oauth: false,
   service: null, //oauth : true인 경우, 소셜 로그인 제공 회사
 };
@@ -70,7 +72,7 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isLogin: false,
         accessToken: null,
-        jwt: null, //한 번에 처리하는 게 아니므로 추후 코드 수정
+        jwt: null,
         oauth: false,
         service: null,
       };

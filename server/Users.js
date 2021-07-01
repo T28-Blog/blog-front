@@ -13,37 +13,37 @@ app.post("/", (req, res, next) => {
     // 이메일이 있을 시 이메일 서버에 넣기
     if (email) {
       db.database()
-      .ref(`users/user_${id}`)
-      .set({
-        user_id: id,
-        thumbnail: "img/defaultThumbnail.png",
-        name,
-        email
-      })
-      .then((response) => {
-        console.log("done");
-        res.json({ isSaved: true });
-      })
-      .catch((err) => {
-        res.json({ isSaved: false, messaage: err });
-      }); 
+        .ref(`users/user_${id}`)
+        .set({
+          user_id: id,
+          thumbnail: "img/defaultThumbnail.jpg",
+          name,
+          email,
+        })
+        .then((response) => {
+          console.log("done");
+          res.json({ isSaved: true });
+        })
+        .catch((err) => {
+          res.json({ isSaved: false, messaage: err });
+        });
     }
     // 이메일이 없는 경우 이메일 제외
     else {
       db.database()
-      .ref(`users/user_${id}`)
-      .set({
-        user_id: id,
-        thumbnail: "img/defaultThumbnail.png",
-        name,
-      })
-      .then((response) => {
-        console.log("done");
-        res.json({ isSaved: true });
-      })
-      .catch((err) => {
-        res.json({ isSaved: false, messaage: err });
-      });
+        .ref(`users/user_${id}`)
+        .set({
+          user_id: id,
+          thumbnail: "img/defaultThumbnail.jpg",
+          name,
+        })
+        .then((response) => {
+          console.log("done");
+          res.json({ isSaved: true });
+        })
+        .catch((err) => {
+          res.json({ isSaved: false, messaage: err });
+        });
     }
   }
 });
