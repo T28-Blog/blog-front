@@ -1,6 +1,7 @@
 import { firebaseInstance } from "fbase/Fbase";
-import timeChanger from "tools/TimeChange";
 import { v4 } from "uuid";
+import timeChanger from "tools/TimeChange";
+import store from "store/store";
 
 const CommentsAPI = {
   getComments: async () => {
@@ -36,6 +37,9 @@ const CommentsAPI = {
     //이 댓글을 작성한 user 정보(store.getState())
     //str : 작성 댓글 text
     const date = timeChanger.nowTOutc();
+    const {
+      userInfo: { uid },
+    } = store.getState();
     const uuid = v4();
     firebaseInstance
       .database()
@@ -46,7 +50,7 @@ const CommentsAPI = {
           comment_id: `comment_${uuid}`,
           date: date,
           post_id: "1",
-          user_id: "10",
+          user_id: uid,
         },
         (error) => {
           if (error) {

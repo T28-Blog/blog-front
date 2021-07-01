@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from "react";
 import {
     DetailContainer,
     DetailHeader,
@@ -9,48 +9,83 @@ import {
     DetailDate,
     DetailHits,
     DetailBody
-} from 'styles/DetailPostElements'
-import { FaEye } from 'react-icons/fa'
-import nature from '../assets/nature4.jpeg'
-import profile from '../assets/woman.jpg'
-import Comments from '../components/Comments'
-import { firebaseInstance } from "fbase/Fbase";
-import store from 'store/store'
+} from "styles/DetailPostElements";
+import {FaEye} from "react-icons/fa";
+import nature from "../assets/nature4.jpeg";
+import profile from "../assets/woman.jpg";
+import Comments from "../components/Comments";
+import TokenAPI from "api/TokenAPI";
+import store from "store/store";
+import Modal from "components/Modal";
+import {firebaseInstance} from "fbase/Fbase";
 
 const DetailPost = () => {
+    const {name, uid, isLogin, jwt} = store
+        .getState()
+        .userInfo;
+    const [isModal, setShowModal] = useState(false);
+
+    useEffect(() => {
+        if (isLogin && !jwt) {
+            //로그인일 때 jwt 발급
+            TokenAPI.getJWT(uid, name);
+        } else {
+            TokenAPI
+                .checkValidation(uid)
+                .then((obj) => {
+                    if (obj) {
+                        const {modal} = obj;
+                        if (modal) {
+                            setShowModal(true);
+                            TokenAPI.clearJWT();
+                        }
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+    }, []);
 
     const database = firebaseInstance.database();
 
     const detailPost = database.ref();
 
-    detailPost.child("posts").child(`post_${post_id}`).get()
+    detailPost
+        .child("posts")
+        .child(`post_${post_id}`)
+        .get()
         .then((snapshot) => {
-            if(snapshot.exists()){
+            if (snapshot.exists()) {
                 console.log(snapshot.val())
-                // title = snapshot.val().title;
-                // content = snapshot.val().content;
-                // name = snapshot.val().name;
-                // date = snapshot.val().date;
-                // hits = snapshot.val().hits;
+                // title = snapshot.val().title; content = snapshot.val().content; name =
+                // snapshot.val().name; date = snapshot.val().date; hits = snapshot.val().hits;
                 store.getState().userInfo.post_id;
             } else {
                 console.log('No data available')
             }
-        }).catch((error) => {
+        })
+        .catch((error) => {
             console.log(error);
         })
-
-    return (
-        <DetailContainer>
+        
+        return (
+        <> 
+        < DetailContainer> 
             <DetailHeader>
-                <DetailTitle></DetailTitle>
+                <DetailTitle>
+                    No-code and Low-code: an Engineering tale from modern times
+                </DetailTitle>
                 <DetailInfo>
-                    <DetailImg img src={profile} alt="profile_image"></DetailImg>
-                    <DetailWriter></DetailWriter>
-                    <DetailDate></DetailDate>
-                    <DetailHits><FaEye/></DetailHits>
+                    <DetailImg img="img" src={profile} alt="profile_image"></DetailImg>
+                    <DetailWriter>루시퍼 모닝스타</DetailWriter>
+                    <DetailDate>2021. 06. 22</DetailDate>
+                    <DetailHits>
+                        <FaEye/>
+                        124
+                    </DetailHits>
                 </DetailInfo>
-            <hr />
+                <hr/>
             </DetailHeader>
             <DetailBody>
                 <img src={nature} alt="text" width="100%"/>
@@ -90,11 +125,15 @@ const DetailPost = () => {
                 id tempor neque faucibus at. Curabitur mollis purus metus, at pellentesque neque
                 hendrerit id. Nam aliquet ligula non ornare aliquet. Phasellus consequat
                 convallis turpis eu porttitor.
-            <hr />
+                <hr/>
             </DetailBody>
-            <Comments />
+            <Comments/>
         </DetailContainer>
-    )
-}
+            {
+            isModal && (<Modal title="로그인 유효시간 종료" desc="로그인 유지 시간이 종료되었습니다.<br>다시 로그인해주세요."/>
+            )}
+        </>
+        );
+};
 
-export default DetailPost
+export default DetailPost;
