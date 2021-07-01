@@ -57,6 +57,7 @@ export const MyPostContent = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 520px;
+  height: 120px;
   margin-right: 20px;
 `;
 export const MyPostTitle = styled.h3`
@@ -81,14 +82,42 @@ export const MyPostDesc = styled.p`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
+export const MyPostDetail = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 export const MyPostDate = styled.p`
+  display: flex;
   font-size: 12px;
   color: #868e96;
+  margin-right: 20px;
+`;
+export const MyPostEdit = styled.p`
+  display: flex;
+  font-size: 12px;
+  color: #868e96;
+  margin-right: 10px;
+
+  &:hover{
+    color: #256ce1;
+    cursor: pointer;
+  }
+`;
+export const MyPostDelete = styled.p`
+  display: flex;
+  font-size: 12px;
+  color: #868e96;
+
+  &:hover{
+    color: #256ce1;
+    cursor: pointer;
+  }
 `;
 export const MyPostThumbnail = styled.img`
   width: 150px;
-  height: 100px;
+  height: 120px;
   object-fit: fill;
+  border-radius: 10px;
 `;
 
 // ----------- MyProfile.jsx 부분 -----------

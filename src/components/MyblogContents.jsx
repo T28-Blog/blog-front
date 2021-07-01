@@ -7,7 +7,10 @@ import {
   MyPostContent,
   MyPostTitle,
   MyPostDesc,
+  MyPostDetail,
   MyPostDate,
+  MyPostEdit,
+  MyPostDelete,
   MyPostThumbnail,
 } from "styles/MyBlogElements";
 import PostDB from "api/PostDB";
@@ -84,7 +87,11 @@ const MyblogContents = () => {
           <MyPostContent>
             <MyPostTitle>{post.title}</MyPostTitle>
             <MyPostDesc>{post.text}</MyPostDesc>
-            <MyPostDate>{timeChanger.utcTOnow(post.date)}</MyPostDate>
+            <MyPostDetail>
+              <MyPostDate>{timeChanger.utcTOnow(post.date)}</MyPostDate>
+              <MyPostEdit>수정</MyPostEdit>
+              <MyPostDelete>삭제</MyPostDelete>
+            </MyPostDetail>
           </MyPostContent>
           <MyPostThumbnail img src={post.img} alt="thumbnail"></MyPostThumbnail>
         </MyPostContents>

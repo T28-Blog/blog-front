@@ -51,23 +51,20 @@ const DetailPost = () => {
 
     const detailPost = database.ref();
 
-    detailPost
-        .child("posts")
-        .child(`post_${post_id}`)
-        .get()
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                console.log(snapshot.val())
-                // title = snapshot.val().title; content = snapshot.val().content; name =
-                // snapshot.val().name; date = snapshot.val().date; hits = snapshot.val().hits;
-                store.getState().userInfo.post_id;
-            } else {
-                console.log('No data available')
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+    // detailPost.child("posts").child(`post_${post_id}`).get()
+    //     .then((snapshot) => {
+    //         if (snapshot.exists()) {
+    //             console.log(snapshot.val())
+    //             // title = snapshot.val().title; content = snapshot.val().content; name =
+    //             // snapshot.val().name; date = snapshot.val().date; hits = snapshot.val().hits;
+    //             store.getState().userInfo.post_id;
+    //         } else {
+    //             console.log('No data available')
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     })
         
         return (
         <> 
