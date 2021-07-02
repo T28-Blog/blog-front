@@ -46,7 +46,7 @@ const LatestPosts = ({ posts }) => {
               <MainTitle>{posts[0].title}</MainTitle>
               <MainDesc>{posts[0].text}</MainDesc>
               <MainFooter>
-                <WriterImg img src={winter}></WriterImg>
+                <WriterImg img src={posts[0].thumbnail}></WriterImg>
                 <Writer>{posts[0].name}</Writer>
               </MainFooter>
             </MainPost>

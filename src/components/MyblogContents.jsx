@@ -16,6 +16,7 @@ import {
 import PostDB from "api/PostDB";
 import store from "store/store";
 import timeChanger from "tools/TimeChange";
+// import Modal from "components/Modal";
 
 const MyblogContents = () => {
   const [items, setItems] = useState([]);

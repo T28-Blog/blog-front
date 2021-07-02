@@ -10,7 +10,7 @@ import {
 } from "../styles/IndexElements";
 import winter from "../assets/winter.jpeg"
 
-const IndexPost = ({ text, image, name, title }) => {
+const IndexPost = ({ text, image, name, title, thumbnail }) => {
   return (
     <Post as="a" href="https://www.naver.com">
       <SubThumbnail>
@@ -25,7 +25,7 @@ const IndexPost = ({ text, image, name, title }) => {
       <SubTitle>{title}</SubTitle>
       <SubDesc>{text}</SubDesc>
       <SubFooter>
-        <SubProfileImg img src={winter}></SubProfileImg>
+        <SubProfileImg img src={thumbnail}></SubProfileImg>
         <SubWriter>{name}</SubWriter>
       </SubFooter>
     </Post>

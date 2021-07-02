@@ -49,7 +49,7 @@ const PopularPosts = ({ posts }) => {
                 <MainTitle>{post.title}</MainTitle>
                 <MainDesc>{post.text}</MainDesc>
                 <MainFooter>
-                  <WriterImg img src={winter}></WriterImg>
+                  <WriterImg img src={post.thumbnail}></WriterImg>
                   <Writer>{post.name}</Writer>
                 </MainFooter>
               </PopularPost>
