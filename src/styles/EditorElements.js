@@ -84,6 +84,8 @@ export const ButtonWrapper = styled.div`
 
 export const Button = styled.button`
   display: flex;
+  width: 100px;
+  justify-content: center;
   align-items: center;
   border-radius: 40px;
   background: transparent;
@@ -110,35 +112,28 @@ export const BottomWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-bottom: 50px;
 `;
 
 export const ThumbInput = styled.input`
-  /*width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  margin: 10px auto;
-  padding: 0;
-  color: #6c757d;
-  font-size: 14px;*/
   display: none;
 `;
 
 export const ThumbContainer = styled.div`
   width: 100%;
-  height: 80px;
+  height: 50px;
   display: flex;
   justify-content: flex-start;
   column-gap: 10px;
   align-items: center;
   align-self: flex-start;
-  margin: 20px 0;
+  margin: 10px 0;
 `;
 
 export const ThumbInputLabel = styled.label`
   width: 120px;
-  height: 50px;
-  line-height: 50px;
+  height: 40px;
+  line-height: 40px;
   text-align: center;
   border-radius: 4px;
   background-color: #256ce1;
