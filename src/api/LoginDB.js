@@ -22,7 +22,7 @@ const LoginDB = {
 
     const res = await axios({
       method: "post",
-      url: `http://localhost:4000/users`,
+      url: `http://13.124.111.34:4000/users`,
       params: {
         id: uuid,
         name,
