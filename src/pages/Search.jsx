@@ -20,10 +20,26 @@ import JSONDATA from "../assets/MOCK_DATA.json";
 import TokenAPI from "api/TokenAPI";
 import store from "store/store";
 import { Modal } from "bootstrap";
+import { firebaseInstance } from "fbase/Fbase";
 
-const Search = () => {
+const Search = ({ posts }) => {
   const [search, setSearch] = useState("");
   const [isModal, setShowModal] = useState(false);
+  const [error, setError] = useState(false); 
+  
+  const getPosts = async () => {
+    try {
+      const posts = [];
+      await (
+        await firebaseInstance.database().ref(`posts`).get()
+      ).forEach((data) => {
+        posts.push(data.val());
+      })
+      return posts.reverse();
+    } catch(e) {
+      setError(true);
+    }
+  }
 
   useEffect(() => {
     const { uid } = store.getState().userInfo;

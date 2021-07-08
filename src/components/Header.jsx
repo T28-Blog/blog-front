@@ -105,9 +105,9 @@ const Header = () => {
                   <NavLink to="/my-blog">My Blog</NavLink>
                 </NavItem>
               )}
-              <NavItem>
+              {/* <NavItem>
                 <NavLink to="/contact-us">Contact Us</NavLink>
-              </NavItem>
+              </NavItem> */}
               {!user && (
                 <NavItem>
                   <NavLink to="/sign-up">Sign Up</NavLink>

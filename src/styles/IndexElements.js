@@ -280,6 +280,7 @@ export const PopularPost = styled.div`
   width: 475px;
   height: 350px;
   margin-right: 50px;
+  margin-bottom: 20px;
 
   &:last-child {
     margin-right: 0;

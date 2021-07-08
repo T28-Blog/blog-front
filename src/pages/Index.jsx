@@ -15,7 +15,7 @@ import {
 } from "styles/PreLoaderElements";
 import airplane from "../assets/airplane.png";
 
-const Home = () => {
+const Home = (props) => {
   const { name, uid, isLogin, jwt } = store.getState().userInfo;
   const [isLatest, setLatestPosts] = useState([]);
   const [isPopular, setPopularPosts] = useState([]);
