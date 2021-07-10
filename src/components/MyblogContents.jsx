@@ -85,7 +85,11 @@ const MyblogContents = () => {
       {items &&
         items.map((post, idx) => (
           // ref를 div요소에 걸어주면 요소가 보이면 inView가 true, 안보이면 false
-          <MyPostContents key={post.post_id} ref={ref}>
+          <MyPostContents
+            to={`detailPost/${post.post_id}`}
+            key={post.post_id}
+            ref={ref}
+          >
             <MyPostContent>
               <MyPostTitle>{post.title}</MyPostTitle>
               <MyPostDesc>{post.text}</MyPostDesc>
