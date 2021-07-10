@@ -13,4 +13,8 @@ export const TopButton = styled.button`
     background-color: #256ce1;
     cursor: pointer;
     z-index: 999;
+
+    @media screen and (max-width: 375px){
+        display: none;
+    }
 `

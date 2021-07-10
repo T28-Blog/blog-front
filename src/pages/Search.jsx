@@ -22,21 +22,24 @@ import store from "store/store";
 import { Modal } from "bootstrap";
 import { firebaseInstance } from "fbase/Fbase";
 
-const Search = ({ posts }) => {
+const Search = () => {
   const [search, setSearch] = useState("");
   const [isModal, setShowModal] = useState(false);
-  const [error, setError] = useState(false); 
-  
-  const getPosts = async () => {
+  const [error, setError] = useState(false);
+
+  const getAllPosts = async() => {
     try {
       const posts = [];
       await (
-        await firebaseInstance.database().ref(`posts`).get()
+        await firebaseInstance
+          .database()
+          .ref(`posts`)
+          .get()
       ).forEach((data) => {
-        posts.push(data.val());
+        posts.push(data.val())
       })
       return posts.reverse();
-    } catch(e) {
+    } catch(e){
       setError(true);
     }
   }
@@ -74,7 +77,7 @@ const Search = ({ posts }) => {
       </SearchContainer>
       {JSONDATA.filter((val) => {
         if (search === "") {
-          return false
+          return true
         } else if (val.title.toLowerCase().includes(search.toLowerCase())) {
           return val;
         } else if (val.desc.toLowerCase().includes(search.toLowerCase())) {

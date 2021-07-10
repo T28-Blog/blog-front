@@ -13,10 +13,6 @@ export const MainSlider = styled.div`
   text-align: center;
   margin: auto 0;
 
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
-
   @media screen and (max-width: 375px) {
     width: 100%;
   }
@@ -29,10 +25,6 @@ export const SectionTitle = styled.h2`
   font-size: 24px;
   font-weight: 400;
   margin-bottom: 30px;
-
-  @media screen and (max-width: 768px) {
-    width: 650px;
-  }
 
   @media screen and (max-width: 375px) {
     width: 375px;
@@ -69,16 +61,11 @@ export const MainPost = styled.div`
   width: 650px;
   margin: 0 50px 0 0;
 
-  @media screen and (max-width: 768px) {
-    display: block;
-    width: 650px;
-    margin: 0 auto;
-  }
-
   @media screen and (max-width: 375px) {
     display: block;
     width: 375px;
     margin: 0 auto;
+    padding: 0 20px;
   }
 `;
 
@@ -99,10 +86,7 @@ export const MainTitle = styled.h3`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-
-  @media screen and (max-width: 375px) {
-    padding: 0 20px 0 20px;
-  }
+  margin-bottom: 10px;
 `;
 
 export const MainDesc = styled.p`
@@ -116,10 +100,6 @@ export const MainDesc = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-
-  @media screen and (max-width: 375px) {
-    padding: 0 20px 0 20px;
-  }
 `;
 
 export const MainFooter = styled.div`
@@ -142,10 +122,6 @@ export const Writer = styled.p`
   line-height: 30px;
   color: blue;
   margin-bottom: 0;
-
-  @media screen and (max-width: 375px) {
-    padding: 0 20px 0 20px;
-  }
 `;
 
 export const PostList = styled.div`
@@ -212,6 +188,10 @@ export const SubThumbnail = styled.div`
   margin-bottom: 15px;
   object-fit: cover;
   border-radius: 10px;
+  
+  @media screen and (max-width: 375px){
+    height: 150px;
+  }
 `;
 export const SubTitle = styled.h4`
   font-size: 20px;
@@ -227,6 +207,10 @@ export const SubTitle = styled.h4`
 export const SubFooter = styled.div`
   display: flex;
   flex-direction: row;
+  
+  @media screen and (max-width: 375px){
+    margin-bottom: 10px;
+  }
 `
 export const SubProfileImg = styled.img`
   width: 30px;
@@ -271,7 +255,7 @@ export const PopularContainer = styled.div`
     display: block;
     width: 375px;
     height: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -298,6 +282,7 @@ export const PopularPost = styled.div`
 
   @media screen and (max-width: 375px) {
     width: 375px;
+    padding: 0 20px;
 
     &:last-child {
       display: none;

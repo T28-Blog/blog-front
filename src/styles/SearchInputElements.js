@@ -21,6 +21,10 @@ export const SearchInputTitle = styled.h2`
 
 export const SearchInputContainer = styled.div`
     margin-bottom: 50px;
+
+    @media screen and (max-width: 375px){
+        width: 100%;
+    }
 `
 
 export const SearchInput = styled.input.attrs({
@@ -35,6 +39,10 @@ export const SearchInput = styled.input.attrs({
     border: 1px solid gray;
     outline: none;
     border-radius: 5px;
+
+    @media screen and (max-width: 375px){
+        width: 85%;
+    }
 `
 
 export const SearchIcon = styled.button`
