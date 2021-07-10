@@ -15,7 +15,7 @@ import CommentUser from "./CommentUser";
 import store from "store/store";
 import Modal from "components/Modal";
 
-const Comments = () => {
+const Comments = ({ postID }) => {
   const [comments, setComments] = useState(null); //기존에 달린 댓글
   const [error, setError] = useState(false); //댓글 불러오기 실패 시 에러 처리
   const [loading, setLoading] = useState(true); //댓글 로딩 상태
@@ -41,7 +41,7 @@ const Comments = () => {
 
   //기존 댓글 DB에서 불러오는 함수
   const getComments = () => {
-    const res = CommentsAPI.getComments();
+    const res = CommentsAPI.getComments(postID);
     if (res) {
       res
         .then((data) => {
@@ -61,7 +61,7 @@ const Comments = () => {
     const { isLogin } = store.getState().userInfo;
     if (isLogin) {
       const texts = textArea.current.value;
-      await CommentsAPI.createComment(texts);
+      await CommentsAPI.createComment(texts, postID);
       textArea.current.value = "";
       getComments();
     }

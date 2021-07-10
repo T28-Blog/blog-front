@@ -10,11 +10,10 @@ import {
   Writer,
   PostList,
   MainFooter,
-  WriterImg
+  WriterImg,
 } from "../styles/IndexElements";
 import Hashtag from "components/Hashtag";
 import IndexPost from "./IndexPost";
-import winter from "../assets/winter.jpeg";
 
 const LatestPosts = ({ posts }) => {
   const [left, setLeft] = useState(null);
@@ -35,14 +34,14 @@ const LatestPosts = ({ posts }) => {
         </SectionTitle>
         <Section>
           <PostContainer>
-            <MainPost as="a" href="https://www.naver.com">
-              <MainThumbnail img
-                  src={posts[0].img}
-                  alt="unplash"
-                  width="100%"
-                  height="100%"
-              >
-              </MainThumbnail>
+            <MainPost to={`detailPost/${posts[0].post_id}`}>
+              <MainThumbnail
+                img
+                src={posts[0].img}
+                alt="unplash"
+                width="100%"
+                height="100%"
+              ></MainThumbnail>
               <MainTitle>{posts[0].title}</MainTitle>
               <MainDesc>{posts[0].text}</MainDesc>
               <MainFooter>
@@ -62,6 +61,7 @@ const LatestPosts = ({ posts }) => {
                   name={post.name}
                   image={post.img}
                   text={post.text}
+                  postID={post.post_id}
                 ></IndexPost>
               ))}
           </PostList>

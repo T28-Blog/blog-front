@@ -48,7 +48,6 @@ const TopicPage = () => {
       const fetchData = async () => {
         try {
           const res = await hashtagAPI.filterPostByHashtag(topic);
-          console.log(res);
           if (!res) {
             //반환값이 Null
             throw new Error();
@@ -60,7 +59,6 @@ const TopicPage = () => {
           setLoading(false);
         }
       };
-
       fetchData();
     }
     return () => (isMounted = false);

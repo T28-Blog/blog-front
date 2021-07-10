@@ -82,21 +82,26 @@ const MyblogContents = () => {
 
   return (
     <MyPostContainer>
-      {items.map((post, idx) => (
-        // ref를 div요소에 걸어주면 요소가 보이면 inView가 true, 안보이면 false
-        <MyPostContents key={post.post_id} ref={ref}>
-          <MyPostContent>
-            <MyPostTitle>{post.title}</MyPostTitle>
-            <MyPostDesc>{post.text}</MyPostDesc>
-            <MyPostDetail>
-              <MyPostDate>{timeChanger.utcTOnow(post.date)}</MyPostDate>
-              <MyPostEdit>수정</MyPostEdit>
-              <MyPostDelete>삭제</MyPostDelete>
-            </MyPostDetail>
-          </MyPostContent>
-          <MyPostThumbnail img src={post.img} alt="thumbnail"></MyPostThumbnail>
-        </MyPostContents>
-      ))}
+      {items &&
+        items.map((post, idx) => (
+          // ref를 div요소에 걸어주면 요소가 보이면 inView가 true, 안보이면 false
+          <MyPostContents key={post.post_id} ref={ref}>
+            <MyPostContent>
+              <MyPostTitle>{post.title}</MyPostTitle>
+              <MyPostDesc>{post.text}</MyPostDesc>
+              <MyPostDetail>
+                <MyPostDate>{timeChanger.utcTOnow(post.date)}</MyPostDate>
+                <MyPostEdit>수정</MyPostEdit>
+                <MyPostDelete>삭제</MyPostDelete>
+              </MyPostDetail>
+            </MyPostContent>
+            <MyPostThumbnail
+              img
+              src={post.img}
+              alt="thumbnail"
+            ></MyPostThumbnail>
+          </MyPostContents>
+        ))}
     </MyPostContainer>
   );
 };
