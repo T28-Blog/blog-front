@@ -1,5 +1,4 @@
 import { firebaseInstance } from "fbase/Fbase";
-import store from "store/store";
 
 const hashtagAPI = {
   filterPostByHashtag: async (hash) => {

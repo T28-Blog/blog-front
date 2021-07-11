@@ -10,11 +10,10 @@ import {
   PopularThumbnail,
   PopularContainer,
   MainFooter,
-  WriterImg
+  WriterImg,
 } from "../styles/IndexElements";
 import ScrollToTop from "components/ScrollToTop";
 import IndexPost from "./IndexPost";
-import winter from "../assets/winter.jpeg";
 
 const PopularPosts = ({ posts }) => {
   const [bigs, setBigs] = useState(null);
@@ -38,14 +37,14 @@ const PopularPosts = ({ posts }) => {
           {bigs &&
             bigs.length &&
             bigs.map((post) => (
-              <PopularPost key={post.post_id}  as="a" href="https://www.naver.com">
-                <PopularThumbnail img
-                    src={post.img}
-                    alt="Google"
-                    width="100%"
-                    height="100%"
-                >
-                </PopularThumbnail>
+              <PopularPost key={post.post_id} to={`detailPost/${post.post_id}`}>
+                <PopularThumbnail
+                  img
+                  src={post.img}
+                  alt="Google"
+                  width="100%"
+                  height="100%"
+                ></PopularThumbnail>
                 <MainTitle>{post.title}</MainTitle>
                 <MainDesc>{post.text}</MainDesc>
                 <MainFooter>
@@ -65,6 +64,7 @@ const PopularPosts = ({ posts }) => {
                 name={post.name}
                 image={post.img}
                 text={post.text}
+                postID={post.post_id}
               ></IndexPost>
             ))}
         </PostList>

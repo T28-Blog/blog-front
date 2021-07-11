@@ -47,18 +47,16 @@ const PostDB = {
     }).catch((error) => {
       console.log(error);
     });
+    console.log(res);
     return res.data;
   },
   fetchTempPost: async () => {
     try {
       const uid = firebaseInstance.auth().currentUser.uid;
       let post = null;
-      const ref = await firebaseInstance
-        .database()
-        .ref("temp_post")
-        .get();
+      const ref = await firebaseInstance.database().ref("temp_post").get();
       await ref.forEach((data) => {
-        if(data.val().user_id === uid) post = data.val();
+        if (data.val().user_id === uid) post = data.val();
       });
       return post;
     } catch (e) {
@@ -69,12 +67,8 @@ const PostDB = {
     try {
       const uid = firebaseInstance.auth().currentUser.uid;
       console.log(uid);
-      await firebaseInstance
-        .database()
-        .ref(`temp_post/post_${uid}`)
-        .remove();
+      await firebaseInstance.database().ref(`temp_post/post_${uid}`).remove();
     } catch (e) {
-      console.log(e)
       return null;
     }
   },

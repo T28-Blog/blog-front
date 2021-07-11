@@ -4,7 +4,7 @@ import timeChanger from "tools/TimeChange";
 import store from "store/store";
 
 const CommentsAPI = {
-  getComments: async () => {
+  getComments: async (postID) => {
     try {
       const arr = [];
       const commentRef = await firebaseInstance
@@ -12,11 +12,12 @@ const CommentsAPI = {
         .ref("comments")
         .get();
       await commentRef.forEach((s) => {
-        arr.push(s.val());
+        if (s.val().post_id === postID) {
+          arr.push(s.val());
+        }
       });
       return arr.sort((a, b) => +a.date - +b.date);
     } catch (err) {
-      console.log(err);
       return null;
     }
   },
@@ -29,11 +30,10 @@ const CommentsAPI = {
       const user = usersRef.val();
       return user;
     } catch (e) {
-      console.log(e);
       return null;
     }
   },
-  createComment: (str) => {
+  createComment: (str, postID) => {
     //이 댓글을 작성한 user 정보(store.getState())
     //str : 작성 댓글 text
     const date = timeChanger.nowTOutc();
@@ -49,7 +49,7 @@ const CommentsAPI = {
           content: str,
           comment_id: `comment_${uuid}`,
           date: date,
-          post_id: "1",
+          post_id: postID,
           user_id: uid,
         },
         (error) => {
