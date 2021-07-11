@@ -25,6 +25,7 @@ const SigninAPI = {
             .auth()
             .signInWithEmailLink(email, window.location.href)
             .then(async (result) => {
+              SigninAPI.setEmailAuth(email);
               setEmailVerified("verified");
               const user = firebaseInstance.auth().currentUser;
               const setPassword = password;
@@ -88,11 +89,10 @@ const SigninAPI = {
       })
       .catch((error) => {
         const errorCode = error.code;
-        setEmailVerified(false);
+        setEmailVerified('hidden');
         setIsInvalidEmail(false);
         setIsInvalidPassword(false);
         console.log(errorCode);
-        console.log("here!!!!!!!!", store.getState().emailAuthReducer);
         if (errorCode === "auth/user-not-found") setIsInvalidEmail(true);
         // 링크로 인증할 때 비밀번호가 틀리면 비밀번호가 틀렸다고 표시하기
         else if (
@@ -104,9 +104,12 @@ const SigninAPI = {
         // 이미 로그인을 했었을 때 비밀번호가 틀리면 표시하기
         else if (
           errorCode === "auth/wrong-password" &&
-          store.getState().emailAuthReducer.isLoginCheck
+          SigninAPI.getEmailAuth(email)
         ) {
           setIsInvalidPassword(true);
+        }
+        else if (errorCode === "auth/invalid-action-code") {
+          alert("이미 인증을 했거나 유효하지 않은 링크입니다")
         }
         // 메일이 인증되지 않았을 때는 비밀번호 인증이 아니라 링크 인증이 안 되었다고 표기
         else if (emailVerified !== "verified") {
@@ -124,6 +127,48 @@ const SigninAPI = {
         }
       });
   },
+  setEmailAuth: async (email) => {
+    try {
+      const users = [];
+      const userRef = await firebaseInstance.database().ref("users").get();
+      await userRef.forEach((s) => {
+        users.push(s.val());
+      });
+      let uid;
+      let setUser;
+      users.forEach((user) => {
+        if (user.email && user.email === email) {
+          uid = user.user_id;
+          setUser = user;
+        }
+      });
+      await firebaseInstance
+        .database()
+        .ref(`users/user_${uid}`)
+        .set({ ...setUser, emailAuth: true });
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  getEmailAuth: async (email) => {
+    try {
+      const users = [];
+      const userRef = await firebaseInstance.database().ref("users").get();
+      await userRef.forEach((s) => {
+        users.push(s.val());
+      });
+      let emailAuth;
+      users.forEach((user) => {
+        if (user.email === email) {
+          emailAuth = user.emailAuth;
+        }
+      });
+      return emailAuth;
+    }
+    catch(e) {
+      console.log(e);
+    }
+  }
 };
 
 export default SigninAPI;

@@ -19,6 +19,7 @@ app.post("/", (req, res, next) => {
           thumbnail: "img/defaultThumbnail.jpg",
           name,
           email,
+          emailAuth: false
         })
         .then((response) => {
           console.log("done");
@@ -36,6 +37,7 @@ app.post("/", (req, res, next) => {
           user_id: id,
           thumbnail: "img/defaultThumbnail.jpg",
           name,
+          emailAuth: false
         })
         .then((response) => {
           console.log("done");
