@@ -38,6 +38,7 @@ const Home = (props) => {
       });
       return posts.reverse();
     } catch (e) {
+      console.log(e);
       setError(true);
     }
   };
@@ -92,7 +93,9 @@ const Home = (props) => {
   }, []);
 
   return error ? (
-    <LoadingTitle>복구 중입니다. 잠시만 기다려주세요 ... 🙇‍♂️</LoadingTitle>
+    <LoadingTitle style={{ color: "#333", marginTop: "10px" }}>
+      복구 중입니다. 잠시만 기다려주세요 ... 🙇‍♂️
+    </LoadingTitle>
   ) : (
     <MainContainer>
       <MainSlider>

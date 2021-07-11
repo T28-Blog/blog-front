@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
   min-height: 100%;
   margin-bottom: 150px;
-`
+`;
 
 export const MainSlider = styled.div`
   width: 100%;
@@ -56,7 +57,7 @@ export const PostContainer = styled.div`
     flex-direction: column-reverse;
   }
 `;
-export const MainPost = styled.div`
+export const MainPost = styled(Link)`
   display: inline-block;
   width: 650px;
   margin: 0 50px 0 0;
@@ -105,7 +106,7 @@ export const MainDesc = styled.p`
 export const MainFooter = styled.div`
   display: flex;
   flex-direction: row;
-`
+`;
 
 export const WriterImg = styled.img`
   width: 30px;
@@ -114,7 +115,7 @@ export const WriterImg = styled.img`
   background: green;
   margin-right: 8px;
   object-fit: cover;
-`
+`;
 
 export const Writer = styled.p`
   height: 30px;
@@ -141,7 +142,7 @@ export const PostList = styled.div`
   }
 `;
 
-export const Post = styled.div`
+export const Post = styled(Link)`
   display: inline-block;
   vertical-align: top;
   width: 320px;
@@ -207,19 +208,15 @@ export const SubTitle = styled.h4`
 export const SubFooter = styled.div`
   display: flex;
   flex-direction: row;
-  
   @media screen and (max-width: 375px){
     margin-bottom: 10px;
   }
 `
 export const SubProfileImg = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
   background: green;
   margin-right: 8px;
   object-fit: cover;
-`
+`;
 export const SubDesc = styled.p`
   font-size: 14px;
   margin-bottom: 2px;
@@ -259,7 +256,7 @@ export const PopularContainer = styled.div`
   }
 `;
 
-export const PopularPost = styled.div`
+export const PopularPost = styled(Link)`
   display: inline-block;
   width: 475px;
   height: 350px;

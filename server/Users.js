@@ -16,7 +16,7 @@ app.post("/", (req, res, next) => {
         .ref(`users/user_${id}`)
         .set({
           user_id: id,
-          thumbnail: "img/defaultThumbnail.jpg",
+          thumbnail: "/img/defaultThumbnail.jpg",
           name,
           email,
           emailAuth: false
@@ -35,7 +35,7 @@ app.post("/", (req, res, next) => {
         .ref(`users/user_${id}`)
         .set({
           user_id: id,
-          thumbnail: "img/defaultThumbnail.jpg",
+          thumbnail: "/img/defaultThumbnail.jpg",
           name,
           emailAuth: false
         })

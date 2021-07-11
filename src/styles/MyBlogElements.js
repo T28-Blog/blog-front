@@ -60,7 +60,7 @@ export const MyPostContainer = styled.div`
     padding-left: 30px;
   }
 `;
-export const MyPostContents = styled.div`
+export const MyPostContents = styled(Link)`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -117,7 +117,7 @@ export const MyPostEdit = styled.p`
   color: #868e96;
   margin-right: 10px;
 
-  &:hover{
+  &:hover {
     color: #256ce1;
     cursor: pointer;
   }
@@ -127,7 +127,7 @@ export const MyPostDelete = styled.p`
   font-size: 12px;
   color: #868e96;
 
-  &:hover{
+  &:hover {
     color: #256ce1;
     cursor: pointer;
   }
