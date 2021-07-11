@@ -5,8 +5,8 @@ import store from "store/store";
 import { LOG_OUT } from "action";
 
 const API_KEY = config.Kakao_KEY;
-const REDIRECT_URI = "http://localhost:3000/loading";
-const LOGOUT_URI = "http://localhost:3000/logout";
+const REDIRECT_URI = "http://13.124.111.34:80/loading";
+const LOGOUT_URI = "http://13.124.111.34:80/logout";
 
 const KakaoLogin = {
   getRequestToken: () => {
