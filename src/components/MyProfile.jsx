@@ -78,8 +78,8 @@ const MyProfile = () => {
       <MyProfileImg img src={userThumbnail} alt="profile_img"></MyProfileImg>
       <MyName>{username}</MyName>
       <MyDesc>{greeting || "프로필 내용을 설정해주세요."}</MyDesc>
-      <MySetting onClick={openModal}>프로필 수정</MySetting>
       <WriteButton>
+        <MySetting onClick={openModal}>프로필 수정</MySetting>
         <WriteLink to="/writepost">글쓰기</WriteLink>
       </WriteButton>
       <MyProfileModal

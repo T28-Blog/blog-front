@@ -63,12 +63,22 @@ export const FormContainer = styled.div`
   height: 100%;
   box-shadow: 8px 8px 20px 8px ${colors.light2};
   border-radius: 20px;
+
+  @media screen and (max-width: 375px){
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
 `
 export const StyleSideArea = styled.img`
   width: 400px;
   height: 700px;
   object-fit: cover;
   border-radius: 20px;
+
+  @media screen and (max-width: 375px){
+    display: none;
+  }
 `
 export const Avatar = styled.div`
   width: 200px;

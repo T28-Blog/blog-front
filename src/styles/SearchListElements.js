@@ -8,6 +8,11 @@ export const SearchListContainer = styled.div`
     flex-direction: row;
     margin: 0 auto;
     margin-bottom: 15px;
+
+    @media screen and (max-width: 375px){
+        width: 100%;
+        padding: 0 20px;
+    }
 `
 
 export const SearchThumbnail = styled.img`
@@ -15,6 +20,10 @@ export const SearchThumbnail = styled.img`
     margin: 0;
     margin-right: 10px;
     border-radius: 10px;
+
+    @media screen and (max-width: 375px){
+        display: none;
+    }
 `
 
 export const SearchTextBox = styled.div`

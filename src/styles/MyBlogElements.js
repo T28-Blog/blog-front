@@ -11,6 +11,10 @@ export const MyblogContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   padding-top: 30px;
+
+  @media screen and (max-width: 375px){
+    flex-direction: column-reverse;
+  }
 `;
 
 export const MyblogTitle = styled.h3`
@@ -30,6 +34,10 @@ export const MyblogSubTitle = styled.p`
   margin-bottom: 50px;
   text-align: center;
   color: #6c757d;
+
+  @media screen and (max-width: 375px){
+    margin-bottom: 0;
+  }
 `;
 
 export const SideContainer = styled.div`
@@ -45,6 +53,12 @@ export const MyPostContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 700px;
+
+  @media screen and (max-width: 375px){
+    justify-content: center;
+    align-items: center;
+    padding-left: 30px;
+  }
 `;
 export const MyPostContents = styled(Link)`
   display: flex;
@@ -59,6 +73,11 @@ export const MyPostContent = styled.div`
   width: 520px;
   height: 120px;
   margin-right: 20px;
+
+  @media screen and (max-width: 375px){
+    width: 215px;
+    margin-right: 0;
+  }
 `;
 export const MyPostTitle = styled.h3`
   font-size: 24px;
@@ -118,6 +137,11 @@ export const MyPostThumbnail = styled.img`
   height: 120px;
   object-fit: cover;
   border-radius: 10px;
+
+  @media screen and (max-width: 375px){
+    width: 100px;
+    height: 100px;
+  }
 `;
 
 // ----------- MyProfile.jsx 부분 -----------
@@ -132,22 +156,43 @@ export const MyProfileContainer = styled.div`
   border: 1px solid #6c757d;
   margin-bottom: 30px;
   border-radius: 10px;
+
+  @media screen and (max-width: 375px){
+    width: 335px;
+    height: 100%;
+    padding: 5px 20px;
+  }
 `;
 
 export const MyProfileImg = styled.img`
   width: 100%;
   border-radius: 10px;
   margin-bottom: 20px;
+  object-fit: cover;
+
+  @media screen and (max-width: 375px){
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const MyName = styled.p`
   font-size: 18px;
+
+  @media screen and (max-width: 375px){
+    margin-bottom: 10px;
+  }
 `;
 
 export const MyDesc = styled.p`
   font-size: 14px;
   color: #6c757d;
   margin-bottom: 30px;
+
+  @media screen and (max-width: 375px){
+    margin-bottom: 15px;
+  }
 `;
 
 export const MySetting = styled.button`
@@ -165,9 +210,19 @@ export const MySetting = styled.button`
     background: #52595f;
     color: #fff;
   }
+
+  @media screen and (max-width: 375px){
+    width: 50%;
+  }
 `;
+
 export const WriteButton = styled.div`
   width: 100%;
+
+  @media screen and (max-width: 375px){
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 export const WriteLink = styled(Link)`
@@ -189,5 +244,9 @@ export const WriteLink = styled(Link)`
     transition: all 0.2s ease-in-out;
     background: #256ce1;
     color: #fff;
+  }
+
+  @media screen and (max-width: 375px){
+    width: 50%;
   }
 `;

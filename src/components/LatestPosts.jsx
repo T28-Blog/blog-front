@@ -46,6 +46,7 @@ const LatestPosts = ({ posts }) => {
               <MainDesc>{posts[0].text}</MainDesc>
               <MainFooter>
                 <WriterImg img src={posts[0].thumbnail}></WriterImg>
+                {console.log(posts[0].thumbnail)}
                 <Writer>{posts[0].name}</Writer>
               </MainFooter>
             </MainPost>

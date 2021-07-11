@@ -25,6 +25,11 @@ const Title = styled.h1`
   margin: 0 auto;
   text-align: left;
   font-size: 50px;
+
+  @media screen and (max-width: 375px) {
+    width: 100%;
+    padding: 0 50px;
+  }
 `;
 
 export default function Slideshow() {
