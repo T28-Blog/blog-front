@@ -14,6 +14,7 @@ import {
   LoadingTitle,
 } from "styles/PreLoaderElements";
 import airplane from "../assets/airplane.png";
+import CommentsAPI from "api/CommentsAPI";
 
 const Home = (props) => {
   const { name, uid, isLogin, jwt } = store.getState().userInfo;
@@ -26,6 +27,7 @@ const Home = (props) => {
   const getLatestPosts = async () => {
     try {
       const posts = [];
+      const new_posts = [];
       await (
         await firebaseInstance
           .database()
@@ -36,7 +38,11 @@ const Home = (props) => {
       ).forEach((data) => {
         posts.push(data.val());
       });
-      return posts.reverse();
+      for (const post of posts) {
+        const user_id = post.user_id;
+        new_posts.push({ ...post, thumbnail: (await CommentsAPI.getCommentUserID(user_id))?.thumbnail });
+      }
+      return new_posts.reverse();
     } catch (e) {
       console.log(e);
       setError(true);
@@ -46,6 +52,7 @@ const Home = (props) => {
   const getPopularPosts = async () => {
     try {
       const posts = [];
+      const new_posts = [];
       await (
         await firebaseInstance
           .database()
@@ -56,7 +63,11 @@ const Home = (props) => {
       ).forEach((data) => {
         posts.push(data.val());
       });
-      return posts.reverse();
+      for (const post of posts) {
+        const user_id = post.user_id;
+        new_posts.push({ ...post, thumbnail: (await CommentsAPI.getCommentUserID(user_id))?.thumbnail });
+      }
+      return new_posts.reverse();
     } catch (e) {
       setError(true);
     }
