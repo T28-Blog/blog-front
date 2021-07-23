@@ -5,17 +5,18 @@ import {
   SubTitle,
   SubDesc,
   SubWriter,
-  SubProfileImg,
   SubFooter,
+  WriterImg,
 } from "../styles/IndexElements";
 
 const IndexPost = ({ text, image, name, title, thumbnail, postID }) => {
+  console.log('there', image);
   return (
     <Post to={`detailPost/${postID}`}>
       <SubThumbnail>
         <img
           src={image}
-          alt="thumbnail"
+          alt="main"
           width="100%"
           height="100%"
           style={{ borderRadius: "10px" }}
@@ -24,7 +25,7 @@ const IndexPost = ({ text, image, name, title, thumbnail, postID }) => {
       <SubTitle>{title}</SubTitle>
       <SubDesc>{text}</SubDesc>
       <SubFooter>
-        <SubProfileImg img src={thumbnail}></SubProfileImg>
+        <WriterImg src={thumbnail} alt="thumbnail"></WriterImg>
         <SubWriter>{name}</SubWriter>
       </SubFooter>
     </Post>

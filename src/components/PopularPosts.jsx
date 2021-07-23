@@ -65,6 +65,7 @@ const PopularPosts = ({ posts }) => {
                 image={post.img}
                 text={post.text}
                 postID={post.post_id}
+                thumbnail={post.thumbnail}
               ></IndexPost>
             ))}
         </PostList>

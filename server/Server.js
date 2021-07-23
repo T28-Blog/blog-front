@@ -9,7 +9,7 @@ const login = require("./KakaoUser");
 const tempPost = require("./TempPost");
 const app = express();
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: "http://13.124.111.34:80", credentials: true }));
 app.use(bodyParser.json());
 
 //(카카오의 경우, 카카오 회원번호 가져오기) 및 DB에 해당 유저 저장되어 있는지 확인
@@ -17,7 +17,7 @@ app.use("/login", login);
 app.use("/token", token); //jwt 생성 및 검증
 
 app.use("/posts", posts); //새 포스트 생성
-app.use("/temp_post", tempPost)
+app.use("/temp_post", tempPost);
 
 app.use("/token", token); //jwt 생성
 app.use("/users", users); //새 유저 생성
