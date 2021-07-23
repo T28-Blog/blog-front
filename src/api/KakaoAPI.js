@@ -1,8 +1,7 @@
 import axios from "axios";
-import config from "../config";
-import { firebaseInstance } from "fbase/Fbase";
 import store from "store/store";
 import { LOG_OUT } from "action";
+import config from "../config";
 
 const API_KEY = config.Kakao_KEY;
 const REDIRECT_URI = "http://13.124.111.34:80/loading";

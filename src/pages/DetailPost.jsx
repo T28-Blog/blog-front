@@ -100,10 +100,10 @@ const DetailPost = () => {
             ></DetailImg>
             <DetailWriter>{postInfo.name}</DetailWriter>
             <DetailDate>{timeChanger.utcTOnow(postInfo.date)}</DetailDate>
-            <DetailHits>
+            {/* <DetailHits>
               <FaEye />
               {postInfo.hits}
-            </DetailHits>
+            </DetailHits> */}
           </DetailInfo>
           <hr />
         </DetailHeader>

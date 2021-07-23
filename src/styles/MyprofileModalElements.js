@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { FaTimes } from "react-icons/fa";
 
 export const Background = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
   top: 0;
@@ -24,6 +24,17 @@ export const ModalWrapper = styled.div`
   position: relative;
   z-index: 10;
   border-radius: 10px;
+
+  @media screen and (max-width: 375px) {
+    width: 300px;
+    height: 600px;
+    position: absolute;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 export const ModalImg = styled.img`
   width: 100%;
@@ -38,6 +49,11 @@ export const ModalContent = styled.div`
   align-items: center;
   line-height: 1.8;
   color: #141414;
+
+  h1 {
+    margin-top: 20px;
+  }
+
   label {
     display: inline-inline-block;
     font-size: 12px;
@@ -59,6 +75,7 @@ export const ModalContent = styled.div`
     background: #141414;
     color: #fff;
     border: none;
+    margin-bottom: 20px;
   }
 `;
 
@@ -71,4 +88,9 @@ export const CloseModalButton = styled(FaTimes)`
   height: 32px;
   padding: 0;
   z-index: 10;
+
+  @media screen and (max-width: 375px) {
+    top: 0px;
+    color: white;
+  }
 `;

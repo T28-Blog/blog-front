@@ -17,6 +17,10 @@ export const DetailHeader = styled.div`
     padding: 0;
     margin-bottom: 50px;
   }
+
+  @media screen and (max-width: 375px) {
+    padding: 0 20px;
+  }
 `;
 
 export const DetailTitle = styled.h3`
