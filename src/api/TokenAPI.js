@@ -6,7 +6,7 @@ const TokenAPI = {
   getJWT: async (id, name) => {
     const res = await axios({
       method: "post",
-      url: "http://localhost:4000/token/create",
+      url: "http://13.124.113.101:4000/token/create",
       data: {
         id,
         name,
@@ -25,7 +25,7 @@ const TokenAPI = {
     try {
       const res = await axios({
         method: "get",
-        url: "http://localhost:4000/token/verify",
+        url: "http://13.124.113.101:4000/token/verify",
         params: { id },
         withCredentials: true,
       });
@@ -54,7 +54,7 @@ const TokenAPI = {
     try {
       await axios({
         method: "delete",
-        url: "http://localhost:4000/token/delete",
+        url: "http://13.124.113.101:4000/token/delete",
         withCredentials: true,
       });
       store.dispatch({ type: LOG_OUT });

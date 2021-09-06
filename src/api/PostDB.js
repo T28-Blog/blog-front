@@ -10,7 +10,7 @@ const PostDB = {
     const post_id = v4();
     const res = await axios({
       method: "post",
-      url: `http://localhost:4000/posts`,
+      url: `http://13.124.113.101:4000/posts`,
       params: {
         content,
         date: timeChanger.nowTOutc(),
@@ -33,7 +33,7 @@ const PostDB = {
     // const post_id = v4();
     const res = await axios({
       method: "post",
-      url: `http://localhost:4000/temp_post`,
+      url: `http://13.124.113.101:4000/temp_post`,
       params: {
         content,
         hashtag,

@@ -10,7 +10,7 @@ const SignupAPI = {
         setIsExistingEmail(false);
         const actionCodeSettings = {
           // url: "http://13.124.111.34:80/sign-in",
-          url: "http://localhost:3000/sign-in",
+          url: "http://13.124.113.101:80/sign-in",
           handleCodeInApp: true,
         };
         firebaseInstance

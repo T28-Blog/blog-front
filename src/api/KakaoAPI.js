@@ -4,8 +4,8 @@ import { LOG_OUT } from "action";
 import config from "../config";
 
 const API_KEY = config.Kakao_KEY;
-const REDIRECT_URI = "http://13.124.113.101/loading";
-const LOGOUT_URI = "http://13.124.113.101/logout";
+const REDIRECT_URI = "http://13.124.113.101:80/loading";
+const LOGOUT_URI = "http://13.124.113.101:80/logout";
 
 const KakaoLogin = {
   getRequestToken: () => {
@@ -35,7 +35,7 @@ const KakaoLogin = {
 
     const res = await axios({
       method: "post",
-      url: "http://localhost:4000/login/kakao",
+      url: "http://13.124.113.101:4000/login/kakao",
       data: { kakaoLoginData: data },
     });
     return res.data;

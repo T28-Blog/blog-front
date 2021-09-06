@@ -5,7 +5,7 @@ const LoginDB = {
   createUserDB: async (name, email) => {
     //서버에 유저 생성 요청 call
     const uuid = firebaseInstance.auth().currentUser.uid;
-    console.log(firebaseInstance.auth().currentUser.getIdToken())
+    console.log(firebaseInstance.auth().currentUser.getIdToken());
     let overlap = false;
     //해당 이메일을 사용하는 유저가 있는지 먼저 확인 -> 이메일이 중복되면, 다른 메일 사용 요청(추후 닉네임으로 바뀔 가능성)
     const checkOverlap = await firebaseInstance.database().ref("/users").get();
@@ -22,7 +22,7 @@ const LoginDB = {
 
     const res = await axios({
       method: "post",
-      url: `http://localhost:4000/users`,
+      url: `http://13.124.113.101:4000/users`,
       params: {
         id: uuid,
         name,
@@ -31,6 +31,6 @@ const LoginDB = {
     });
     return res.data;
   },
-}
+};
 
 export default LoginDB;
