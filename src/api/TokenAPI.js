@@ -1,12 +1,13 @@
 import { ADD_JWT, LOG_OUT, REFRESH_PAGE } from "action";
 import axios from "axios";
 import store from "store/store";
+import config from "../config";
 
 const TokenAPI = {
   getJWT: async (id, name) => {
     const res = await axios({
       method: "post",
-      url: "http://13.124.113.101:4000/token/create",
+      url: `${config.IP_ADDRESS}:4000/token/create`,
       data: {
         id,
         name,
@@ -25,7 +26,7 @@ const TokenAPI = {
     try {
       const res = await axios({
         method: "get",
-        url: "http://13.124.113.101:4000/token/verify",
+        url: `${config.IP_ADDRESS}:4000/token/verify`,
         params: { id },
         withCredentials: true,
       });
@@ -54,7 +55,7 @@ const TokenAPI = {
     try {
       await axios({
         method: "delete",
-        url: "http://13.124.113.101:4000/token/delete",
+        url: `${config.IP_ADDRESS}:4000/token/delete`,
         withCredentials: true,
       });
       store.dispatch({ type: LOG_OUT });

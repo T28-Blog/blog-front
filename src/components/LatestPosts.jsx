@@ -17,7 +17,6 @@ import IndexPost from "./IndexPost";
 
 const LatestPosts = ({ posts }) => {
   const [left, setLeft] = useState(null);
-  console.log(posts);
   useEffect(() => {
     if (posts) {
       setLeft(posts.slice(1));

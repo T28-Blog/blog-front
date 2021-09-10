@@ -13,7 +13,6 @@ const hashtagAPI = {
           }
         });
       }
-      //console.log(selected);
       if (selected.length) {
         return selected;
       }

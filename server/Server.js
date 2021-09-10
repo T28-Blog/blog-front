@@ -9,7 +9,11 @@ const login = require("./KakaoUser");
 const tempPost = require("./TempPost");
 const app = express();
 
-app.use(cors({ origin: "http://13.124.113.101", credentials: true }));
+//const IP_ADDRESS = "http://13.124.113.101";
+const IP_ADDRESS = "http://localhost:3000";
+
+//app.use(cors({ origin: "http://13.124.113.101", credentials: true }));
+app.use(cors({ origin: `${IP_ADDRESS}`, credentials: true }));
 app.use(bodyParser.json());
 
 //(카카오의 경우, 카카오 회원번호 가져오기) 및 DB에 해당 유저 저장되어 있는지 확인
