@@ -1,5 +1,6 @@
 import { firebaseInstance } from "fbase/Fbase";
 import LoginDB from "./LoginDB";
+import config from "../config";
 
 const SignupAPI = {
   signup: (email, password, name, history, setIsExistingEmail) => {
@@ -9,8 +10,7 @@ const SignupAPI = {
       .then((userCredential) => {
         setIsExistingEmail(false);
         const actionCodeSettings = {
-          //url: "http://13.124.113.101:80/sign-in",
-          url: "http://localhost:3000/sign-in",
+          url: `${config.IP_ADDRESS}:3000/sign-in`,
           handleCodeInApp: true,
         };
         firebaseInstance
