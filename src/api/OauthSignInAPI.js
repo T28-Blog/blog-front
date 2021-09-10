@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "store/store";
+import config from "../config";
 
 const OauthSignin = {
   createUserDB: async (name) => {
@@ -7,8 +8,7 @@ const OauthSignin = {
     const { uid } = store.getState().userInfo;
     const res = await axios({
       method: "post",
-      //url: `http://13.124.113.101:4000/users`,
-      url: `http://localhost:4000/users`,
+      url: `${config.IP_ADDRESS}:4000/users`,
       params: {
         id: uid,
         name,
@@ -19,8 +19,7 @@ const OauthSignin = {
   getUserInfo: async (uid) => {
     const res = await axios({
       method: "post",
-      //url: "http://13.124.113.101:4000/login",
-      url: "http://localhost:4000/login",
+      url: `${config.IP_ADDRESS}:4000/login`,
       data: { oauthUID: uid },
     });
     return res.data;

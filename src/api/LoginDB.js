@@ -1,5 +1,6 @@
 import { firebaseInstance } from "fbase/Fbase";
 import axios from "axios";
+import config from "../config";
 
 const LoginDB = {
   createUserDB: async (name, email) => {
@@ -22,8 +23,7 @@ const LoginDB = {
 
     const res = await axios({
       method: "post",
-      //url: `http://13.124.113.101:4000/users`,
-      url: `http://localhost:4000/users`,
+      url: `${config.IP_ADDRESS}:4000/users`,
       params: {
         id: uuid,
         name,
