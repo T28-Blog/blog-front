@@ -3,14 +3,15 @@ import axios from "axios";
 import { v4 } from "uuid";
 import timeChanger from "tools/TimeChange";
 import store from "store/store";
+import config from "../config";
 
 const PostDB = {
   createPostDB: async (name, title, content, hashtag, text, img) => {
-    const uuid = firebaseInstance.auth().currentUser.uid;
+    const { uid } = store.getState().userInfo;
     const post_id = v4();
     const res = await axios({
       method: "post",
-      url: `http://13.124.113.101:4000/posts`,
+      url: `${config.IP_ADDRESS}:4000/posts`,
       params: {
         content,
         date: timeChanger.nowTOutc(),
@@ -20,7 +21,7 @@ const PostDB = {
         name,
         post_id,
         title,
-        user_id: uuid,
+        user_id: uid,
         text,
       },
     }).catch((error) => {
@@ -29,30 +30,27 @@ const PostDB = {
     return res.data;
   },
   savePostDB: async (name, title, content, hashtag, img, imgName) => {
-    const uuid = firebaseInstance.auth().currentUser.uid;
-    // const post_id = v4();
+    const { uid } = store.getState().userInfo;
     const res = await axios({
       method: "post",
-      url: `http://13.124.113.101:4000/temp_post`,
+      url: `${config.IP_ADDRESS}:4000/temp_post`,
       params: {
         content,
         hashtag,
         img,
         imgName,
         name,
-        // post_id,
         title,
-        user_id: uuid,
+        user_id: uid,
       },
     }).catch((error) => {
       console.log(error);
     });
-    console.log(res);
     return res.data;
   },
   fetchTempPost: async () => {
     try {
-      const uid = firebaseInstance.auth().currentUser.uid;
+      const { uid } = store.getState().userInfo;
       let post = null;
       const ref = await firebaseInstance.database().ref("temp_post").get();
       await ref.forEach((data) => {
@@ -65,8 +63,7 @@ const PostDB = {
   },
   deleteTempPost: async () => {
     try {
-      const uid = firebaseInstance.auth().currentUser.uid;
-      console.log(uid);
+      const { uid } = store.getState().userInfo;
       await firebaseInstance.database().ref(`temp_post/post_${uid}`).remove();
     } catch (e) {
       return null;

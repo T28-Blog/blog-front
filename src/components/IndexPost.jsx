@@ -10,7 +10,6 @@ import {
 } from "../styles/IndexElements";
 
 const IndexPost = ({ text, image, name, title, thumbnail, postID }) => {
-  console.log('there', image);
   return (
     <Post to={`detailPost/${postID}`}>
       <SubThumbnail>

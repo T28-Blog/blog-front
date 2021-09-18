@@ -162,8 +162,6 @@ export default function WritePost() {
     const selectedFile = imgRef.current.files;
     if (selectedFile.length) {
       const storageRef = storage.ref();
-
-      // Create a reference to 'images/mountains.jpg'
       const imgName = v4();
       const mountainImagesRef = storageRef.child(`images/${imgName}`);
       const uploadTask = mountainImagesRef.put(selectedFile[0]);
