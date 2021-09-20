@@ -25,7 +25,6 @@ const NavLogo = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
-  padding: 0 1rem;
   height: 100%;
   cursor: pointer;
   &:active {
@@ -50,7 +49,6 @@ const MobileIcon = styled.div`
 const NavMenu = styled.ul`
   display: flex;
   align-items: center;
-  margin-right: 24px;
   margin-bottom: 0;
   list-style: none;
   text-align: center;
