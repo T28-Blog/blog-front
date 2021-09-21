@@ -1,20 +1,13 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+## 📌 이슈내용
 
----
+- 이슈내용 작성
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## 📄 상세내용
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+- 이슈내용에 대한 상세정보 작성
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## ✅ 체크리스트
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+- [] 구현 기능 목록 작성 및 체크표시
+- [] 구현 기능 목록 작성 및 체크표시
+- [] 구현 기능 목록 작성 및 체크표시
