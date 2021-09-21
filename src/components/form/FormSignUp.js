@@ -14,48 +14,56 @@ const FormSignUp = ({ submitForm }) => {
       <Form onSubmit={handleSubmit}>
         <h1>Get started with us!</h1>
         <FormInputs>
-          <FormLabel htmlFor="username">User Name</FormLabel>
+          <FormLabel htmlFor="username">
+            이름<span>*</span>
+          </FormLabel>
           <TextInput
             id="username"
             type="text"
             name="username"
-            placeholder="username"
+            placeholder="Username"
             value={values.username}
             onChange={handleChange}
           />
           {errors.username && <p>{errors.username}</p>}
         </FormInputs>
         <FormInputs>
-          <FormLabel htmlFor="email">Email</FormLabel>
+          <FormLabel htmlFor="email">
+            이메일<span>*</span>
+          </FormLabel>
           <TextInput
             id="email"
             type="email"
             name="email"
-            placeholder="email"
+            placeholder="Email"
             value={values.email}
             onChange={handleChange}
           />
           {errors.email && <p>{errors.email}</p>}
         </FormInputs>
         <FormInputs>
-          <FormLabel htmlFor="password">Password</FormLabel>
+          <FormLabel htmlFor="password">
+            비밀번호<span>*</span>
+          </FormLabel>
           <TextInput
             id="password"
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             value={values.password}
             onChange={handleChange}
           />
           {errors.password && <p>{errors.password}</p>}
         </FormInputs>
         <FormInputs>
-          <FormLabel htmlFor="password2">Password2</FormLabel>
+          <FormLabel htmlFor="password2">
+            비밀번호 확인<span>*</span>
+          </FormLabel>
           <TextInput
             id="password2"
             type="password"
             name="password2"
-            placeholder="password2"
+            placeholder="Confirm Password"
             value={values.password2}
             onChange={handleChange}
           />
