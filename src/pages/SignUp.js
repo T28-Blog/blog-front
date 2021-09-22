@@ -1,4 +1,4 @@
-import FormSignUp from 'components/form/FormSignUp';
+import FormSignUp from 'components/form/signup/FormSignUp';
 import FormSuccess from 'components/form/FormSuccess';
 import React, { useState } from 'react';
 

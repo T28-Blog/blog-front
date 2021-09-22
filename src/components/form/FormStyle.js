@@ -49,7 +49,8 @@ const TextInput = styled.input`
   border: 1px solid black;
   border-radius: 10px;
   height: 50px;
-  width: 100%;
+  width: 96%;
+  padding-left: 20px;
 
   &::placeholder {
     font-size: 14px;
