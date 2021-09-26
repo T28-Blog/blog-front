@@ -16,12 +16,11 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         cursor: pointer;
         outline: none;
-        border-radius: 3px;
+        border-radius: 5px;
     };
     input{
         display: flex;
         outline: none;
-        padding-left: 10px;
     }
 `;
 
