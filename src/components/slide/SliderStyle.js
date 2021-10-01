@@ -7,7 +7,7 @@ const Container = styled.div`
 
 const SlideBg = styled.div`
   width: 100vw;
-  height: 500px;
+  height: 300px;
 
   img {
     width: 100%;
