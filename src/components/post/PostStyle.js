@@ -117,6 +117,9 @@ const PostButton = styled.button`
   }
 `;
 
+// --------------- PostList.js ---------------
+const PostListContainer = styled.div``;
+
 export const style = {
   PostContainer,
   PostLink,
@@ -130,4 +133,5 @@ export const style = {
   PostImg,
   PostDesc,
   PostButton,
+  PostListContainer,
 };

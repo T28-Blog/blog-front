@@ -4,7 +4,16 @@ import { style } from './PostStyle';
 import testThumb from 'assets/test_thumb.jpeg';
 import testProfile from 'assets/test_user.jpeg';
 
-const Post = () => {
+const Post = ({
+  postId,
+  title,
+  writter,
+  data,
+  views,
+  comments,
+  thumbnail,
+  desc,
+}) => {
   return (
     <PostContainer>
       <PostLink>
@@ -14,7 +23,7 @@ const Post = () => {
           </PostTitle>
           <PostInfo>
             <Writter>
-              <img src={testProfile} />
+              <img src={testProfile} alt="UserImage" />
               &nbsp;&nbsp;Maroon5
             </Writter>
             <CreatedAt>
