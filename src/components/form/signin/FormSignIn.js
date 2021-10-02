@@ -1,12 +1,12 @@
 import React from 'react';
 import { style } from '../FormStyle';
 import useForm from 'hooks/useForm';
-import ValidateInfo from '../ValidateInfo';
+import validateInfo from '../ValidateInfo';
 
 const FormSignIn = ({ submitForm }) => {
   const { handleChange, values, handleSubmit, errors } = useForm(
     submitForm,
-    ValidateInfo,
+    validateInfo.signIn,
   );
   return (
     <Formcontent>
