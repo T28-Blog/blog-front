@@ -16,7 +16,7 @@ const PostList = ({ posts }) => {
             views={post.views}
             comments={post.comments}
             thumbnail={post.thumbnail}
-            desc={post.thumbnail}
+            desc={post.desc}
           />
         ))}
     </PostListContainer>

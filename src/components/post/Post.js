@@ -8,7 +8,7 @@ const Post = ({
   postId,
   title,
   writter,
-  data,
+  date,
   views,
   comments,
   thumbnail,

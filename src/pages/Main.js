@@ -12,7 +12,6 @@ const Main = () => {
       <Slider />
       <HashTag />
       <Post />
-      <PostList />
     </>
   );
 };
