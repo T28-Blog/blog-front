@@ -2,6 +2,7 @@ import Header from 'components/header/Header';
 import React from 'react';
 import { style } from './MyBlogStyle';
 import testProfile from 'assets/test_user.jpeg';
+import MyBlogPost from 'components/post/MyBlogPost';
 
 const MyBlog = () => {
   return (
@@ -28,6 +29,7 @@ const MyBlog = () => {
           </Tab>
         </TabList>
       </TabContents>
+      <MyBlogPost />
     </>
   );
 };
