@@ -22,6 +22,7 @@ const SignUp = () => {
       }
     });
   }
+
   return (
     <>
       {!isSubmitted ? <FormSignUp submitForm={submitForm} /> : <FormSuccess />}

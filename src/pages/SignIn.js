@@ -1,10 +1,14 @@
-import FormSignIn from 'components/form/signin/FormSignIn';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import FormSignIn from '../components/form/signin/FormSignIn';
 import Main from './Main';
 import authentication from '../api/Authentication';
 
 const SignIn = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    return () => setIsSubmitted(null);
+  }, []);
 
   function submitForm(userInfo) {
     const { email, password } = userInfo;
@@ -16,6 +20,7 @@ const SignIn = () => {
       }
     });
   }
+
   return (
     <>{!isSubmitted ? <FormSignIn submitForm={submitForm} /> : <Main />}</>
   );

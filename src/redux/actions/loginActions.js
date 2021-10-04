@@ -5,13 +5,19 @@ const logInActions = {
   userLogInAction: (state) => {
     return {
       type: LOG_IN,
-      payload: { ...state },
+      payload: {
+        isLogged: true,
+        user: state,
+      },
     };
   },
   userLogOutAction: (state) => {
     return {
       type: LOG_OUT,
-      payload: { ...state },
+      payload: {
+        isLogged: false,
+        user: state,
+      },
     };
   },
 };
