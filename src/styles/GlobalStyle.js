@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     button{
         display: flex;
         cursor: pointer;
+        border: none;
         outline: none;
         border-radius: 5px;
     };
