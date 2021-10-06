@@ -1,8 +1,4 @@
 import { initializeApp } from 'firebase/app';
-<<<<<<< HEAD:src/firebase.js
-import { getAnalytics } from 'firebase/analytics';
-import { getFirestore } from '@firebase/firestore';
-=======
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -11,7 +7,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
->>>>>>> 008f710119b66b05643fe70f2ab79e24249bd2ca:src/api/Firebase.js
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -20,14 +15,6 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_ID,
   appId: process.env.REACT_APP_ID,
-<<<<<<< HEAD:src/firebase.js
-};
-
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const db = getFirestore();
-export const analytics = getAnalytics(app);
-=======
 };
 
 const actionCodeSettings = {
@@ -48,4 +35,3 @@ export {
   signInWithEmailAndPassword,
   signOut,
 };
->>>>>>> 008f710119b66b05643fe70f2ab79e24249bd2ca:src/api/Firebase.js
