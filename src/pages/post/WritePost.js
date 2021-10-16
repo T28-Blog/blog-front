@@ -1,7 +1,8 @@
+import Editor from 'components/editor/Editor';
 import React from 'react';
 
 const WritePost = () => {
-  return <div></div>;
+  return <Editor />;
 };
 
 export default WritePost;
