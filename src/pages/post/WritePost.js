@@ -2,6 +2,8 @@ import Editor from 'components/editor/Editor';
 import React, { useRef, useState } from 'react';
 import { style } from './WritePostStyle';
 import thumbnail from 'assets/1.jpeg';
+import Dropdown from 'components/dropdown/Dropdown';
+import { items } from 'components/dropdown/DropdownItems';
 
 const WritePost = () => {
   const [content, setContent] = useState({
@@ -33,6 +35,7 @@ const WritePost = () => {
         <Button>뒤로</Button>
         <Button>저장</Button>
       </ButtonContainer>
+      <Dropdown title="카테고리" items={items} multiSelect />
       <Title
         type="text"
         name="title"
