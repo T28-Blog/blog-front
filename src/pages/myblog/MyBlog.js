@@ -9,9 +9,12 @@ const MyBlog = () => {
     <>
       <Header />
       <ProfileContainer>
-        <UserImage>
-          <img src={testProfile} alt="user" />
-        </UserImage>
+        <div>
+          <UserImage>
+            <img src={testProfile} alt="user" />
+            <WriteButton to="/write">글쓰기</WriteButton>
+          </UserImage>
+        </div>
         <UserName>스티브 잡스</UserName>
         <UserEmail>apple@apple.com</UserEmail>
         <UserIntro>
@@ -39,6 +42,7 @@ export default MyBlog;
 const {
   ProfileContainer,
   UserImage,
+  WriteButton,
   UserName,
   UserEmail,
   UserIntro,

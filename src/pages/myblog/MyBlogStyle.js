@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const ProfileContainer = styled.div`
   position: relative;
@@ -7,6 +8,11 @@ const ProfileContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 0 auto;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const UserImage = styled.div`
@@ -19,7 +25,20 @@ const UserImage = styled.div`
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
+    margin-bottom: 20px;
   }
+`;
+
+const WriteButton = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 30px;
+  text-decoration: none;
+  color: #000;
+  background: #ececec;
+  border-radius: 5px;
 `;
 
 const UserName = styled.h1`
@@ -79,6 +98,7 @@ export const style = {
   UserEmail,
   UserIntro,
   UserImage,
+  WriteButton,
   TabContents,
   TabList,
   Tab,
