@@ -31,6 +31,8 @@ function App() {
         <Route path="/" exact component={Main} />
         <CustomRouter path="/sign-in" user={isUser} component={SignIn} />
         <CustomRouter path="/sign-up" user={isUser} component={SignUp} />
+        <Route path="/myblog" component={MyBlog} />
+        {/* <CustomRouter path="/my-blog" user={isUser} component={MyBlog} /> */}
       </Switch>
     </Router>
   );
