@@ -5,19 +5,22 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { auth, onAuthStateChanged } from './api/Firebase';
 import { useEffect, useState } from 'react';
 import CustomRouter from './CustomRouter';
-import MyBlog from 'pages/myblog/MyBlog';
+import { store } from 'redux/store';
+import logInActions from 'redux/actions/loginActions';
 
 function App() {
   const [isUser, setUser] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      const { userLogInAction, userLogOutAction } = logInActions;
       if (user) {
-        //log-In
         setUser(true);
+        const { uid, email, photoURL, displayName: name } = user;
+        store.dispatch(userLogInAction({ name, email, photoURL, uid }));
       } else {
-        //log-Out
         setUser(false);
+        store.dispatch(userLogOutAction(null));
       }
     });
   }, []);

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import logo from 'assets/logo_basic.png';
 import { FaSearch, FaTimes, FaBars } from 'react-icons/fa';
 import { style } from './HeaderStyle';
+import { store } from 'redux/store';
+import authentication from 'api/Authentication';
+import logInActions from 'redux/actions/loginActions';
+import logo from 'assets/logo_basic.png';
 
 const Header = () => {
   const [click, setClick] = useState(false);
   const [scroll, setScroll] = useState(false);
+
+  const [isLoggedUser, setLoggedUser] = useState(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -18,9 +23,27 @@ const Header = () => {
     }
   };
 
+  const onHandleClickLogOutButton = (event) => {
+    const { logOut } = authentication;
+    logOut().then(() => {
+      store.dispatch(logInActions.userLogOutAction(null));
+      setLoggedUser(false);
+    });
+  };
+
   useEffect(() => {
     changeNav();
     window.addEventListener('scroll', changeNav);
+
+    const { isLogged } = store.getState();
+    if (isLogged) {
+      setLoggedUser(true);
+    }
+
+    return () => {
+      setClick(false);
+      setLoggedUser(false);
+    };
   }, []);
 
   return (
@@ -36,20 +59,28 @@ const Header = () => {
           <NavItem>
             <NavLink to="/">Home</NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink to="/myblog">My Blog</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/sign-up">회원가입</NavLink>
-          </NavItem>
+          {isLoggedUser && (
+            <NavItem>
+              <NavLink to="/my-blog">My Blog</NavLink>
+            </NavItem>
+          )}
+          {!isLoggedUser && (
+            <NavItem>
+              <NavLink to="/sign-up">회원가입</NavLink>
+            </NavItem>
+          )}
           <NavItem>
             <NavLink to="/search">
               <FaSearch />
             </NavLink>
           </NavItem>
-          <NavItem>
-            <NavBtnLink to="/sign-in">로그인</NavBtnLink>
-          </NavItem>
+          {!isLoggedUser ? (
+            <NavItem>
+              <NavBtnLink to="/sign-in">로그인</NavBtnLink>
+            </NavItem>
+          ) : (
+            <NavItem onClick={onHandleClickLogOutButton}>로그아웃</NavItem>
+          )}
         </NavMenu>
       </NavbarContainer>
     </Nav>
