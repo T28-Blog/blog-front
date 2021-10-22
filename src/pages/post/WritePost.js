@@ -4,7 +4,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { style } from './WritePostStyle';
 import thumbnail from 'assets/thumbnail.jpg';
 import Dropdown from 'components/dropdown/Dropdown';
-import { items } from 'components/dropdown/DropdownItems';
 
 const WritePost = () => {
   const [postContent, setPostContent] = useState({
@@ -14,6 +13,7 @@ const WritePost = () => {
   });
   const inputOpenImageRef = useRef(null);
   const [viewContent, setViewContent] = useState([]);
+  const [selected, setSelected] = useState('Choose One');
 
   const getValue = (e) => {
     const { name, value } = e.target;
@@ -32,6 +32,13 @@ const WritePost = () => {
     const file = e.target.files[0];
   };
 
+  const getCategory = () => {
+    setPostContent({
+      ...postContent,
+      category: selected,
+    });
+  };
+
   return (
     <WriteContainer>
       <ButtonContainer>
@@ -44,7 +51,12 @@ const WritePost = () => {
           저장
         </Button>
       </ButtonContainer>
-      <Dropdown title="카테고리" items={items} multiSelect />
+      <Dropdown
+        name="category"
+        selected={selected}
+        setSelected={setSelected}
+        getCategory={getCategory}
+      />
       <Title
         type="text"
         name="title"
