@@ -1,24 +1,27 @@
-import Editor from 'components/editor/Editor';
 import React, { useRef, useState } from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { style } from './WritePostStyle';
-import thumbnail from 'assets/1.jpeg';
+import thumbnail from 'assets/thumbnail.jpg';
 import Dropdown from 'components/dropdown/Dropdown';
 import { items } from 'components/dropdown/DropdownItems';
 
 const WritePost = () => {
-  const [content, setContent] = useState({
+  const [postContent, setPostContent] = useState({
     title: '',
     content: '',
+    category: '',
   });
   const inputOpenImageRef = useRef(null);
+  const [viewContent, setViewContent] = useState([]);
 
-  const getTitle = (e) => {
+  const getValue = (e) => {
     const { name, value } = e.target;
-    setContent({
-      ...content,
+    setPostContent({
+      ...postContent,
       [name]: value,
     });
-    console.log(content);
+    console.log(postContent);
   };
 
   const handleOpenImageRef = () => {
@@ -33,14 +36,20 @@ const WritePost = () => {
     <WriteContainer>
       <ButtonContainer>
         <Button>뒤로</Button>
-        <Button>저장</Button>
+        <Button
+          onClick={() => {
+            setViewContent(viewContent.concat({ ...postContent }));
+          }}
+        >
+          저장
+        </Button>
       </ButtonContainer>
       <Dropdown title="카테고리" items={items} multiSelect />
       <Title
         type="text"
         name="title"
         placeholder="제목을 입력하세요."
-        onChange={getTitle}
+        onChange={getValue}
       />
       <Thumbnail>
         <img src={thumbnail} alt="thumbnail" onClick={handleOpenImageRef} />
@@ -51,7 +60,21 @@ const WritePost = () => {
           ref={inputOpenImageRef}
         />
       </Thumbnail>
-      <Editor />
+      <CKEditor
+        editor={ClassicEditor}
+        data=""
+        onReady={(editor) => {}}
+        onChange={(event, editor) => {
+          const data = editor.getData();
+          setPostContent({
+            ...postContent,
+            content: data,
+          });
+          console.log(postContent);
+        }}
+        onBlur={(event, editor) => {}}
+        onFocus={(event, editor) => {}}
+      />
     </WriteContainer>
   );
 };
