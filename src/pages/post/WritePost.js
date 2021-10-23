@@ -4,11 +4,12 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { style } from './WritePostStyle';
 import thumbnail from 'assets/thumbnail.jpg';
 import Dropdown from 'components/dropdown/Dropdown';
-import { setDoc, collection, doc } from '@firebase/firestore';
+import { addDoc, collection, doc } from '@firebase/firestore';
 import { db, auth, storage } from 'api/Firebase';
 import moment from 'moment';
 import 'moment/locale/ko';
-import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage';
+import { ref, uploadString } from '@firebase/storage';
+import { base64 } from '@firebase/util';
 
 const WritePost = () => {
   const [postContent, setPostContent] = useState({
@@ -43,6 +44,11 @@ const WritePost = () => {
 
   const handleChangeFile = (e) => {
     let reader = new FileReader();
+    const file = e.target.files[0];
+    const imageRef = ref(storage, 'images/' + file.name);
+    const metadata = {
+      contentType: 'image/png',
+    };
 
     reader.onloadend = () => {
       const base64 = reader.result;
@@ -50,28 +56,23 @@ const WritePost = () => {
         setImgBase64(base64.toString());
       }
     };
-    if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0]);
-      setImgFile(e.target.files[0]);
+    if (file) {
+      reader.readAsDataURL(file);
+      setImgFile(file);
     }
+    uploadString(imageRef, base64).then((snapshot) => {
+      console.log('Uploaded ad base64 string');
+    });
   };
 
-  // const handleUploadImage = (e) => {
-  //   const file = e.target.files[0];
-  //   const imageRef = ref(storage, 'images/' + file.name);
-  //   const metadata = {
-  //     contentType: 'image/png',
-  //   };
-  // };
-
-  const registerPost = async () => {
-    await setDoc(doc(db, 'Posts'), {
+  const registerPost = () => {
+    addDoc(collection(db, 'Posts'), {
       title: postContent.title,
       content: postContent.content,
       category: postContent.category,
       createdAt: nowDate,
-      writter: auth.currentUser,
-      photoURL: '',
+      writter: auth.currentUser.displayName,
+      thumbnail: base64 || '',
     });
   };
 
@@ -79,7 +80,9 @@ const WritePost = () => {
     <WriteContainer>
       <ButtonContainer>
         <Button>뒤로</Button>
-        <Button onClick={registerPost}>저장</Button>
+        <Button type="submit" onClick={registerPost}>
+          저장
+        </Button>
       </ButtonContainer>
       <Dropdown
         name="category"
