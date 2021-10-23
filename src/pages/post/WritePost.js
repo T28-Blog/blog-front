@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { style } from './WritePostStyle';
@@ -21,6 +22,7 @@ const WritePost = () => {
   const [imgFile, setImgFile] = useState(null);
   const [imgBase64, setImgBase64] = useState('');
   const nowDate = moment().format('YYYY-MM-DD HH:mm:ss');
+  const history = useHistory();
 
   const getValue = (e) => {
     const { name, value } = e.target;
@@ -72,6 +74,9 @@ const WritePost = () => {
       createdAt: nowDate,
       writter: auth.currentUser.displayName,
       thumbnail: imgBase64,
+    });
+    history.push({
+      pathname: '/myblog',
     });
   };
 
