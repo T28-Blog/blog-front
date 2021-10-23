@@ -4,6 +4,8 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { style } from './WritePostStyle';
 import thumbnail from 'assets/thumbnail.jpg';
 import Dropdown from 'components/dropdown/Dropdown';
+import { addDoc, collection, doc } from '@firebase/firestore';
+import { db, timeStamp } from 'api/Firebase';
 
 const WritePost = () => {
   const [postContent, setPostContent] = useState({
@@ -39,14 +41,27 @@ const WritePost = () => {
     });
   };
 
+  const registerPost = async () => {
+    await addDoc(collection(db, 'Posts'), {
+      id: doc.id,
+      title: postContent.title,
+      content: postContent.content,
+      category: postContent.category,
+      createdAt: '',
+      thumbnail: '',
+      writter: '',
+    });
+  };
+
   return (
     <WriteContainer>
       <ButtonContainer>
         <Button>뒤로</Button>
         <Button
-          onClick={() => {
-            setViewContent(viewContent.concat({ ...postContent }));
-          }}
+          // onClick={() => {
+          //   setViewContent(viewContent.concat({ ...postContent }));
+          // }}
+          onClick={registerPost}
         >
           저장
         </Button>
