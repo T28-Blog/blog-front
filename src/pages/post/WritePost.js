@@ -5,7 +5,9 @@ import { style } from './WritePostStyle';
 import thumbnail from 'assets/thumbnail.jpg';
 import Dropdown from 'components/dropdown/Dropdown';
 import { addDoc, collection, doc } from '@firebase/firestore';
-import { db, timeStamp } from 'api/Firebase';
+import { db } from 'api/Firebase';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 const WritePost = () => {
   const [postContent, setPostContent] = useState({
@@ -41,13 +43,15 @@ const WritePost = () => {
     });
   };
 
+  const nowDate = moment().format('YYYY-MM-DD HH:mm:ss');
+
   const registerPost = async () => {
     await addDoc(collection(db, 'Posts'), {
-      id: doc.id,
+      id: '',
       title: postContent.title,
       content: postContent.content,
       category: postContent.category,
-      createdAt: '',
+      createdAt: nowDate,
       thumbnail: '',
       writter: '',
     });
@@ -57,14 +61,7 @@ const WritePost = () => {
     <WriteContainer>
       <ButtonContainer>
         <Button>뒤로</Button>
-        <Button
-          // onClick={() => {
-          //   setViewContent(viewContent.concat({ ...postContent }));
-          // }}
-          onClick={registerPost}
-        >
-          저장
-        </Button>
+        <Button onClick={registerPost}>저장</Button>
       </ButtonContainer>
       <Dropdown
         name="category"
