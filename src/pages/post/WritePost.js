@@ -2,9 +2,8 @@ import React, { useRef, useState } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { style } from './WritePostStyle';
-import thumbnail from 'assets/thumbnail.jpg';
 import Dropdown from 'components/dropdown/Dropdown';
-import { addDoc, collection, doc } from '@firebase/firestore';
+import { addDoc, collection } from '@firebase/firestore';
 import { db, auth, storage } from 'api/Firebase';
 import moment from 'moment';
 import 'moment/locale/ko';
@@ -46,9 +45,9 @@ const WritePost = () => {
     let reader = new FileReader();
     const file = e.target.files[0];
     const imageRef = ref(storage, 'images/' + file.name);
-    const metadata = {
-      contentType: 'image/png',
-    };
+    // const metadata = {
+    //   contentType: 'image/png',
+    // };
 
     reader.onloadend = () => {
       const base64 = reader.result;
@@ -72,7 +71,7 @@ const WritePost = () => {
       category: postContent.category,
       createdAt: nowDate,
       writter: auth.currentUser.displayName,
-      thumbnail: base64 || '',
+      thumbnail: imgBase64,
     });
   };
 
