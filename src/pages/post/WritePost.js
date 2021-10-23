@@ -4,10 +4,11 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { style } from './WritePostStyle';
 import thumbnail from 'assets/thumbnail.jpg';
 import Dropdown from 'components/dropdown/Dropdown';
-import { addDoc, collection, doc } from '@firebase/firestore';
-import { db } from 'api/Firebase';
+import { setDoc, collection, doc } from '@firebase/firestore';
+import { db, auth, storage } from 'api/Firebase';
 import moment from 'moment';
 import 'moment/locale/ko';
+import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage';
 
 const WritePost = () => {
   const [postContent, setPostContent] = useState({
@@ -16,8 +17,10 @@ const WritePost = () => {
     category: '',
   });
   const inputOpenImageRef = useRef(null);
-  const [viewContent, setViewContent] = useState([]);
   const [selected, setSelected] = useState('Choose One');
+  const [imgFile, setImgFile] = useState(null);
+  const [imgBase64, setImgBase64] = useState('');
+  const nowDate = moment().format('YYYY-MM-DD HH:mm:ss');
 
   const getValue = (e) => {
     const { name, value } = e.target;
@@ -25,15 +28,6 @@ const WritePost = () => {
       ...postContent,
       [name]: value,
     });
-    console.log(postContent);
-  };
-
-  const handleOpenImageRef = () => {
-    inputOpenImageRef.current.click();
-  };
-
-  const handleUploadImage = (e) => {
-    const file = e.target.files[0];
   };
 
   const getCategory = () => {
@@ -43,17 +37,41 @@ const WritePost = () => {
     });
   };
 
-  const nowDate = moment().format('YYYY-MM-DD HH:mm:ss');
+  const handleOpenImageRef = () => {
+    inputOpenImageRef.current.click();
+  };
+
+  const handleChangeFile = (e) => {
+    let reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64 = reader.result;
+      if (base64) {
+        setImgBase64(base64.toString());
+      }
+    };
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+      setImgFile(e.target.files[0]);
+    }
+  };
+
+  // const handleUploadImage = (e) => {
+  //   const file = e.target.files[0];
+  //   const imageRef = ref(storage, 'images/' + file.name);
+  //   const metadata = {
+  //     contentType: 'image/png',
+  //   };
+  // };
 
   const registerPost = async () => {
-    await addDoc(collection(db, 'Posts'), {
-      id: '',
+    await setDoc(doc(db, 'Posts'), {
       title: postContent.title,
       content: postContent.content,
       category: postContent.category,
       createdAt: nowDate,
-      thumbnail: '',
-      writter: '',
+      writter: auth.currentUser,
+      photoURL: '',
     });
   };
 
@@ -76,11 +94,18 @@ const WritePost = () => {
         onChange={getValue}
       />
       <Thumbnail>
-        <img src={thumbnail} alt="thumbnail" onClick={handleOpenImageRef} />
+        <img
+          src={imgBase64}
+          onClick={handleOpenImageRef}
+          // onError={(event) => (event.target.style.display = 'none')}
+          alt=""
+        />
         <input
           type="file"
           accept="image.jpeg, image/png"
-          onChange={handleUploadImage}
+          name="imgFile"
+          id="imgFile"
+          onChange={handleChangeFile}
           ref={inputOpenImageRef}
         />
       </Thumbnail>
@@ -94,7 +119,6 @@ const WritePost = () => {
             ...postContent,
             content: data,
           });
-          console.log(postContent);
         }}
         onBlur={(event, editor) => {}}
         onFocus={(event, editor) => {}}
