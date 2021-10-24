@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { auth, onAuthStateChanged } from './api/Firebase';
 import { useEffect, useState } from 'react';
 import CustomRouter from './CustomRouter';
+import MyBlog from 'pages/myblog/MyBlog';
+import WritePost from 'pages/post/WritePost';
 import { store } from 'redux/store';
 import logInActions from 'redux/actions/loginActions';
 
@@ -32,6 +34,7 @@ function App() {
         <CustomRouter path="/sign-in" user={isUser} component={SignIn} />
         <CustomRouter path="/sign-up" user={isUser} component={SignUp} />
         <Route path="/myblog" component={MyBlog} />
+        <Route path="/write" component={WritePost} />
         {/* <CustomRouter path="/my-blog" user={isUser} component={MyBlog} /> */}
       </Switch>
     </Router>
