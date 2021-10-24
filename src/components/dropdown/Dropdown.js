@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { style } from './DropdownStyle';
 import { FaCaretDown } from 'react-icons/fa';
 
-const Dropdown = ({ selected, setSelected, getCategory }) => {
+const Dropdown = ({ selected, setSelected }) => {
   const [isActive, setIsActive] = useState(false);
   const items = ['Travel', 'Food', 'IT', 'T.I.L', 'Review'];
 
@@ -19,7 +19,7 @@ const Dropdown = ({ selected, setSelected, getCategory }) => {
         </span>
       </DropdownHeader>
       {isActive && (
-        <DropdownContent onClick={getCategory}>
+        <DropdownContent>
           {items.map((item) => (
             <DropdownItem
               onClick={() => {

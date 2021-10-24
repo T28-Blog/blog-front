@@ -10,6 +10,7 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import { ref, uploadString } from '@firebase/storage';
 import { base64 } from '@firebase/util';
+import thumb from 'assets/thumbnail.jpg';
 
 const WritePost = () => {
   const [postContent, setPostContent] = useState({
@@ -29,13 +30,6 @@ const WritePost = () => {
     setPostContent({
       ...postContent,
       [name]: value,
-    });
-  };
-
-  const getCategory = () => {
-    setPostContent({
-      ...postContent,
-      category: selected,
     });
   };
 
@@ -66,11 +60,11 @@ const WritePost = () => {
     });
   };
 
-  const registerPost = () => {
-    addDoc(collection(db, 'Posts'), {
+  const registerPost = async () => {
+    await addDoc(collection(db, 'Posts'), {
       title: postContent.title,
       content: postContent.content,
-      category: postContent.category,
+      category: selected,
       createdAt: nowDate,
       writter: auth.currentUser.displayName,
       thumbnail: imgBase64,
@@ -78,6 +72,7 @@ const WritePost = () => {
     history.push({
       pathname: '/myblog',
     });
+    console.log(postContent);
   };
 
   return (
@@ -88,12 +83,7 @@ const WritePost = () => {
           저장
         </Button>
       </ButtonContainer>
-      <Dropdown
-        name="category"
-        selected={selected}
-        setSelected={setSelected}
-        getCategory={getCategory}
-      />
+      <Dropdown name="category" selected={selected} setSelected={setSelected} />
       <Title
         type="text"
         name="title"
@@ -102,7 +92,7 @@ const WritePost = () => {
       />
       <Thumbnail>
         <img
-          src={imgBase64}
+          src={imgBase64 ? imgBase64 : thumb}
           onClick={handleOpenImageRef}
           // onError={(event) => (event.target.style.display = 'none')}
           alt=""
